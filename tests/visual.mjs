@@ -536,6 +536,39 @@ try {
   assert.equal(await ev('harborStudy.report().quality.mode'),'auto');
   await click('quality-close');
   pass('settings change real resolution/shadows/effects/reflection cadence, persist through reload, pause driving input and release replaced reflection targets across repeated quality switches');
+  // Exercise the real scene's obstacle list, input handler and visible car after contact.
+  // Lighting checks above retain full quality; this input check uses the user's lighter preset.
+  await click('quality-open');await selectTier('performance');await click('quality-close');
+  await click('explore');
+  const collisionRecovery=[];
+  for(const scenario of [
+    {name:'warehouse corner',x:-35,z:42,yaw:-.8,steer:'ArrowRight'},
+    {name:'bridge rail',x:3,z:20,yaw:Math.PI/2},
+    {name:'outer quay edge',x:-70,z:55,yaw:-Math.PI/2},
+  ]){
+    const result=await ev(`(async()=>{
+      const scenario=${JSON.stringify(scenario)},s=harborStudy,v=s.vehicle;
+      const key=(type,code)=>window.dispatchEvent(new KeyboardEvent(type,{code,bubbles:true}));
+      const advance=async seconds=>{const end=v.elapsed+seconds;while(v.elapsed<end)await new Promise(requestAnimationFrame);};
+      s.freeKeys.clear();v.reset(scenario.x,scenario.z,scenario.yaw);s.updateDrivingModel();s.resetChaseCamera();s.pipeline.resetHistory();
+      try {
+        key('keydown','KeyW');if(scenario.steer)key('keydown',scenario.steer);
+        await advance(3);key('keyup','KeyW');if(scenario.steer)key('keyup',scenario.steer);
+        const impact=v.snapshot();key('keydown','KeyS');await advance(2);key('keyup','KeyS');
+        const escaped=v.snapshot(),p=s.drivingCar.transform.position,model=[p.x,p.y,p.z];
+        key('keydown','Space');await advance(1);key('keyup','Space');
+        return {name:scenario.name,impact,escaped,distance:Math.hypot(escaped.x-impact.x,escaped.z-impact.z),model};
+      }finally{for(const code of ['KeyW','KeyS','ArrowRight','Space'])key('keyup',code);}
+    })()`,300000);
+    assert.ok(result.impact.contacts>0,`${scenario.name} must actually hit`);
+    assert.ok(result.distance>2,`${scenario.name} must reverse free without resetting`);
+    assert.ok(result.escaped.speed<-.5,`${scenario.name} retains reverse control`);
+    assert.ok(Math.abs(result.model[0]-result.escaped.x)<1e-5 && Math.abs(result.model[2]-result.escaped.z)<1e-5,'visible GLB follows the recovered vehicle');
+    collisionRecovery.push(result);
+  }
+  await shot('visual-collision-recovered');
+  await click('reset-drive');
+  pass('real keyboard driving reverses free of warehouse corners, bridge rails and quay edges without RESET; the visible GLB follows the recovered vehicle');
   assert.deepEqual(errors, []);
   assert.deepEqual(failures, []);
   const report = {
@@ -558,6 +591,7 @@ try {
     qualityMeasurements,
     qualityPoolStart,
     qualityPoolEnd,
+    collisionRecovery,
     errors,
     failures,
   };
