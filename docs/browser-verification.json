@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "url": "http://localhost:8908/zhuda-neon-racer/",
+  "checkedAt": "2026-10-30T04:26:33.136Z",
+  "checks": [
+    "locked circuits do not start",
+    "real keyboard steering and nitro create engine particles and historical trails",
+    "complete live WebGL race -> podium -> credits -> unlock",
+    "purchases, audio/throttle preferences and progress survive reload; backup downloads valid JSON",
+    "exported save restores progress through the actual file input and overwrite confirmation",
+    "simultaneous steering + nitro touch input, capture release, landscape layout",
+    "timeout boundary reaches a retryable loss with no reward",
+    "all four authored environments render through the public SDK",
+    "corrupt stored data recovers to a playable fresh game"
+  ],
+  "liveRace": {
+    "result": {
+      "won": true,
+      "place": 1,
+      "time": 14.016666666666511,
+      "stars": 3,
+      "reward": 650,
+      "reason": "finish",
+      "newBest": true
+    },
+    "gates": 8
+  },
+  "touch": {
+    "steer": true,
+    "nitro": true,
+    "particles": 36
+  },
+  "webglDrawCalls": 24,
+  "errors": [],
+  "failures": []
+}

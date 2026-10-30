@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b1723" />
+    <meta
+      name="description"
+      content="霓虹疾線：免費瀏覽器賽車遊戲。四條賽道、氮氣超車、車庫升級，鍵盤與觸控皆可玩。"
+    />
+    <title>霓虹疾線 NEON APEX — 午夜巡迴賽</title>
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="loading">
+      <div class="load-logo">N<span>↗︎</span></div>
+      <strong>NEON APEX</strong>
+      <p id="loading-label">正在準備發車…</p>
+    </div>
+    <div id="app" hidden>
+      <section id="lobby" class="screen">
+        <header class="topbar">
+          <a class="brand" href="./" aria-label="霓虹疾線首頁"
+            ><span class="brand-icon">N↗︎</span
+            ><span>NEON<span class="brand-apex">APEX</span></span></a
+          ><span class="season"><i></i> 午夜巡迴賽 / SEASON 01</span>
+          <nav>
+            <span class="balance">◈ <b id="wallet">0</b></span
+            ><button id="garage-open">車庫 <span>↗︎</span></button
+            ><button id="settings-open" class="icon-button" aria-label="設定">
+              ⚙︎
+            </button>
+          </nav>
+        </header>
+        <main class="lobby-main">
+          <div class="hero">
+            <div class="eyebrow">
+              <span class="short-line"></span> THE CITY IS YOUR CIRCUIT
+            </div>
+            <h1>把夜色<br />甩在<span>身後。</span></h1>
+            <p>不必等綠燈。<br />抓住彎心，用氮氣拉開距離。</p>
+            <div class="hero-note">
+              <span>4</span> 條賽道 <i>/</i> <span>3</span> 位對手
+              <i>/</i> 一個終點
+            </div>
+          </div>
+          <div class="race-card" id="race-card">
+            <div class="card-overline">
+              <span id="track-district"></span><span class="pill">CIRCUIT</span>
+            </div>
+            <div class="track-title">
+              <span id="track-number">01</span>
+              <div>
+                <h2 id="track-name"></h2>
+                <p id="track-en"></p>
+              </div>
+            </div>
+            <div id="track-map" class="track-map"></div>
+            <div class="track-facts">
+              <div><small>圈數</small><strong id="track-laps"></strong></div>
+              <div>
+                <small>金牌目標</small><strong id="track-gold"></strong>
+              </div>
+              <div>
+                <small>最佳成績</small><strong id="track-best">—</strong>
+              </div>
+            </div>
+            <p class="race-goal">在時限內跑進前三，解鎖下一條賽道。</p>
+            <button id="start" class="primary">出發比賽 <span>↗︎</span></button
+            ><button id="help-open" class="text-button">
+              第一次上路？看看操作方式 <span>→</span>
+            </button>
+          </div>
+        </main>
+        <section class="circuit-picker">
+          <div class="picker-label">
+            <span>選擇賽道 <small>THE NIGHT TOUR</small></span
+            ><span id="star-total">★ 0 / 12</span>
+          </div>
+          <div id="track-list" class="track-list"></div>
+        </section>
+        <footer class="lobby-footer">
+          <span id="save-status"><i></i> 進度自動保存在此瀏覽器</span
+          ><span>獨立遊戲 · POWERED BY ZHUDA</span>
+        </footer>
+      </section>
+      <section id="race-ui" class="screen" hidden>
+        <div class="hud-top">
+          <div class="position">
+            <small>POSITION</small
+            ><strong id="position">4<span>/4</span></strong>
+          </div>
+          <div class="hud-divider"></div>
+          <div class="hud-stat">
+            <small>LAP</small><strong id="lap">1 / 1</strong>
+          </div>
+          <div class="hud-stat">
+            <small>RACE TIME</small><strong id="race-time">00:00.00</strong>
+          </div>
+          <div class="hud-stat remaining">
+            <small>剩餘時間</small><strong id="remaining">60s</strong>
+          </div>
+          <button id="pause" class="pause-button" aria-label="暫停比賽">
+            Ⅱ
+          </button>
+        </div>
+        <div class="race-name">
+          <i></i><span id="hud-track"></span><span class="live">LIVE</span>
+        </div>
+        <div id="countdown" aria-live="polite"></div>
+        <div id="race-message" role="status"></div>
+        <div id="turn-hint"></div>
+        <canvas
+          id="minimap"
+          width="200"
+          height="160"
+          aria-label="賽道與車輛位置"
+        ></canvas>
+        <div class="dashboard">
+          <div class="speed">
+            <strong id="speed">0</strong><span>KM/H</span>
+          </div>
+          <div class="boost-meter">
+            <div>
+              <span id="boost-label">氮氣 / NITRO</span
+              ><b id="boost-number">70%</b>
+            </div>
+            <div class="meter"><i id="boost-fill"></i></div>
+            <small id="drive-hint">← → 轉向 · ↓ 煞車 · SPACE 氮氣</small>
+          </div>
+        </div>
+        <div class="touch-controls">
+          <div class="steering">
+            <button data-control="left" aria-label="向左轉">◀︎</button
+            ><button data-control="right" aria-label="向右轉">▶︎</button>
+          </div>
+          <div class="pedals">
+            <button data-control="throttle" class="throttle" aria-label="油門">
+              油門</button
+            ><button data-control="brake" aria-label="煞車">煞車</button
+            ><button data-control="nitro" class="nitro" aria-label="氮氣">
+              N₂<span>氮氣</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <dialog id="modal"><div id="modal-content"></div></dialog>
+      <div id="toast" role="status"></div>
+    </div>
+    <script src="libs/laya.core.js"></script>
+    <script src="libs/laya.webgl_2D.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

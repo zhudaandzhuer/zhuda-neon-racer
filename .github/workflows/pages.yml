@@ -1,0 +1,57 @@
+name: Verify and publish Neon Apex
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: neon-apex-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: zhudaandzhuer/zhuda-laya-engine
+          ref: 0ec1d3717756544467ab065ef23062f0755ef2c5
+          path: .engine
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Build pinned public engine SDK
+        working-directory: .engine
+        run: npm install && npm run build
+      - name: Typecheck, build and simulate all circuits
+        env:
+          ZHUDA_ENGINE_ROOT: ${{ github.workspace }}/.engine
+        run: npm run typecheck && npm run build && npm test
+      - name: Verify live WebGL gameplay and saved progress
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npm run verify:browser
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: neon-apex-verification
+          path: evidence/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish verified game
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,6 @@
+dist/
+node_modules/
+.engine/
+evidence/
+.test-build.mjs
+.DS_Store
