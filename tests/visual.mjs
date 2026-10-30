@@ -378,21 +378,23 @@ try {
   await key("keyDown", "KeyW", "w");
   await delay(700);
   assert.ok(await ev("harborStudy.report().freeSpeed") > 0.5);
+  const freeYawBefore = await ev("harborStudy.freeYaw");
+  await key("keyDown", "ArrowRight", "ArrowRight");
+  await delay(350);
+  const freeYawTurning = await ev("harborStudy.freeYaw");
+  const freeRollTurning = await ev("harborStudy.freeBodyRoll");
+  await key("keyUp", "ArrowRight", "ArrowRight");
   await key("keyUp", "KeyW", "w");
   const freeAfter = await ev("harborStudy.report().freePosition");
   assert.ok(
     Math.hypot(freeAfter[0] - freeBefore[0], freeAfter[1] - freeBefore[1]) > 1,
     JSON.stringify({ freeBefore, freeAfter }),
   );
-  const freeYawBefore = await ev("harborStudy.freeYaw");
-  await key("keyDown", "ArrowRight", "ArrowRight");
-  await delay(180);
-  await key("keyUp", "ArrowRight", "ArrowRight");
   assert.ok(
-    Math.abs((await ev("harborStudy.freeYaw")) - freeYawBefore) > 1,
+    Math.abs(freeYawTurning - freeYawBefore) > 1,
     "free exploration accepts steering input",
   );
-  assert.ok(Math.abs(await ev("harborStudy.freeBodyRoll")) > 0.05);
+  assert.ok(Math.abs(freeRollTurning) > 0.05);
   await click("explore");
   await settle();
   pass("GTA-style free drive accelerates, steers with a turning radius and rolls the real GLB within bounded harbor surfaces");
