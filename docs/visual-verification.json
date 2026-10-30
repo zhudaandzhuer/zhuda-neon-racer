@@ -1,7 +1,7 @@
 {
   "passed": true,
   "url": "http://localhost:8908/zhuda-neon-racer/visual.html?quality=high&targetFPS=60",
-  "checkedAt": "2026-10-30T18:45:13.482Z",
+  "checkedAt": "2026-10-30T19:07:03.965Z",
   "viewport": {
     "width": 1600,
     "height": 1000
@@ -18,7 +18,8 @@
     "native car/building shadow casters change actual ground pixels",
     "lighting A/B changes actual scene pixels outside UI and disables shadow map, IBL and AO",
     "30 HDR/AO/bloom/ACES/TAA chain replacements release owned LUTs/materials and reach bounded resource counts",
-    "settings change real resolution/shadows/effects/reflection cadence, persist through reload, pause driving input and release replaced reflection targets across repeated quality switches"
+    "settings change real resolution/shadows/effects/reflection cadence, persist through reload, pause driving input and release replaced reflection targets across repeated quality switches",
+    "real keyboard driving reverses free of warehouse corners, bridge rails and quay edges without RESET; the visible GLB follows the recovered vehicle"
   ],
   "scene": {
     "ready": true,
@@ -67,8 +68,8 @@
       "targetFPS": 60,
       "tier": "high",
       "scale": 1,
-      "fps": 15.268968757768429,
-      "p90": 77.20000004768372,
+      "fps": 0,
+      "p90": 0,
       "reason": "Measuring performance…",
       "canvas": [
         1600,
@@ -172,7 +173,7 @@
         "height": 2048
       }
     ],
-    "frameIntervalP95": 88.70000004768372,
+    "frameIntervalP95": 107,
     "scope": "first visual slice; no claim of UE parity or mobile performance"
   },
   "axes": {
@@ -309,20 +310,20 @@
     "isTarget": true
   },
   "reflectionDifference": {
-    "changedFraction": 0.1625908163265306,
-    "meanChannelDifference": 6.234911904761697
+    "changedFraction": 0.15401326530612244,
+    "meanChannelDifference": 6.084407823129854
   },
   "shadowDifference": {
-    "changedFraction": 0.32673061224489797,
-    "meanChannelDifference": 6.64689421768697
+    "changedFraction": 0.31926836734693875,
+    "meanChannelDifference": 6.666419047618593
   },
   "lightingDifference": {
-    "changedFraction": 0.7821030612244898,
-    "meanChannelDifference": 36.03287585033842
+    "changedFraction": 0.7822989795918367,
+    "meanChannelDifference": 36.07585646258179
   },
   "carNormalDifference": {
-    "changedFraction": 0.021520408163265305,
-    "meanChannelDifference": 0.6902034013610099
+    "changedFraction": 0.019746938775510203,
+    "meanChannelDifference": 0.6596343537417257
   },
   "handling": {
     "acceleration": {
@@ -332,39 +333,39 @@
       "freeExplore": true,
       "freePosition": [
         -1.4,
-        8.965483322763863
+        9.350297924363092
       ],
-      "freeSpeed": 7.189082473536959,
+      "freeSpeed": 6.862946486112172,
       "freeYaw": 180,
       "driving": {
         "x": -1.4,
         "y": 0,
-        "z": 8.965483322763863,
+        "z": 9.350297924363092,
         "yaw": 3.141592653589793,
-        "speed": 7.189082473536959,
+        "speed": 6.862946486112172,
         "steering": 0,
         "yawRate": 0,
         "roll": 0,
-        "pitch": -0.020271469344516905,
-        "wheelTravel": 4.579316677426868,
+        "pitch": -0.020326233736791887,
+        "wheelTravel": 4.168102075255436,
         "contacts": 0
       },
       "wheels": [
         {
           "steering": 0,
-          "spin": 316.22556358358383
+          "spin": 255.50169456664003
         },
         {
           "steering": 0,
-          "spin": 316.22556358358383
+          "spin": 255.50169456664003
         },
         {
           "steering": 0,
-          "spin": 316.22556358358383
+          "spin": 255.50169456664003
         },
         {
           "steering": 0,
-          "spin": 316.22556358358383
+          "spin": 255.50169456664003
         }
       ],
       "quality": {
@@ -372,8 +373,8 @@
         "targetFPS": 60,
         "tier": "high",
         "scale": 1,
-        "fps": 7.472078024015084,
-        "p90": 155.10000002384186,
+        "fps": 8.062348830811823,
+        "p90": 137.69999992847443,
         "reason": "Measuring performance…",
         "canvas": [
           1600,
@@ -477,7 +478,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 123.10000002384186,
+      "frameIntervalP95": 124.29999995231628,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "turning": {
@@ -486,40 +487,40 @@
       "moving": false,
       "freeExplore": true,
       "freePosition": [
-        -0.893677525880747,
-        3.594947192057704
+        -0.9797070673495034,
+        4.418868459889382
       ],
-      "freeSpeed": 10.520245481232347,
-      "freeYaw": 159.76432653470332,
+      "freeSpeed": 10.072342335735147,
+      "freeYaw": 160.7648904201288,
       "driving": {
-        "x": -0.893677525880747,
+        "x": -0.9797070673495034,
         "y": 0,
-        "z": 3.594947192057704,
-        "yaw": 2.7884135252619155,
-        "speed": 10.520245481232347,
-        "steering": -0.3738687122501333,
-        "yawRate": -0.8432333110736089,
-        "roll": -0.046381909928209133,
-        "pitch": -0.019542298169867103,
-        "wheelTravel": 9.98672651453044,
+        "z": 4.418868459889382,
+        "yaw": 2.8058766594391376,
+        "speed": 10.072342335735147,
+        "steering": -0.37964140810736285,
+        "yawRate": -0.8757112788009257,
+        "roll": -0.0444243427337439,
+        "pitch": -0.019658590267256124,
+        "wheelTravel": 9.12681561634166,
         "contacts": 0
       },
       "wheels": [
         {
-          "steering": -19.627099051090408,
-          "spin": 34.73525885048775
+          "steering": -19.90658722780388,
+          "spin": 267.7526165218253
         },
         {
-          "steering": -23.55569190643718,
-          "spin": 34.73525885048775
-        },
-        {
-          "steering": 0,
-          "spin": 34.73525885048775
+          "steering": -23.952175296430532,
+          "spin": 267.7526165218253
         },
         {
           "steering": 0,
-          "spin": 34.73525885048775
+          "spin": 267.7526165218253
+        },
+        {
+          "steering": 0,
+          "spin": 267.7526165218253
         }
       ],
       "quality": {
@@ -527,8 +528,8 @@
         "targetFPS": 60,
         "tier": "high",
         "scale": 1,
-        "fps": 7.472078024015084,
-        "p90": 155.10000002384186,
+        "fps": 8.062348830811823,
+        "p90": 137.69999992847443,
         "reason": "Measuring performance…",
         "canvas": [
           1600,
@@ -632,7 +633,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 131.29999995231628,
+      "frameIntervalP95": 124.10000002384186,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "coast": {
@@ -641,40 +642,40 @@
       "moving": false,
       "freeExplore": true,
       "freePosition": [
-        1.5466816057114223,
-        -1.4226422148727664
+        1.0389050440890242,
+        -0.0009391684878685275
       ],
-      "freeSpeed": 10.127435753820189,
-      "freeYaw": 147.6864447120685,
+      "freeSpeed": 9.731732268694156,
+      "freeYaw": 148.46407853419993,
       "driving": {
-        "x": 1.5466816057114223,
+        "x": 1.0389050440890242,
         "y": 0,
-        "z": -1.4226422148727664,
-        "yaw": 2.577614720790164,
-        "speed": 10.127435753820189,
+        "z": -0.0009391684878685275,
+        "yaw": 2.5911869913612255,
+        "speed": 9.731732268694156,
         "steering": 0,
-        "yawRate": -0.03493620588950337,
-        "roll": -0.012159677130614055,
-        "pitch": 0.00237298874215521,
-        "wheelTravel": 15.57641639322577,
+        "yawRate": -0.05347714306116835,
+        "roll": -0.0161153956756101,
+        "pitch": 0.0020673124834582547,
+        "wheelTravel": 13.993381608831909,
         "contacts": 0
       },
       "wheels": [
         {
           "steering": 0,
-          "spin": 140.16216306758952
+          "spin": 266.3961528403461
         },
         {
           "steering": 0,
-          "spin": 140.16216306758952
+          "spin": 266.3961528403461
         },
         {
           "steering": 0,
-          "spin": 140.16216306758952
+          "spin": 266.3961528403461
         },
         {
           "steering": 0,
-          "spin": 140.16216306758952
+          "spin": 266.3961528403461
         }
       ],
       "quality": {
@@ -682,8 +683,8 @@
         "targetFPS": 60,
         "tier": "high",
         "scale": 1,
-        "fps": 7.472078024015084,
-        "p90": 155.10000002384186,
+        "fps": 8.062348830811823,
+        "p90": 137.69999992847443,
         "reason": "Measuring performance…",
         "canvas": [
           1600,
@@ -787,7 +788,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 131.29999995231628,
+      "frameIntervalP95": 124.29999995231628,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "brake": {
@@ -796,40 +797,40 @@
       "moving": false,
       "freeExplore": true,
       "freePosition": [
-        4.495512898188989,
-        -6.241375647071476
+        3.672821354931279,
+        -4.513101013344568
       ],
       "freeSpeed": 0,
-      "freeYaw": 147.44450824381755,
+      "freeYaw": 148.09376127173297,
       "driving": {
-        "x": 4.495512898188989,
+        "x": 3.672821354931279,
         "y": 0,
-        "z": -6.241375647071476,
-        "yaw": 2.5733921328385385,
+        "z": -4.513101013344568,
+        "yaw": 2.5847237358542055,
         "speed": 0,
         "steering": 0,
         "yawRate": 0,
-        "roll": 5.395676043592032e-9,
-        "pitch": 0.0012742405785723119,
-        "wheelTravel": 21.224864920864427,
+        "roll": 1.1856478717545924e-8,
+        "pitch": 0.0011432623377588597,
+        "wheelTravel": 19.216064816804472,
         "contacts": 0
       },
       "wheels": [
         {
           "steering": 0,
-          "spin": 254.26592964124666
+          "spin": 317.6273527132157
         },
         {
           "steering": 0,
-          "spin": 254.26592964124666
+          "spin": 317.6273527132157
         },
         {
           "steering": 0,
-          "spin": 254.26592964124666
+          "spin": 317.6273527132157
         },
         {
           "steering": 0,
-          "spin": 254.26592964124666
+          "spin": 317.6273527132157
         }
       ],
       "quality": {
@@ -837,8 +838,8 @@
         "targetFPS": 60,
         "tier": "high",
         "scale": 1,
-        "fps": 10.167370561836082,
-        "p90": 132,
+        "fps": 10.023903153858424,
+        "p90": 122.60000002384186,
         "reason": "Measuring performance…",
         "canvas": [
           1600,
@@ -942,7 +943,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 131.19999992847443,
+      "frameIntervalP95": 124.10000002384186,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "active": true,
@@ -1002,7 +1003,7 @@
       "taa": true,
       "shadowResolution": 4096,
       "panelOpen": false,
-      "meanRenderInterval": 88.49375000596046
+      "meanRenderInterval": 74.74374999850988
     },
     {
       "mode": "balanced",
@@ -1027,7 +1028,7 @@
       "taa": true,
       "shadowResolution": 2048,
       "panelOpen": false,
-      "meanRenderInterval": 66.19374999403954
+      "meanRenderInterval": 56.38750000298023
     },
     {
       "mode": "performance",
@@ -1052,7 +1053,7 @@
       "taa": false,
       "shadowResolution": 2048,
       "panelOpen": false,
-      "meanRenderInterval": 23.512500002980232
+      "meanRenderInterval": 20.78125
     }
   ],
   "qualityPoolStart": {
@@ -1083,6 +1084,113 @@
     "memoryMeasurement": "estimate",
     "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
   },
+  "collisionRecovery": [
+    {
+      "name": "warehouse corner",
+      "impact": {
+        "x": -49.83864033168576,
+        "y": -4.994,
+        "z": 39.61540091251717,
+        "yaw": -2.459528391144309,
+        "speed": 12.423604552075737,
+        "steering": -0.3511753856040855,
+        "yawRate": -0.7257047356235704,
+        "roll": -0.05395807650530951,
+        "pitch": -0.018984281357122348,
+        "wheelTravel": 16.38627611148809,
+        "contacts": 28
+      },
+      "escaped": {
+        "x": -52.81727284038114,
+        "y": -4.994,
+        "z": 35.379233052244466,
+        "yaw": -2.6455928610566652,
+        "speed": -3.1151398169214453,
+        "steering": 0,
+        "yawRate": -2.53977168779963e-7,
+        "roll": 2.8205766807370573e-8,
+        "pitch": 0.012433253048532933,
+        "wheelTravel": 21.569490514089672,
+        "contacts": 28
+      },
+      "distance": 5.178549001628193,
+      "model": [
+        -52.81727284038114,
+        -4.994,
+        35.379233052244466
+      ]
+    },
+    {
+      "name": "bridge rail",
+      "impact": {
+        "x": 5.2879999965400035,
+        "y": 0,
+        "z": 20,
+        "yaw": 1.5707963267948966,
+        "speed": -5.161376942070858e-31,
+        "steering": 0,
+        "yawRate": 0,
+        "roll": 0,
+        "pitch": -4.3486108845518954e-11,
+        "wheelTravel": 2.2696059781053974,
+        "contacts": 255
+      },
+      "escaped": {
+        "x": -1.696604865134296,
+        "y": 0,
+        "z": 20,
+        "yaw": 1.5707963267948966,
+        "speed": -6.866430601951835,
+        "steering": 0,
+        "yawRate": 0,
+        "roll": 0,
+        "pitch": 0.011982868291968393,
+        "wheelTravel": -4.714998883568902,
+        "contacts": 255
+      },
+      "distance": 6.984604861674299,
+      "model": [
+        -1.696604865134296,
+        0,
+        20
+      ]
+    },
+    {
+      "name": "outer quay edge",
+      "impact": {
+        "x": -72.7879999840544,
+        "y": -4.994,
+        "z": 55,
+        "yaw": -1.5707963267948966,
+        "speed": 2.3726989612221717e-33,
+        "steering": 0,
+        "yawRate": 0,
+        "roll": 0,
+        "pitch": -1.1320542459362619e-10,
+        "wheelTravel": 2.760932917999649,
+        "contacts": 244
+      },
+      "escaped": {
+        "x": -65.86061537739633,
+        "y": -4.994,
+        "z": 55,
+        "yaw": -1.5707963267948966,
+        "speed": -6.838925428083363,
+        "steering": 0,
+        "yawRate": 0,
+        "roll": 0,
+        "pitch": 0.011987639420015867,
+        "wheelTravel": -4.166451688658384,
+        "contacts": 244
+      },
+      "distance": 6.927384606658066,
+      "model": [
+        -65.86061537739633,
+        -4.994,
+        55
+      ]
+    }
+  ],
   "errors": [],
   "failures": []
 }

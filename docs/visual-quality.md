@@ -6,6 +6,8 @@ The goal is a believable, controllable Web 3D scene with an eventual AAA visual 
 
 Controls: W/up accelerates, S/down brakes then reverses, A/D or left/right steers, Space is the handbrake, Shift boosts, drag or touch orbits, R resets. Touch controls include throttle, reverse, steering and handbrake. The speedometer shows km/h and D/N/R. DRIVE remains the presentation path.
 
+The entire 5.42 × 2.12 m capsule now contacts solid boxes and the connected paving perimeter. Movement advances to contact and projects the remaining displacement and velocity along the wall; it does not bounce or commit independent X/Z moves. Rotation is checked after translation and clips to the last clear orientation, so a blocked turn cannot trap the car in an overlapping pose or prevent reverse from making room. Bridge/ramp/forecourt joins stay open. A head-on impact stops the car; S reverses away without RESET. This remains a consumer arcade solver rather than a general rigid-body engine.
+
 ## Graphics and performance settings
 
 The default is **Auto**. Open SETTINGS in any presentation view or while driving. The modal blocks driving input and pauses vehicle/presentation movement; the scene continues rendering so its performance can be measured. Native dialog focus handling and Escape close are supported. Mode and 30/60 FPS target save locally; unavailable persistent storage falls back to the session. A target is a goal, not a guaranteed frame rate.
@@ -20,7 +22,7 @@ Pixel budgets respect native density and the SDK's .5 minimum DPR. Auto starts a
 
 Reflection resizing destroys the previous camera and target. Disabling reflections disables that camera, rather than merely hiding the reflected pixels. Repeated quality switches reach a bounded target pool. All source models/textures are still loaded: these settings control rendering cost and do not introduce model streaming or geometry LOD.
 
-The local 1600 × 1000, native-DPR-1 WebGL verification measured short 16-frame stationary captures at approximately 11.3 FPS (High), 15.1 FPS (Balanced) and 42.5 FPS (Performance, 1131 × 707). These are short test-environment observations, not sustained device guarantees or GPU timings. The live in-app browser also settled to Auto · Performance at approximately 60 FPS.
+The WebGL report records short 16-frame stationary captures for each tier. Results vary with concurrent rendering load and are test-environment observations, not sustained device guarantees or GPU timings. A separate live in-app browser check settled to Auto · Performance at approximately 60 FPS.
 
 ## Delivered baseline
 
@@ -47,7 +49,7 @@ Rendering tests establish that the features are active and consistent. Screensho
 
 ### Accepted rendering evidence
 
-The [12-check real WebGL report](visual-verification.json) includes the loaded driving rig, actual wheel rotation/steering, body reaction, acceleration/coast/brake, independent camera orbit and touch cancellation. It also verifies all six cube axes plus fractional mip interpolation, material/4K glTF normal bindings, five settled camera views, the warehouse's rotated metre bounds and support contact, drive/stop behavior, reflection/shadow/lighting pixel changes and 30 drawn pipeline replacements. Native glTF materials use `u_NormalScale`; assigning the `PBRStandardMaterial.normalTextureScale` property to a plain glTF `Material` has no effect. The original normal-map comparison remains in the current report.
+The [13-check real WebGL report](visual-verification.json) includes the loaded driving rig, actual wheel rotation/steering, body reaction, acceleration/coast/brake, independent camera orbit and touch cancellation. Keyboard-driven collision regressions hit the actual warehouse corner, bridge rail and outer quay edge, then reverse free without RESET and verify the visible GLB position. Unit coverage also checks glancing wall slides, simultaneous corner contacts, high-speed thin obstacles and consistent recovery at 30/60/120 render FPS. It also verifies all six cube axes plus fractional mip interpolation, material/4K glTF normal bindings, five settled camera views, the warehouse's rotated metre bounds and support contact, drive/stop behavior, reflection/shadow/lighting pixel changes and 30 drawn pipeline replacements. Native glTF materials use `u_NormalScale`; assigning the `PBRStandardMaterial.normalTextureScale` property to a plain glTF `Material` has no effect. The original normal-map comparison remains in the current report.
 
 All 169 warehouse renderers cast and receive shadows; its world bounds are (−56, −5, 45) to (−38, 13, 75) m. The source GLB separately passed fresh-import bounds and BVH tests for its recessed doors, windows and skylights. The machine-readable report records reflection, shadow and combined-lighting pixel differences for the current capture. These differences demonstrate contribution, not a photorealism score. Resource totals remained exactly stable through the drawn replacement loop.
 

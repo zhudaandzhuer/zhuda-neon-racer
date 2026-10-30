@@ -29,6 +29,64 @@ test('harbor: full car footprint contacts bridge rails and solid containers with
  const obstacle={minX:-32,maxX:-28,minZ:60,maxZ:63,minY:-5,maxY:-2};
  const c=new HarborVehicle([obstacle]);c.reset(-30,52,0);run(c,3,input(1));assert.ok(c.contacts>0);assert.ok(c.z<58);assert.ok(harborDriveable(c.x,c.z,c.yaw,[obstacle]));
 });
+const warehouse={minX:-56,maxX:-38,minZ:45,maxZ:75,minY:-5,maxY:13};
+test('harbor: a turning impact at the warehouse corner never embeds the body and reverse escapes',()=>{
+ // Previously the independently accepted X/Z moves left this pose inside the corner;
+ // two seconds of reverse then moved exactly zero metres.
+ for(const [x,z,yaw,steer] of [[-35,40,-.4,-.5],[-35,42,-.8,-1],[-36,77,.8,1]]){
+  const v=new HarborVehicle([warehouse]);v.reset(x,z,yaw);
+  for(let n=0;n<360;n++){
+   v.update(1/120,input(1,steer));
+   assert.ok(harborDriveable(v.x,v.z,v.yaw,[warehouse]),`invalid forward pose at ${n}`);
+  }
+  assert.ok(v.contacts>0);const hit=v.snapshot();
+  for(let n=0;n<240;n++){
+   v.update(1/120,input(-1));
+   assert.ok(harborDriveable(v.x,v.z,v.yaw,[warehouse]),`invalid reverse pose at ${n}`);
+  }
+  assert.ok(Math.hypot(v.x-hit.x,v.z-hit.z)>2,'reverse must leave the contact without RESET');
+  assert.ok(v.speed<-.5);
+ }
+});
+test('harbor: a glancing wall impact keeps tangential motion without jittering back through the wall',()=>{
+ const wall={minX:-40,maxX:-38,minZ:-30,maxZ:180,minY:-5,maxY:12};
+ const v=new HarborVehicle([wall]);v.reset(-34,10,-.3);
+ run(v,2,input(1));const first=v.snapshot();run(v,2,input(1));
+ assert.ok(v.contacts>0);assert.ok(v.z>first.z+10,'continue sliding along the wall');
+ assert.ok(v.speed>5);assert.ok(Math.abs(v.vx)<1e-6,'only the incoming normal velocity is removed');
+ assert.ok(v.x-Math.abs(Math.sin(v.yaw))*1.65-1.06>=wall.maxX,'whole capsule stays outside the wall');
+});
+test('harbor: bridge rails and quay edges allow reversing after a head-on impact',()=>{
+ for(const [x,z,yaw] of [[3,20,Math.PI/2],[-70,20,-Math.PI/2],[-28,254,0],[70,20,Math.PI/2]]){
+  const v=new HarborVehicle();v.reset(x,z,yaw);run(v,3,input(1,.2));
+  assert.ok(v.contacts>0);const hit=v.snapshot();run(v,2,input(-1));
+  assert.ok(Math.hypot(v.x-hit.x,v.z-hit.z)>2);
+  assert.ok(harborDriveable(v.x,v.z,v.yaw));assert.ok(v.speed<-.5);
+ }
+});
+test('harbor: simultaneous corner contacts cannot commit two separately valid axis moves',()=>{
+ const walls=[{minX:-40,maxX:-38,minZ:40,maxZ:90,minY:-5,maxY:12},
+  {minX:-38,maxX:-20,minZ:80,maxZ:82,minY:-5,maxY:12}];
+ const v=new HarborVehicle(walls);v.reset(-33,74,-.6);
+ for(let n=0;n<480;n++){v.update(1/120,input(1,-.3));assert.ok(harborDriveable(v.x,v.z,v.yaw,walls));}
+ const hit=v.snapshot();assert.ok(v.contacts>0);run(v,2,input(-1));
+ assert.ok(Math.hypot(v.x-hit.x,v.z-hit.z)>2);assert.ok(harborDriveable(v.x,v.z,v.yaw,walls));
+});
+test('harbor: boosted impacts remain outside thin obstacles and escape consistently at 30/60/120 FPS',()=>{
+ const thin={minX:-60,maxX:-22,minZ:80,maxZ:80.05,minY:-5,maxY:-2};
+ const drive=fps=>{
+  const v=new HarborVehicle([thin]);v.reset(-30,20,0);
+  for(let n=0;n<5*fps;n++){
+   v.update(1/fps,{...input(1),boost:true});
+   assert.ok(v.z+1.65+1.06<=80,'cannot tunnel across the thin wall');
+  }
+  assert.ok(v.contacts>0);const hit=v.z;run(v,2,input(-1),fps);
+  assert.ok(v.z<hit-2);return v.snapshot();
+ };
+ const reference=drive(120);for(const fps of [30,60]){
+  const actual=drive(fps);for(const key of ['x','z','yaw','speed'])assert.ok(Math.abs(actual[key]-reference[key])<1e-7);
+ }
+});
 test('harbor: access ramp joins the bridge and forecourt with continuous support height',()=>{
  const v=new HarborVehicle();v.reset(0,160,0);let last=0,min=0;
  for(let n=0;n<7*120;n++){v.update(1/120,input(1));assert.ok(Math.abs(v.y-last)<.03);last=v.y;min=Math.min(min,v.y);}
