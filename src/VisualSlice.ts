@@ -12,6 +12,7 @@ import {
   inspectSceneResources,
 } from "zhuda-laya-engine";
 import { Geometry, type V } from "./Geometry";
+import { HarborVehicle, harborHeight, cameraObstruction, wrapAngle, type DriveObstacle } from "./HarborDriving";
 import { verifyEnvironmentUpload } from "./VisualVerification";
 import environment from "../public/visual-assets/harbor-ibl.json";
 import carAsset from "../public/visual-assets/maextro-s800-hero.json";
@@ -146,21 +147,23 @@ class HarborStudy {
   view = "hero";
   moving = false;
   freeExplore = false;
-  private freeX = -1.4;
-  private freeZ = 1.5;
-  private freeYaw = 180;
-  private freeSpeed = 0;
-  private freeSteer = 0;
-  private freeBodyPitch = 0;
-  private freeBodyRoll = 0;
+  private driveObstacles: DriveObstacle[] = [];
+  vehicle = new HarborVehicle(this.driveObstacles);
+  drivingCar: any;
+  drivingBody: any;
+  wheels: {steer: any; axle: any; front: boolean; side: number}[] = [];
+  private driveSpawn: V = [-1.4, 0, 1.5];
   private freeCameraX = 0;
-  private freeCameraY = 2.2;
-  private freeCameraZ = -7;
-  private freeCameraYaw = 180;
-  private freePitch = 0.18;
+  private freeCameraY = 3.4;
+  private freeCameraZ = -8;
+  private freeCameraYaw = Math.PI;
+  private freePitch = 0.34;
   private freeLookIdle = 0;
+  private freeDistance = 8.6;
   private freeKeys = new Set<string>();
   private freePointer: { id: number; x: number; y: number } | null = null;
+  get freeYaw() { return this.vehicle.yaw * 180 / Math.PI; }
+  get freeBodyRoll() { return this.vehicle.roll * 180 / Math.PI; }
   comparison = false;
   time = 0;
   frames = 0;
@@ -173,124 +176,98 @@ class HarborStudy {
   verifyEnvironmentUpload = verifyEnvironmentUpload;
   private enterFreeExplore() {
     const p = this.car.transform.position;
-    this.freeX = p.x;
-    this.freeZ = p.z;
-    this.freeYaw = this.car.transform.rotationEuler.y;
-    this.freeSpeed = 0;
-    this.freeSteer = 0;
-    this.freeBodyPitch = 0;
-    this.freeBodyRoll = 0;
-    this.freeCameraYaw = this.freeYaw;
-    this.freePitch = 0.18;
-    const initialAngle = radians(this.freeCameraYaw),
-      initialGround = Math.abs(this.freeX) < 10 ? 0 : -4.994;
-    this.freeCameraX = this.freeX - Math.sin(initialAngle) * 7.4;
-    this.freeCameraY = initialGround + 2.15;
-    this.freeCameraZ = this.freeZ - Math.cos(initialAngle) * 7.4;
+    this.driveSpawn = [p.x, p.y, p.z];
+    this.vehicle.reset(p.x, p.z, Math.PI);
+    this.freeCameraYaw = this.vehicle.yaw;
+    this.freePitch = 0.34;
     this.freeLookIdle = 0;
+    this.freeKeys.clear();
     this.freeExplore = true;
     this.moving = false;
     this.view = "free";
+    this.car.active = false;
+    this.drivingCar.active = true;
+    this.updateDrivingModel();
     document.body.classList.add("exploring");
     $("explore").setAttribute("aria-pressed", "true");
+    $("explore").textContent = "EXIT DRIVE";
     $("motion").setAttribute("aria-pressed", "false");
+    document.querySelectorAll("[data-view]").forEach(v => v.setAttribute("aria-pressed", "false"));
+    this.resetChaseCamera();
+    this.pipeline.resetHistory();
+  }
+  private resetChaseCamera() {
+    const v = this.vehicle;
+    this.freeCameraYaw = v.yaw;
+    this.freeCameraX = v.x - Math.sin(v.yaw) * this.freeDistance;
+    this.freeCameraY = v.y + 3.5;
+    this.freeCameraZ = v.z - Math.cos(v.yaw) * this.freeDistance;
+  }
+  private resetDriving() {
+    this.vehicle.reset(this.driveSpawn[0], this.driveSpawn[2], Math.PI);
+    this.freeKeys.clear();
+    this.freePointer = null;
+    this.freeLookIdle = 0;
+    this.resetChaseCamera();
+    this.updateDrivingModel();
     this.pipeline.resetHistory();
   }
   private exitFreeExplore() {
     this.freeExplore = false;
     this.freeKeys.clear();
     this.freePointer = null;
-    this.freeSpeed = 0;
-    this.freeSteer = 0;
-    this.freeBodyPitch = 0;
-    this.freeBodyRoll = 0;
+    this.drivingCar.active = false;
+    this.car.active = true;
     document.body.classList.remove("exploring");
     $("explore").setAttribute("aria-pressed", "false");
+    $("explore").textContent = "EXPLORE";
     this.view = "hero";
     this.car.transform.rotationEuler = new Laya.Vector3(0, 180, 0);
     this.pipeline.resetHistory();
   }
-  private freeStep(dt: number) {
-    const forward =
-        (this.freeKeys.has("KeyW") || this.freeKeys.has("ArrowUp") ? 1 : 0) -
-        (this.freeKeys.has("KeyS") || this.freeKeys.has("ArrowDown") ? 1 : 0),
-      steer =
-        (this.freeKeys.has("KeyD") || this.freeKeys.has("ArrowRight") ? 1 : 0) -
-        (this.freeKeys.has("KeyA") || this.freeKeys.has("ArrowLeft") ? 1 : 0),
-      boost = this.freeKeys.has("ShiftLeft") || this.freeKeys.has("ShiftRight"),
-      brake = this.freeKeys.has("Space");
-    const targetSpeed = brake
-        ? 0
-        : forward > 0
-          ? boost
-            ? 22
-            : 14
-          : forward < 0
-            ? -5
-            : 0,
-      acceleration = brake ? 24 : forward ? 8.5 : 5.5,
-      speedDelta = targetSpeed - this.freeSpeed,
-      maxDelta = acceleration * dt;
-    this.freeSpeed += Math.max(-maxDelta, Math.min(maxDelta, speedDelta));
-    if (!forward && !brake)
-      this.freeSpeed *= Math.max(0, 1 - Math.min(1, dt * 1.7));
-    if (Math.abs(this.freeSpeed) < 0.03) this.freeSpeed = 0;
-    this.freeSteer +=
-      (steer - this.freeSteer) * Math.min(1, Math.max(0, dt * 9));
-    const steeringAngle = this.freeSteer * 0.46,
-      wheelBase = 2.85;
-    if (Math.abs(this.freeSpeed) > 0.05)
-      this.freeYaw +=
-        (this.freeSpeed / wheelBase) * Math.tan(steeringAngle) * dt *
-        (180 / Math.PI);
-    const angle = radians(this.freeYaw);
-    this.freeX += Math.sin(angle) * this.freeSpeed * dt;
-    this.freeZ += Math.cos(angle) * this.freeSpeed * dt;
-    this.freeX = Math.max(-72, Math.min(72, this.freeX));
-    this.freeZ = Math.max(-62, Math.min(178, this.freeZ));
-    const ground = Math.abs(this.freeX) < 10 ? 0 : -4.994;
-    this.car.transform.position = new Laya.Vector3(this.freeX, ground, this.freeZ);
-    const targetRoll =
-        -this.freeSteer * Math.min(1, Math.abs(this.freeSpeed) / 12) * 5.5,
-      targetPitch =
-        -forward * Math.min(1, Math.abs(this.freeSpeed) / 18) * 1.3;
-    this.freeBodyRoll +=
-      (targetRoll - this.freeBodyRoll) * Math.min(1, dt * 7);
-    this.freeBodyPitch +=
-      (targetPitch - this.freeBodyPitch) * Math.min(1, dt * 7);
-    this.car.transform.rotationEuler = new Laya.Vector3(
-      this.freeBodyPitch,
-      this.freeYaw,
-      this.freeBodyRoll,
-    );
-    if (this.freeLookIdle > 0) this.freeLookIdle -= dt;
-    else {
-      const yawDelta = ((this.freeYaw - this.freeCameraYaw + 540) % 360) - 180;
-      this.freeCameraYaw += yawDelta * Math.min(1, dt * 2.2);
+  private updateDrivingModel() {
+    const v = this.vehicle, deg = 180 / Math.PI;
+    this.drivingCar.transform.position = new Laya.Vector3(v.x,v.y,v.z);
+    this.drivingCar.transform.rotationEuler = new Laya.Vector3(v.groundPitch * deg, v.yaw * deg, 0);
+    this.drivingBody.transform.localRotationEuler = new Laya.Vector3(v.pitch * deg,0,v.roll * deg);
+    this.drivingBody.transform.localPosition = new Laya.Vector3(0,-Math.abs(v.roll) * 0.08,0);
+    for (const w of this.wheels) {
+      const radius = Math.abs(v.steering) > 0.001 ? 3.37 / Math.tan(Math.abs(v.steering)) : 1e8;
+      const inside = Math.sign(v.steering) === w.side;
+      const steer = w.front ? Math.sign(v.steering) * Math.atan(3.37 / Math.max(1, radius + (inside ? -0.86 : 0.86))) : 0;
+      w.steer.transform.localRotationEuler = new Laya.Vector3(0,steer * deg,0);
+      w.axle.transform.localRotationEuler = new Laya.Vector3(v.wheelTravel / 0.388 * deg % 360,0,0);
     }
   }
-  private freePose() {
-    const angle = radians(this.freeCameraYaw),
-      ground = Math.abs(this.freeX) < 10 ? 0 : -4.994,
-      lookHeight = 1.05 + this.freePitch * 2.2,
-      eyeHeight = 2.15 + this.freePitch * 1.4,
-      distance = 7.4 + Math.min(3.2, Math.abs(this.freeSpeed) * 0.12),
-      desiredX = this.freeX - Math.sin(angle) * distance,
-      desiredY = ground + eyeHeight,
-      desiredZ = this.freeZ - Math.cos(angle) * distance,
-      follow = 0.14;
-    this.freeCameraX += (desiredX - this.freeCameraX) * follow;
-    this.freeCameraY += (desiredY - this.freeCameraY) * follow;
-    this.freeCameraZ += (desiredZ - this.freeCameraZ) * follow;
-    return {
-      eye: [this.freeCameraX, this.freeCameraY, this.freeCameraZ] as V,
-      target: [
-        this.freeX + Math.sin(angle) * (10 + Math.min(3, Math.abs(this.freeSpeed) * 0.2)),
-        ground + lookHeight,
-        this.freeZ + Math.cos(angle) * (10 + Math.min(3, Math.abs(this.freeSpeed) * 0.2)),
-      ] as V,
-      fov: 48,
-    };
+  private freeStep(dt: number) {
+    this.vehicle.update(dt, {
+      throttle: Number(this.freeKeys.has("KeyW") || this.freeKeys.has("ArrowUp")) - Number(this.freeKeys.has("KeyS") || this.freeKeys.has("ArrowDown")),
+      steer: Number(this.freeKeys.has("KeyD") || this.freeKeys.has("ArrowRight")) - Number(this.freeKeys.has("KeyA") || this.freeKeys.has("ArrowLeft")),
+      boost: this.freeKeys.has("ShiftLeft") || this.freeKeys.has("ShiftRight"),
+      handbrake: this.freeKeys.has("Space"),
+    });
+    this.updateDrivingModel();
+    if (this.freeLookIdle > 0) this.freeLookIdle -= dt;
+    else if (!this.freePointer && Math.abs(this.vehicle.speed) > 0.5) {
+      this.freeCameraYaw += wrapAngle(this.vehicle.yaw - this.freeCameraYaw) * (1-Math.exp(-2.4*dt));
+    }
+    $("speed-value").textContent = String(Math.round(Math.abs(this.vehicle.speed) * 3.6)).padStart(3,"0");
+    $("gear-value").textContent = this.vehicle.speed < -0.2 ? "R" : Math.abs(this.vehicle.speed) < 0.2 ? "N" : "D";
+  }
+  private freePose(dt: number) {
+    const v = this.vehicle, angle = this.freeCameraYaw,
+      distance = this.freeDistance + Math.min(2.3, Math.abs(v.speed)*0.065),
+      follow = 1 - Math.exp(-6.5 * Math.min(0.25,dt)),
+      target: V = [v.x + Math.sin(v.yaw)*1.2,v.y+0.95,v.z+Math.cos(v.yaw)*1.2],
+      desired: V = [v.x-Math.sin(angle)*distance*Math.cos(this.freePitch),v.y+1.1+Math.sin(this.freePitch)*distance,v.z-Math.cos(angle)*distance*Math.cos(this.freePitch)];
+    this.freeCameraX += (desired[0]-this.freeCameraX)*follow;
+    this.freeCameraY += (desired[1]-this.freeCameraY)*follow;
+    this.freeCameraZ += (desired[2]-this.freeCameraZ)*follow;
+    const eye: V = [this.freeCameraX,this.freeCameraY,this.freeCameraZ],
+      obstruction = cameraObstruction(target,eye,this.driveObstacles);
+    for(let i=0;i<3;i++) eye[i]=target[i]+(eye[i]-target[i])*obstruction;
+    eye[1]=Math.max(eye[1],(harborHeight(eye[0],eye[2]) ?? -7)+0.3);
+    return {eye,target,fov:56+Math.min(7,Math.abs(v.speed)*0.2)};
   }
   rebuildPipeline() {
     this.pipeline?.dispose();
@@ -464,6 +441,9 @@ class HarborStudy {
     ) => {
       const node = mesh(roundedBox(w, h, d, r), mat, this.scene, name);
       node.transform.position = new l.Vector3(x, y, z);
+      if (["shipping-container", "warehouse-main", "crane-leg", "crane-outboard-leg",
+        "crane-wheel-bogie", "loading-bollard", "streetlamp-base"].includes(name))
+        this.driveObstacles.push({minX:x-w/2,maxX:x+w/2,minZ:z-d/2,maxZ:z+d/2,minY:y-h/2,maxY:y+h/2});
       if (y + h / 2 <= 0.027) node.layer = 2;
       materialNodes.push(node);
       return node;
@@ -480,6 +460,17 @@ class HarborStudy {
     );
     mesh(roadG, road, this.scene, "wet-asphalt").layer = 2;
     box("bridge-deck", concreteMat, 0, -0.65, 60, 18, 1.25, 240, 0.08);
+    // Continuous, visible access ramp from bridge level to the quay forecourt.
+    const ramp = new Geometry(), rampNormal = [0,1,4.994/54] as V;
+    const rn = Math.hypot(...rampNormal);
+    ramp.quad([-8,0,180],[8,0,180],[8,-4.994,234],[-8,-4.994,234],rampNormal.map(n=>n/rn) as V,[0,0,4,0,4,13.5,0,13.5]);
+    mesh(ramp,road,this.scene,"harbor-access-ramp").layer=2;
+    const rampSides = new Geometry();
+    for(const x of [-8,8]) {
+      rampSides.quad([x,0,180],[x,-0.8,180],[x,-5.794,234],[x,-4.994,234],[Math.sign(x),0,0]);
+      tubes(rampSides,[x,0.65,180],[x,-4.344,234],0.09);
+    }
+    mesh(rampSides,concreteMat,this.scene,"ramp-structure-and-rails");
     for (const side of [-1, 1]) {
       box(
         "paved-shoulder",
@@ -752,7 +743,8 @@ class HarborStudy {
       normal: cnormal,
       metallicGloss: crough,
     });
-    box("east-warehouse-quay", concreteMat, 46, -6, 80, 58, 2, 260, 0.12);
+    box("east-warehouse-quay", concreteMat, 46, -6, 105, 58, 2, 310, 0.12);
+    box("harbor-forecourt", concreteMat, -0.25, -6, 247, 150.5, 2, 26, 0.1);
     for (let block = 0; block < 3; block++) {
       const z = 95 + block * 38,
         height = [14, 24, 17][block];
@@ -832,10 +824,11 @@ class HarborStudy {
       }
     }
     // Harbour-side container stacks, cranes, quay and distant skyline provide coherent scale.
-    box("quay", concreteMat, -48, -6, 60, 55, 2, 250, 0.12);
+    box("quay", concreteMat, -48, -6, 97.5, 55, 2, 325, 0.12);
     for (const [x0, x1, z0, z1] of [
-      [-75.5, -20.5, -65, 185],
-      [17, 75, -50, 210],
+      [-75.5, -20.5, -65, 260],
+      [17, 75, -50, 260],
+      [-75.5, 75, 234, 260],
     ]) {
       const paving = new Geometry();
       paving.quad(
@@ -936,6 +929,7 @@ class HarborStudy {
     this.scene.addChild(this.warehouse);
     this.warehouse.transform.position = new l.Vector3(-47, -5, 60);
     this.warehouse.transform.rotationEuler = new l.Vector3(0, 90, 0);
+    this.driveObstacles.push({minX:-56,maxX:-38,minZ:45,maxZ:75,minY:-5,maxY:13});
     const yellow = lit("DockSafetyPaint", [0.48, 0.31, 0.065, 1], 0.8, 0);
     for (const z of [48, 56, 64, 72]) {
       box(
@@ -1171,6 +1165,32 @@ class HarborStudy {
     };
     walk(this.car, 0.25);
     walk(this.warehouse);
+    $("progress").textContent = "Preparing independent steering and wheel assemblies…";
+    const driveAsset = await this.library.instantiate(new URL("visual-assets/maextro-s800-driving.glb?v=487ad7cb03d3",document.baseURI).href,{independentMaterials:true});
+    this.drivingCar = driveAsset.node;
+    this.drivingCar.name = "s800-independent-wheels";
+    this.scene.addChild(this.drivingCar);
+    const find = (node: any, name: string): any => {
+      if(node.name === name) return node;
+      for(let i=0;i<node.numChildren;i++) {const found=find(node.getChildAt(i),name);if(found)return found;}
+      return null;
+    };
+    const root = find(this.drivingCar,"Maextro_S800_Root");
+    if(!root) throw Error("Driving GLB root missing");
+    this.drivingBody = new l.Sprite3D("suspended-body");
+    const parts = Array.from({length:root.numChildren},(_,i)=>root.getChildAt(i));
+    root.addChild(this.drivingBody);
+    for(const part of parts) if(!part.name.startsWith("wheel_")) this.drivingBody.addChild(part);
+    for(const key of ["FL","FR","RL","RR"]) {
+      const steer=find(root,"wheel_"+key), axle=find(root,"wheel_"+key+"_axle");
+      if(!steer||!axle) throw Error("Driving wheel missing: "+key);
+      this.wheels.push({steer,axle,front:key.startsWith("F"),side:steer.transform.localPosition.x > 0 ? 1 : -1});
+    }
+    const disableClips = (node:any) => { const animator=node.getComponent(l.Animator);if(animator)animator.enabled=false;for(let i=0;i<node.numChildren;i++)disableClips(node.getChildAt(i)); };
+    disableClips(this.drivingCar);
+    walk(this.drivingCar);
+    this.drivingCar.active = false;
+
     const navigationCodes = new Set([
       "KeyW",
       "KeyA",
@@ -1185,14 +1205,18 @@ class HarborStudy {
       "Space",
     ]);
     window.addEventListener("keydown", (event) => {
-      if (!navigationCodes.has(event.code)) return;
+      if (event.code === "KeyR" && this.freeExplore && !event.repeat) {this.resetDriving();event.preventDefault();return;}
+      if (!this.freeExplore || !navigationCodes.has(event.code)) return;
       this.freeKeys.add(event.code);
       if (this.freeExplore) event.preventDefault();
     });
     window.addEventListener("keyup", (event) => {
       if (navigationCodes.has(event.code)) this.freeKeys.delete(event.code);
     });
-    window.addEventListener("blur", () => this.freeKeys.clear());
+    const clearInput = () => {this.freeKeys.clear();this.freePointer=null;};
+    window.addEventListener("blur", clearInput);
+    document.addEventListener("visibilitychange", () => {if(document.hidden)clearInput();this.last=performance.now();});
+    $("reset-drive").onclick=()=>this.resetDriving();
     document.querySelectorAll<HTMLButtonElement>("[data-free-key]").forEach((button) => {
       const code = button.dataset.freeKey!;
       const release = () => this.freeKeys.delete(code);
@@ -1209,7 +1233,9 @@ class HarborStudy {
     window.addEventListener("pointerdown", (event) => {
       if (!this.freeExplore || (event.target as Element)?.closest("button,a"))
         return;
+      if(this.freePointer) return;
       this.freePointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      (event.target as Element).setPointerCapture?.(event.pointerId);
     });
     window.addEventListener("pointermove", (event) => {
       if (!this.freePointer || event.pointerId !== this.freePointer.id) return;
@@ -1217,11 +1243,12 @@ class HarborStudy {
         dy = event.clientY - this.freePointer.y;
       this.freePointer.x = event.clientX;
       this.freePointer.y = event.clientY;
-      this.freeCameraYaw += dx * 0.24;
-      this.freePitch = Math.max(-0.35, Math.min(0.65, this.freePitch - dy * 0.004));
+      this.freeCameraYaw -= dx * 0.004;
+      this.freePitch = Math.max(0.08, Math.min(1.05, this.freePitch + dy * 0.004));
       this.freeLookIdle = 1.8;
       event.preventDefault();
     });
+    window.addEventListener("pointercancel", (event) => {if(this.freePointer?.id===event.pointerId)this.freePointer=null;});
     window.addEventListener("pointerup", (event) => {
       if (this.freePointer?.id === event.pointerId) this.freePointer = null;
     });
@@ -1263,6 +1290,7 @@ class HarborStudy {
         ? l.ShadowMode.None
         : l.ShadowMode.SoftHigh;
     };
+    document.querySelector("canvas")!.style.touchAction="none";
     const requestedView = new URLSearchParams(location.search).get("view");
     if (
       requestedView &&
@@ -1318,7 +1346,7 @@ class HarborStudy {
         fov: 44,
       },
     };
-    const p = this.freeExplore ? this.freePose() : poses[this.view] || poses.hero;
+    const p = this.freeExplore ? this.freePose(dt) : poses[this.view] || poses.hero;
     this.camera.fieldOfView = p.fov;
     this.camera.transform.position = new Laya.Vector3(...p.eye);
     this.camera.transform.lookAt(
@@ -1337,7 +1365,7 @@ class HarborStudy {
     this.puddle.setUniform("u_ZhudaEye", p.eye);
     if (this.frames % 30 === 0) {
       $("status").textContent =
-        `HDR / GGX IBL / PBR / SHADOWS / ACES\n${this.freeExplore ? `GTA-style drive · ${Math.abs(this.freeSpeed).toFixed(1)} m/s` : this.comparison ? "A/B: shadows, IBL and AO disabled" : "Live 3D scene · first visual study"}`;
+        `HDR / GGX IBL / PBR / SHADOWS / ACES\n${this.freeExplore ? `Harbor free drive · ${Math.round(Math.abs(this.vehicle.speed)*3.6)} km/h` : this.comparison ? "A/B: shadows, IBL and AO disabled" : "Live 3D scene · first visual study"}`;
     }
   }
   report() {
@@ -1368,9 +1396,11 @@ class HarborStudy {
       view: this.view,
       moving: this.moving,
       freeExplore: this.freeExplore,
-      freePosition: [this.freeX, this.freeZ],
-      freeSpeed: this.freeSpeed,
+      freePosition: [this.vehicle.x, this.vehicle.z],
+      freeSpeed: this.vehicle.speed,
       freeYaw: this.freeYaw,
+      driving: this.vehicle.snapshot(),
+      wheels: this.wheels.map(w=>({steering:w.steer.transform.localRotationEuler.y,spin:w.axle.transform.localRotationEuler.x})),
       hdr: this.camera.enableHDR,
       ibl: this.environment.texture.width,
       shadows: this.sun.shadowMode,

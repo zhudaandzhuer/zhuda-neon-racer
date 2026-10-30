@@ -295,7 +295,7 @@ try {
   assert.equal(initial.hdr, true);
   assert.equal(initial.ibl, 256);
   assert.ok(initial.meshCount > 500);
-  assert.equal(initial.model.instances, 24);
+  assert.equal(initial.model.instances, 25);
   assert.equal(initial.carMaterial.normalScale, 0.25);
   assert.deepEqual(initial.carMaterial.normalTextureSize, [4096, 4096]);
   for (const [actual, expected] of [
@@ -374,30 +374,52 @@ try {
   await click("explore");
   await settle();
   assert.equal(await ev("harborStudy.report().freeExplore"), true);
-  const freeBefore = await ev("harborStudy.report().freePosition");
   await key("keyDown", "KeyW", "w");
-  await delay(700);
-  assert.ok(await ev("harborStudy.report().freeSpeed") > 0.5);
-  const freeYawBefore = await ev("harborStudy.freeYaw");
-  await key("keyDown", "ArrowRight", "ArrowRight");
-  await delay(350);
-  const freeYawTurning = await ev("harborStudy.freeYaw");
-  const freeRollTurning = await ev("harborStudy.freeBodyRoll");
-  await key("keyUp", "ArrowRight", "ArrowRight");
-  await key("keyUp", "KeyW", "w");
-  const freeAfter = await ev("harborStudy.report().freePosition");
-  assert.ok(
-    Math.hypot(freeAfter[0] - freeBefore[0], freeAfter[1] - freeBefore[1]) > 1,
-    JSON.stringify({ freeBefore, freeAfter }),
-  );
-  assert.ok(
-    Math.abs(freeYawTurning - freeYawBefore) > 1,
-    "free exploration accepts steering input",
-  );
-  assert.ok(Math.abs(freeRollTurning) > 0.05);
+  const handling = await ev(`(async()=>{
+    const v=harborStudy.vehicle;
+    const advance=async seconds=>{const end=v.elapsed+seconds;while(v.elapsed<end)await new Promise(requestAnimationFrame);};
+    const key=(type,code)=>window.dispatchEvent(new KeyboardEvent(type,{code,bubbles:true}));
+    try {
+      await advance(1);
+      const acceleration=harborStudy.report();
+      key('keydown','ArrowRight');await advance(.55);
+      const turning=harborStudy.report();
+      key('keyup','ArrowRight');key('keyup','KeyW');await advance(.45);
+      const coast=harborStudy.report();
+      key('keydown','Space');await advance(1.5);
+      return {acceleration,turning,coast,brake:harborStudy.report(),active:harborStudy.drivingCar.active,originalHidden:!harborStudy.car.active};
+    } finally {for(const code of ['KeyW','ArrowRight','Space'])key('keyup',code);}
+  })()`,180000);
+  assert.ok(handling.acceleration.freeSpeed>3, 'throttle builds speed');
+  assert.ok(handling.active && handling.originalHidden);
+  const turnRadians=(handling.turning.freeYaw-handling.acceleration.freeYaw)*Math.PI/180;
+  assert.ok(Math.abs(Math.atan2(Math.sin(turnRadians),Math.cos(turnRadians)))>Math.PI/180, 'moving vehicle follows a turning arc');
+  assert.ok(Math.abs(handling.turning.driving.roll)>.001, 'suspension reacts to lateral acceleration');
+  assert.ok(handling.coast.freeSpeed>handling.turning.freeSpeed*.6, 'release retains momentum');
+  assert.ok(Math.abs(handling.brake.freeSpeed)<.15, 'handbrake stops the vehicle');
+  assert.equal(handling.turning.wheels.length,4);
+  assert.ok(handling.turning.wheels.slice(0,2).every(w=>Math.abs(w.steering)>1));
+  assert.ok(handling.turning.wheels.every(w=>Math.abs(w.spin)>1));
+  await shot('visual-driving');
+  // Drag orbit must alter only the camera, never the car's steering/heading.
+  const orbitBefore=await ev('({yaw:harborStudy.freeYaw,camera:harborStudy.freeCameraYaw})');
+  await cdp('Input.dispatchMouseEvent',{type:'mousePressed',x:viewport.width*.65,y:viewport.height*.5,button:'left',clickCount:1});
+  await cdp('Input.dispatchMouseEvent',{type:'mouseMoved',x:viewport.width*.8,y:viewport.height*.5,button:'left',buttons:1});
+  await cdp('Input.dispatchMouseEvent',{type:'mouseReleased',x:viewport.width*.8,y:viewport.height*.5,button:'left',clickCount:1});
+  const orbitAfter=await ev('({yaw:harborStudy.freeYaw,camera:harborStudy.freeCameraYaw})');
+  assert.ok(Math.abs(orbitAfter.camera-orbitBefore.camera)>.1);
+  assert.ok(Math.abs(orbitAfter.yaw-orbitBefore.yaw)<.01);
+  await click('reset-drive');
+  await cdp('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:2});
+  const touchButton=await ev(`(()=>{const r=document.querySelector('[data-free-key=KeyW]').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()`);
+  await cdp('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{...touchButton,id:1}]});
+  assert.ok(await ev('harborStudy.freeKeys.has("KeyW")'));
+  await cdp('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});
+  assert.equal(await ev('harborStudy.freeKeys.size'),0);
+  await cdp('Emulation.setTouchEmulationEnabled',{enabled:false});
   await click("explore");
   await settle();
-  pass("GTA-style free drive accelerates, steers with a turning radius and rolls the real GLB within bounded harbor surfaces");
+  pass("vehicle accelerates, coasts, brakes and turns on real independent steering/spinning wheel nodes; orbit preserves heading and touch cancellation clears input");
   await ev("document.querySelector('[data-view=hero]').click()");
   await settle();
   const reflected = await crop();
@@ -482,6 +504,7 @@ try {
     shadowDifference,
     lightingDifference,
     carNormalDifference,
+    handling,
     teardown,
     errors,
     failures,

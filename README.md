@@ -36,7 +36,7 @@ The film is an actual canvas capture at 1280 × 720 / 60 FPS with a test driver.
 
 ## HARBOR / 01 · visual study
 
-[Open the separate quality study](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html): a harbor bridge with photographed PBR surfaces, 4K HDR sky, offline GGX light, soft cascaded shadows, real planar pool reflections and an HDR/AO/bloom/ACES/TAA pipeline. Five camera views, GTA-style third-person free driving with acceleration, steering radius, braking, body roll and drag-to-look, and a drive-through inspect the same 3D scene. This first slice establishes rendering capability; further scene/vehicle art work is required for the intended AAA visual feel. [Scope, evidence and staged quality plan](docs/visual-quality.md).
+[Open the separate quality study](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html): a harbor bridge with photographed PBR surfaces, 4K HDR sky, offline GGX light, soft cascaded shadows, real planar pool reflections and an HDR/AO/bloom/ACES/TAA pipeline. Five camera views, third-person free driving with momentum, brake/reverse, independent wheel animation, tyre grip, suspension motion and an orbiting chase camera, and a drive-through inspect the same 3D scene. This first slice establishes rendering capability; further scene/vehicle art work is required for the intended AAA visual feel. [Scope, evidence and staged quality plan](docs/visual-quality.md).
 
 [![Actual WebGL harbor scene](docs/visual-dock.jpg)](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html?view=dock)
 

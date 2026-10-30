@@ -1,0 +1,30 @@
+{
+  "official_url": "https://hima.auto/zunjie/s800/",
+  "retrieved_date": "2026-10-30",
+  "official_dimensions_m": {
+    "length": 5.48,
+    "width_body": 2.0,
+    "height": 1.542,
+    "wheelbase": 3.37
+  },
+  "height_note": "Current manufacturer page: 1542 mm. Does not assert exact incident vehicle trim/year.",
+  "estimated": {
+    "track_m": 1.72,
+    "tyre_radius_m": 0.388,
+    "tyre_width_m": 0.268,
+    "wheel_center_longitudinal_blender_Y_m": [
+      -1.77,
+      1.6
+    ]
+  },
+  "reference_images": "AI four views from gpt-image-2.5-flare plus manufacturer design page; no CAD/scan or measured orthographic blueprints.",
+  "construction": "Analytical body lofts with independent arch apertures, separate cabin/glass, actual panel gaps and axle-local wheel geometry. No whole-model stretch.",
+  "materials": "Standard PBR factors for paint/glass/metals/lamps, 1024 linear ORM and tangent normal for rubber, explicit mesh normals. No baked lighting or shadows. Glass uses transmission; paint uses clearcoat.",
+  "limitations": [
+    "Silhouette and detailed lamp/wheel design are reference approximations, not OEM CAD.",
+    "Track, tyre outer diameter, overhang split and glass curvature are estimated.",
+    "Incident-specific vehicle identity and accident damage are not reconstructed.",
+    "Interior and underbody are simplified; doors do not open.",
+    "Fine logos are geometric approximations."
+  ]
+}
