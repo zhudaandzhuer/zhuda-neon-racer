@@ -187,6 +187,43 @@
       #loading[hidden] {
         display: none;
       }
+      #quality-panel {
+        width: min(520px, calc(100vw - 28px));
+        max-height: calc(100dvh - 32px);
+        overflow: auto;
+        color: #f4f1e9;
+        border: 1px solid #d5bc8c60;
+        border-radius: 16px;
+        padding: 28px;
+        background: #101923f5;
+        box-shadow: 0 24px 100px #0009;
+      }
+      #quality-panel::backdrop { background: #030a12a8; backdrop-filter: blur(6px); }
+      .quality-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+      #quality-panel h2 { margin: 5px 0 10px; font-size: 25px; font-weight: 450; letter-spacing: -.025em; }
+      #quality-panel p { color: #aebbc8; line-height: 1.6; margin: 6px 0 18px; }
+      #quality-close { font-size: 22px; padding: 1px 9px 5px; border-radius: 50%; }
+      .quality-modes { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+      .quality-modes legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+      .quality-choice { position: relative; display: grid; grid-template-columns: 18px 1fr; align-items: center; column-gap: 10px; padding: 13px 15px; border: 1px solid #ffffff21; border-radius: 9px; cursor: pointer; background: #ffffff04; }
+      .quality-choice:has(input:checked) { border-color: #dfc794; background: #dfc79412; }
+      .quality-choice:focus-within { outline: 2px solid #dfc794; outline-offset: 2px; }
+      .quality-choice input { accent-color: #dfc794; margin: 0; }
+      .quality-choice strong { font-weight: 550; font-size: 13px; }
+      .quality-choice small { display: inline-block; margin-left: 8px; font-size: 8px; letter-spacing: .2em; }
+      .quality-choice span { grid-column: 2; color: #aebbc8; font-size: 11px; margin-top: 4px; line-height: 1.5; }
+      .quality-target-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 19px 0; }
+      #quality-target { color: #eee5d2; background: #1e2a36; border: 1px solid #ffffff30; border-radius: 6px; padding: 8px 12px; font: inherit; }
+      .quality-live { border-top: 1px solid #ffffff20; padding-top: 18px; }
+      .quality-live-line { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; }
+      #quality-fps { font-size: 25px; font-weight: 400; font-variant-numeric: tabular-nums; }
+      #quality-current { color: #dfc794; }
+      #quality-panel #quality-reason { font-size: 12px; margin: 9px 0; }
+      #quality-panel details { color: #aebbc8; font-size: 11px; line-height: 1.7; margin-top: 12px; }
+      #quality-panel summary { cursor: pointer; color: #d3dce4; }
+      #quality-effects { margin-top: 7px; }
+      .quality-bottom { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+      #quality-save { color: #8e9eae; font-size: 10px; line-height: 1.5; }
       @media (max-width: 700px) {
         header {
           top: 15px;
@@ -240,6 +277,7 @@
         ><button id="reset-drive">RESET · R</button
         ><button id="motion" aria-pressed="false">DRIVE</button
         ><button id="compare" aria-pressed="false">LIGHTING A/B</button
+        ><button id="quality-open" aria-controls="quality-panel" aria-expanded="false">SETTINGS · AUTO</button
         ><a href="index.html">RACE ↗</a>
       </nav>
       <div id="status">Loading scene…</div>
@@ -256,6 +294,20 @@
       <button data-free-key="KeyD" aria-label="Turn right">▶</button>
       <button data-free-key="Space" aria-label="Handbrake">BRAKE</button>
     </div>
+    <dialog id="quality-panel" aria-labelledby="quality-title" aria-describedby="quality-description">
+      <div class="quality-heading"><div><small>HARBOR / DISPLAY</small><h2 id="quality-title">Graphics &amp; performance</h2></div><button id="quality-close" aria-label="Close settings">×</button></div>
+      <p id="quality-description">Choose your balance of detail and responsiveness. Auto adapts as you explore.</p>
+      <fieldset class="quality-modes"><legend>Quality mode</legend>
+        <label class="quality-choice"><input type="radio" name="quality-mode" value="auto" checked /><strong>Auto <small>RECOMMENDED</small></strong><span>Matches your device, then adjusts to real performance.</span></label>
+        <label class="quality-choice"><input type="radio" name="quality-mode" value="performance" /><strong>Performance</strong><span>Lighter resolution and fewer effects for responsive driving.</span></label>
+        <label class="quality-choice"><input type="radio" name="quality-mode" value="balanced" /><strong>Balanced</strong><span>A sharper image with lighter shadows and reflections.</span></label>
+        <label class="quality-choice"><input type="radio" name="quality-mode" value="high" /><strong>High quality</strong><span>Full effects, detailed shadows and reflections. Most demanding.</span></label>
+      </fieldset>
+      <div class="quality-target-row"><label for="quality-target">Target frame rate</label><select id="quality-target"><option value="60">60 FPS · Responsive</option><option value="30">30 FPS · Relaxed</option></select></div>
+      <div class="quality-live"><div class="quality-live-line"><strong id="quality-fps">Measuring…</strong><span id="quality-current">Auto</span></div><p id="quality-reason" role="status">Measuring performance…</p></div>
+      <details><summary>Current display settings</summary><div>Render resolution: <span id="quality-resolution">—</span></div><div id="quality-effects"></div></details>
+      <div class="quality-bottom"><button id="quality-recheck">Recheck in Auto</button><span id="quality-save">Your selection is saved on this device.</span></div>
+    </dialog>
     <div id="loading">
       <div>
         PREPARING HARBOR<small id="progress"
