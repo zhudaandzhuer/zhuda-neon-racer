@@ -1,8 +1,9 @@
 {
   "passed": true,
   "url": "http://localhost:8908/zhuda-neon-racer/",
-  "checkedAt": "2026-10-30T08:54:13.088Z",
+  "checkedAt": "2026-10-30T09:53:12.714Z",
   "checks": [
+    "four imported S800 vehicles use bounded LOD geometry, embedded PBR maps and two shared model leases",
     "locked circuits do not start",
     "real keyboard steering and nitro create engine particles and historical trails",
     "complete live WebGL race -> podium -> credits -> unlock",
@@ -31,22 +32,129 @@
     "nitro": true,
     "particles": 38
   },
-  "webglDrawCalls": 168,
+  "webglDrawCalls": 363,
   "resourceCycles": [
-    146,
-    146,
-    146,
-    146,
-    146,
-    146,
-    146,
-    146,
-    146,
-    146,
-    146,
-    146
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117,
+    117
   ],
   "renderDimension": 3,
+  "importedVehicles": {
+    "report": {
+      "asset": "maextro-s800",
+      "importedInstances": 4,
+      "playerTriangles": 55998,
+      "rivalTriangles": 17998,
+      "payloadBytes": 6399092,
+      "library": {
+        "entries": 2,
+        "references": 4,
+        "pending": 0,
+        "loads": 2,
+        "phases": [
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/models/maextro-s800.glb?v=d9437fe067c5",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/models/maextro-s800-rival.glb?v=324966dc6c29",
+            "phase": "ready",
+            "references": 3
+          }
+        ],
+        "gpuReady": "requires-first-draw",
+        "instances": 4
+      }
+    },
+    "meshes": [
+      [
+        {
+          "vertices": 59128,
+          "textures": [
+            {
+              "width": 1024,
+              "height": 1024
+            },
+            {
+              "width": 1024,
+              "height": 1024
+            },
+            {
+              "width": 1024,
+              "height": 1024
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "vertices": 22898,
+          "textures": [
+            {
+              "width": 512,
+              "height": 512
+            },
+            {
+              "width": 512,
+              "height": 512
+            },
+            {
+              "width": 512,
+              "height": 512
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "vertices": 22898,
+          "textures": [
+            {
+              "width": 512,
+              "height": 512
+            },
+            {
+              "width": 512,
+              "height": 512
+            },
+            {
+              "width": 512,
+              "height": 512
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "vertices": 22898,
+          "textures": [
+            {
+              "width": 512,
+              "height": 512
+            },
+            {
+              "width": 512,
+              "height": 512
+            },
+            {
+              "width": 512,
+              "height": 512
+            }
+          ]
+        }
+      ]
+    ]
+  },
   "errors": [],
   "failures": []
 }

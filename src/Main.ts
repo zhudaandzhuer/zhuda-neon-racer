@@ -54,7 +54,7 @@ class Game {
       width: innerWidth,
       height: innerHeight,
       bgColor: "#0b1723",
-      features: ["core", "3d", "postProcess"],
+      features: ["core", "3d", "gltf", "postProcess"],
       dprCap: 1.5,
       antialias: true,
       preserveDrawingBuffer: false,
@@ -63,6 +63,7 @@ class Game {
     this.resize();
     addEventListener("resize", () => this.resize());
     this.renderer = new Renderer();
+    $("loading-label").textContent = "正在準備車輛與賽道…";
     await this.renderer.init();
     this.bind();
     this.refreshLobby();
@@ -490,9 +491,9 @@ class Game {
       this.startRace(won && next < 4 ? next : this.selected);
   }
   showGarage() {
-    const names = ["PULSE / 脈衝", "COMET / 彗星", "GHOST / 幽影"],
+    const names = ["S800 / 脈衝", "S800 / 彗星", "S800 / 幽影"],
       desc = [
-        "均衡起跑，穩定過彎",
+        "銀黑車身 · 均衡調校",
         "極速 +15 · 需 4 顆星",
         "抓地更強 · 需 8 顆星",
       ],

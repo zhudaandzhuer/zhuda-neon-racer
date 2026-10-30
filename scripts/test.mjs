@@ -10,7 +10,7 @@ const { default: esbuild } = await import(
 await esbuild.build({
   stdin: {
     contents:
-      "export * from './src/Model';export * from './src/Tracks';export * from './src/Save';",
+      "export * from './src/Model';export * from './src/Tracks';export * from './src/Save';export * from './src/Vehicle';",
     resolveDir: root,
   },
   bundle: true,
@@ -18,7 +18,7 @@ await esbuild.build({
   platform: "node",
   outfile: path.join(root, ".test-build.mjs"),
 });
-const r = spawnSync(process.execPath, ["--test", "tests/model.test.mjs"], {
+const r = spawnSync(process.execPath, ["--test", "tests/model.test.mjs", "tests/assets.test.mjs"], {
   cwd: root,
   stdio: "inherit",
 });

@@ -150,6 +150,31 @@ try {
   await load();
   assert.equal(await ev("neonGame.snapshot().save.races"), 0);
   assert.ok(await ev("window.__drawCalls>0"));
+  const importedVehicles = await ev(`(()=>{
+    const r=neonGame.renderer;
+    return {report:r.stats().vehicle, meshes:r.cars.map(root=>{
+      const imported=root.getChildByName('maextro-s800-imported'), result=[];
+      const walk=n=>{const filter=n.meshFilter||n.getComponent(Laya.MeshFilter),renderer=n.meshRenderer||n.getComponent(Laya.MeshRenderer);if(filter?.sharedMesh){const m=renderer.sharedMaterial;
+        const base=m.getTexture('u_BaseColorTexture'),normal=m.getTexture('u_NormalTexture'),orm=m.getTexture('u_MetallicRoughnessTexture');
+        result.push({vertices:filter.sharedMesh.vertexCount,textures:[base,normal,orm].map(t=>t?{width:t.width,height:t.height}:null)});
+      }for(let i=0;i<n.numChildren;i++)walk(n.getChildAt(i));};walk(imported);return result;
+    })};
+  })()`);
+  assert.equal(importedVehicles.report.importedInstances, 4);
+  assert.equal(importedVehicles.report.library.entries, 2);
+  assert.equal(importedVehicles.report.library.loads, 2);
+  assert.equal(importedVehicles.report.library.references, 4);
+  assert.equal(importedVehicles.report.library.instances, 4);
+  assert.ok(importedVehicles.report.payloadBytes < 8_000_000);
+  for (const [i, meshes] of importedVehicles.meshes.entries()) {
+    assert.equal(meshes.length, 1);
+    assert.ok(meshes[0].vertices > 10000);
+    for (const texture of meshes[0].textures) {
+      assert.ok(texture && texture.width <= (i === 0 ? 1024 : 512));
+    }
+  }
+  assert.ok(importedVehicles.meshes[0][0].vertices > importedVehicles.meshes[1][0].vertices);
+  checks.push("four imported S800 vehicles use bounded LOD geometry, embedded PBR maps and two shared model leases");
   await shot("01-home");
   await ev("document.querySelector('[data-track=\"2\"]').click()");
   assert.equal(await ev("neonGame.selected"), 0);
@@ -377,6 +402,7 @@ try {
     webglDrawCalls: await ev("__drawCalls"),
     resourceCycles,
     renderDimension:3,
+    importedVehicles,
     errors,
     failures,
   };

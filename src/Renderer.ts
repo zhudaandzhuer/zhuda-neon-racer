@@ -8,12 +8,16 @@ import {
   resolveCameraBoom,
   ZhudaShaderMaterial,
   inspectSceneResources,
+  ZhudaModelLibrary,
 } from "zhuda-laya-engine";
 import { textureArt } from "./Art";
 import { Geometry, type V } from "./Geometry";
 import { World, roadHeight, roadPoint, SCALE } from "./World";
 import { TRACKS, at, nearest, angleDelta } from "./Tracks";
 import type { Race } from "./Model";
+import { createSkylineIBL } from "./Environment";
+import playerModel from "../public/models/maextro-s800.json";
+import rivalModel from "../public/models/maextro-s800-rival.json";
 declare const Laya: any;
 export class Renderer {
   scene: any;
@@ -41,7 +45,9 @@ export class Renderer {
   private previous = 0;
   private post: any;
   private contactShadow!: ZhudaShaderMaterial;
-  private bodyMaterials: any[] = [];
+  private accentMaterials: any[] = [];
+  private carLibrary = new ZhudaModelLibrary(2);
+  private carInstances: any[] = [];
   private glow: any;
   private rearFlames: any[] = [];
   private boostEnvelope = 0;
@@ -50,7 +56,10 @@ export class Renderer {
     this.scene = new L.Scene3D();
     L.stage.addChild(this.scene);
     this.scene.ambientMode = L.AmbientMode.SolidColor;
-    this.scene.ambientColor = new L.Color(0.65, 0.69, 0.86, 1);
+    this.scene.ambientColor = new L.Color(0.85, 0.9, 1, 1);
+    this.scene.iblTex = createSkylineIBL();
+    this.scene.iblTexRGBD = false;
+    this.scene.reflectionIntensity = 0.8;
     this.scene.enableFog = true;
     this.scene.fogColor = new L.Color(0.17, 0.13, 0.23, 1);
     this.scene.fogStart = 160;
@@ -74,9 +83,15 @@ export class Renderer {
     const light = new L.Sprite3D();
     this.scene.addChild(light);
     const sun = light.addComponent(L.DirectionLightCom);
-    sun.color = new L.Color(1, 0.72, 0.55, 1);
-    sun.intensity = 1.2;
+    sun.color = new L.Color(1, 0.9, 0.78, 1);
+    sun.intensity = 1.6;
     light.transform.rotationEuler = new L.Vector3(-28, -55, 0);
+    const fill = new L.Sprite3D("cool-rim-light");
+    this.scene.addChild(fill);
+    const fillLight = fill.addComponent(L.DirectionLightCom);
+    fillLight.color = new L.Color(0.45, 0.7, 1, 1);
+    fillLight.intensity = 0.45;
+    fill.transform.rotationEuler = new L.Vector3(-18, 125, 0);
     const glow = await L.loader.load({
         url: textureArt("glow").toDataURL(),
         type: L.Loader.IMAGE,
@@ -101,7 +116,7 @@ export class Renderer {
         "vec4 zhudaSurface(vec2 uv,vec3 p,vec3 n){float r=length((uv-.5)*2.0);return vec4(.0,.005,.015,(1.0-smoothstep(.4,1.0,r))*.55);}",
     });
     for (let i = 0; i < 4; i++)
-      this.makeCar(i, ["#d9fc74", "#ff786c", "#a593ff", "#5ddbd8"][i]);
+      await this.makeCar(i, ["#d9fc74", "#ff786c", "#a593ff", "#5ddbd8"][i]);
     const specs: any[] = [
       {
         id: "nitro3d",
@@ -238,146 +253,37 @@ export class Renderer {
     this.materials.push(m);
     return m;
   }
-  private makeCar(i: number, color: string) {
+  private async makeCar(i: number, color: string) {
     const root = new Laya.Sprite3D("racer-" + i);
     this.scene.addChild(root);
-    this.cars.push(root);
-    root.transform.localScale = new Laya.Vector3(1.18, 1.18, 1.18);
+    this.cars[i] = root;
     const shadow = new Geometry();
     shadow.quad(
-      [-1.3, 0.015, -2],
-      [1.3, 0.015, -2],
-      [1.3, 0.015, 2],
-      [-1.3, 0.015, 2],
-      [0, 1, 0],
+      [-1.45, 0.015, -3.1], [1.45, 0.015, -3.1],
+      [1.45, 0.015, 3.1], [-1.45, 0.015, 3.1], [0, 1, 0],
     );
-    this.meshes.push(
-      shadow.build(root, this.contactShadow.material, "contact-shadow"),
+    this.meshes.push(shadow.build(root, this.contactShadow.material, "contact-shadow"));
+    const asset = i === 0 ? playerModel : rivalModel;
+    const instance = await this.carLibrary.instantiate(
+      new URL("models/" + asset.file + "?v=" + asset.sha256.slice(0, 12), document.baseURI).href,
+      { retries: 1 },
     );
-    const body = this.mat(color),
-      black = this.mat("#080e1d"),
-      glass = this.mat("#203b50"),
-      light = this.mat("#c4fff9", false),
-      rear = this.mat("#ff436e", false),
-      silver = this.mat("#98b1ca");
-    this.bodyMaterials.push(body);
-    const g = new Geometry();
-    // Sculpted wedge: broad rear shoulders, low nose and a glass canopy.
-    g.quad(
-      [-0.85, 0.32, -1.6],
-      [0.85, 0.32, -1.6],
-      [0.72, 0.35, 1.6],
-      [-0.72, 0.35, 1.6],
-      [0, -1, 0],
-    );
-    g.quad(
-      [-0.85, 0.32, -1.6],
-      [-0.72, 0.35, 1.6],
-      [-0.55, 0.62, 1.25],
-      [-0.77, 0.75, -1.35],
-      [-1, 0.2, 0],
-    );
-    g.quad(
-      [0.72, 0.35, 1.6],
-      [0.85, 0.32, -1.6],
-      [0.77, 0.75, -1.35],
-      [0.55, 0.62, 1.25],
-      [1, 0.2, 0],
-    );
-    g.quad(
-      [-0.77, 0.75, -1.35],
-      [-0.55, 0.62, 1.25],
-      [0.55, 0.62, 1.25],
-      [0.77, 0.75, -1.35],
-      [0, 1, 0],
-    );
-    g.quad(
-      [-0.72, 0.35, 1.6],
-      [0.72, 0.35, 1.6],
-      [0.55, 0.62, 1.25],
-      [-0.55, 0.62, 1.25],
-      [0, 0.2, 1],
-    );
-    g.quad(
-      [0.85, 0.32, -1.6],
-      [-0.85, 0.32, -1.6],
-      [-0.77, 0.75, -1.35],
-      [0.77, 0.75, -1.35],
-      [0, 0, -1],
-    );
-    this.meshes.push(g.build(root, body, "aerodynamic-body"));
-    const canopy = new Geometry();
-    canopy.quad(
-      [-0.53, 0.75, -0.9],
-      [0.53, 0.75, -0.9],
-      [0.4, 1.13, -0.55],
-      [-0.4, 1.13, -0.55],
-      [0, 0.7, -0.4],
-    );
-    canopy.quad(
-      [-0.4, 1.13, -0.55],
-      [0.4, 1.13, -0.55],
-      [0.35, 1.1, 0.15],
-      [-0.35, 1.1, 0.15],
-      [0, 1, 0],
-    );
-    canopy.quad(
-      [-0.35, 1.1, 0.15],
-      [0.35, 1.1, 0.15],
-      [0.52, 0.68, 0.9],
-      [-0.52, 0.68, 0.9],
-      [0, 0.6, 0.5],
-    );
-    canopy.quad(
-      [-0.53, 0.75, -0.9],
-      [-0.4, 1.13, -0.55],
-      [-0.35, 1.1, 0.15],
-      [-0.52, 0.68, 0.9],
-      [-1, 0.2, 0],
-    );
-    canopy.quad(
-      [0.52, 0.68, 0.9],
-      [0.35, 1.1, 0.15],
-      [0.4, 1.13, -0.55],
-      [0.53, 0.75, -0.9],
-      [1, 0.2, 0],
-    );
-    this.meshes.push(canopy.build(root, glass, "panoramic-glass"));
-    const pieces = new Map<any, Geometry>(),
-      box = (
-        m: any,
-        x: number,
-        y: number,
-        z: number,
-        w: number,
-        h: number,
-        d: number,
-      ) => {
-        if (!pieces.has(m)) pieces.set(m, new Geometry());
-        pieces.get(m)!.box(x, y, z, w, h, d);
-      };
-    for (const x of [-0.84, 0.84])
-      for (const z of [-1.02, 1.02]) {
-        box(black, x, 0.31, z, 0.3, 0.56, 0.65);
-        box(silver, x * 1.16, 0.31, z, 0.025, 0.29, 0.38);
-      }
-    box(black, 0, 0.3, 0, 1.5, 0.22, 2.9);
-    box(body, 0, 0.97, -1.43, 1.9, 0.12, 0.35);
-    for (const x of [-0.55, 0.55]) box(black, x, 0.81, -1.4, 0.08, 0.35, 0.1);
-    for (const x of [-0.52, 0.52]) box(light, x, 0.6, 1.43, 0.4, 0.06, 0.12);
-    box(rear, 0, 0.63, -1.53, 1.35, 0.07, 0.08);
-    box(light, 0, 0.34, -1.65, 0.9, 0.04, 0.08);
-    box(black, 0, 0.78, -1.1, 0.9, 0.05, 0.4);
-    box(light, 0, 0.625, 1.05, 0.07, 0.02, 0.25);
-    for (const [m, b] of pieces)
-      this.meshes.push(b.build(root, m, "car-detail"));
-    // Two small jet cores remain attached; simulated exhaust lives in world space.
-    const f = new Geometry();
-    f.box(-0.43, 0.45, -1.82, 0.25, 0.2, 0.65);
-    f.box(0.43, 0.45, -1.82, 0.25, 0.2, 0.65);
-    const flame = f.build(root, light, "jet-cores");
+    root.addChild(instance.node);
+    instance.node.name = "maextro-s800-imported";
+    this.carInstances.push(instance);
+
+    // The source's silver/black PBR body is preserved. Race liveries are light accents.
+    const accent = this.mat(color, false);
+    this.accentMaterials[i] = accent;
+    const trim = new Geometry();
+    for (const x of [-1.02, 1.02]) trim.box(x, 0.15, 0, 0.035, 0.025, 3.5);
+    this.meshes.push(trim.build(root, accent, "race-accent"));
+    const light = this.mat("#d2ffff", false);
+    const jets = new Geometry();
+    for (const x of [-0.55, 0.55]) jets.box(x, 0.3, -2.8, 0.22, 0.1, 0.45);
+    const flame = jets.build(root, light, "nitro-cores");
     flame.node.active = false;
-    this.rearFlames.push(flame.node);
+    this.rearFlames[i] = flame.node;
     this.meshes.push(flame);
   }
   async selectTrack(id: number) {
@@ -411,15 +317,15 @@ export class Renderer {
     this.systems[0].intensity = active && p.boosting && !reduced ? 1 : 0;
     this.systems[1].intensity = active && p.drifting && !reduced ? 1 : 0;
     this.systems[0].setTransform(
-      (p.x - c * 18) * SCALE,
+      (p.x - c * 29) * SCALE,
       y + 0.45,
-      (p.y - sn * 18) * SCALE,
+      (p.y - sn * 29) * SCALE,
       rotation,
     );
     this.systems[1].setTransform(
-      (p.x - c * 11) * SCALE,
+      (p.x - c * 18) * SCALE,
       y + 0.1,
-      (p.y - sn * 11) * SCALE,
+      (p.y - sn * 18) * SCALE,
       rotation,
     );
     for (const e of race.events)
@@ -429,8 +335,8 @@ export class Renderer {
       }
     for (const system of this.systems) system.update(dt);
     for (let i = 0; i < this.trails.length; i++) {
-      const side = (i % 2 ? 1 : -1) * (i < 2 ? 8 : 10),
-        front = i < 2 ? -13 : 10;
+      const side = (i % 2 ? 1 : -1) * (i < 2 ? 10 : 12),
+        front = i < 2 ? -23 : 18;
       this.trails[i].update(
         dt,
         (p.x + c * front - sn * side) * SCALE,
@@ -454,13 +360,13 @@ export class Renderer {
         (Number(p.boosting) - this.boostEnvelope) * (1 - Math.exp(-5 * dt));
       const c = Math.cos(this.heading),
         s = Math.sin(this.heading),
-        back = 8 + this.boostEnvelope * 1.8;
+        back = 10.5 + this.boostEnvelope * 1.8;
       const desired = {
           x: p.x * SCALE - c * back,
-          y: h + 3.6,
+          y: h + 4.4,
           z: p.y * SCALE - s * back,
         },
-        focus = { x: p.x * SCALE, y: h + 1.3, z: p.y * SCALE };
+        focus = { x: p.x * SCALE, y: h + 1.5, z: p.y * SCALE };
       const safe = resolveCameraBoom(focus, desired, {
         queries: this.world.queries,
         radius: 0.3,
@@ -513,7 +419,7 @@ export class Renderer {
       this.camera.fieldOfView = 62;
       for (let i = 0; i < 4; i++) {
         const s = distance + 20 - i * 45,
-          p = at(track, s, i % 2 === 0 ? -31 : 31);
+          p = at(track, s, i % 2 === 0 ? 31 : -31);
         this.placeCar(
           i,
           p.x,
@@ -570,7 +476,7 @@ export class Renderer {
     this.rearFlames[i].active = boosting;
     if (i === 0) {
       const h = parseInt(color.slice(1), 16);
-      this.bodyMaterials[0].albedoColor = new Laya.Color(
+      this.accentMaterials[0].albedoColor = new Laya.Color(
         ((h >> 16) & 255) / 255,
         ((h >> 8) & 255) / 255,
         (h & 255) / 255,
@@ -583,6 +489,14 @@ export class Renderer {
     return {
       resources: inspectSceneResources(),
       dimension: 3,
+      vehicle: {
+        asset: "maextro-s800",
+        importedInstances: this.carInstances.length,
+        playerTriangles: playerModel.triangles,
+        rivalTriangles: rivalModel.triangles,
+        payloadBytes: playerModel.bytes + rivalModel.bytes,
+        library: this.carLibrary.report(),
+      },
       particles: this.systems.reduce((s, p) => s + p.aliveCount, 0),
       trailPoints: this.trails.reduce((s, t) => s + t.pointCount, 0),
       maps: this.maps.size,

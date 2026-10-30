@@ -8,6 +8,7 @@ import {
   type Track,
 } from "./Tracks";
 import { type Save, unlocked } from "./Save";
+import { vehicleContact, VEHICLE_RADIUS, VEHICLE_HALF_SEGMENT } from "./Vehicle";
 export type Input = {
   steer: number;
   throttle: boolean;
@@ -135,19 +136,19 @@ export class Race {
       this.drive(c, dt, i === 0 ? input : this.aiInput(i), i);
     }
     // Physical contact can cost momentum, but cannot move a car across a gate.
+    for (let pass = 0; pass < 3; pass++)
     for (let i = 0; i < 4; i++)
       for (let j = i + 1; j < 4; j++) {
         const a = this.cars[i],
-          b = this.cars[j],
-          dx = b.x - a.x,
-          dy = b.y - a.y,
-          d = Math.hypot(dx, dy);
-        if (d > 0 && d < 30 && !a.finished && !b.finished) {
-          const push = (30 - d) * 0.52;
-          a.x -= (dx / d) * push;
-          a.y -= (dy / d) * push;
-          b.x += (dx / d) * push;
-          b.y += (dy / d) * push;
+          b = this.cars[j];
+        if (a.finished || b.finished || Math.hypot(b.x-a.x,b.y-a.y) > 55) continue;
+        const contact = vehicleContact(a, b);
+        if (contact) {
+          const push = contact.penetration * 0.51;
+          a.x -= contact.x * push;
+          a.y -= contact.y * push;
+          b.x += contact.x * push;
+          b.y += contact.y * push;
           a.speed *= 0.997;
           b.speed *= 0.997;
         }
@@ -214,7 +215,8 @@ export class Race {
     c.x += c.vx * dt;
     c.y += c.vy * dt;
     const near = nearest(this.track, c.x, c.y),
-      edge = this.track.width / 2 - 17;
+      edge = this.track.width / 2 - VEHICLE_RADIUS - 5 -
+        VEHICLE_HALF_SEGMENT * Math.abs(Math.sin(c.angle - near.angle));
     if (near.distance > edge) {
       const dx = c.x - near.x,
         dy = c.y - near.y;

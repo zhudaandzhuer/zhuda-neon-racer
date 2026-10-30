@@ -1,8 +1,10 @@
 # Third-party notices
 
-Neon Apex uses [zhuda-laya-engine](https://github.com/zhudaandzhuer/zhuda-laya-engine), pinned to `0ec1d3717756544467ab065ef23062f0755ef2c5` (MIT; copyright 2026 豬大 / zhudaandzhuer).
+Neon Apex uses [zhuda-laya-engine](https://github.com/zhudaandzhuer/zhuda-laya-engine), pinned to `bdfdf51c46346868138d977aa8432ae8f7c9f828` (MIT; copyright 2026 豬大 / zhudaandzhuer).
 
-The two bundled LayaAir 3.4.2 runtime files (`laya.core.js`, `laya.webgl_2D.js`) are from [Layabox / LayaAir](https://github.com/layabox/LayaAir), distributed under MIT. No Spine runtime, remote music or fonts are loaded. Tracks, vehicles, textures and sounds are procedurally authored in this separate game project.
+The bundled LayaAir 3.4.2 core, d3, WebGL 2D/3D, glTF and post-process runtime files are from [Layabox / LayaAir](https://github.com/layabox/LayaAir), distributed under MIT. No Spine runtime, remote music or fonts are loaded. Tracks, procedural scenery, effects and sounds are authored in this separate game project.
+
+The silver/black S800 GLBs derive from the user's AI reconstruction using four generated reference images and Hunyuan 3D V3.1. This repository contains reduced game assets and conversion metadata; the original high-poly file is preserved outside the repository. Vehicle names/design/trademarks retain their respective owners' rights. See [model provenance](public/models/README.md). The three garage choices tune the same chassis.
 
 The launch image combines the user-provided 豬大 character with the official LayaAir 3 logo from https://layaair.com/3.x/doc/_astro/layaair3-logo.DHjbuK9G.png. The master was generated with gpt-image-2.5-flare through remote-imagegen; the exact official logo was composited onto the generated plaque. Source artwork and provenance are preserved in https://github.com/zhudaandzhuer/zhuda-arcade/tree/main/source-assets. The project code is MIT; character and brand artwork retain their respective owners’ rights.
 

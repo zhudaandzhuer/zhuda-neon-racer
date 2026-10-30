@@ -1,0 +1,21 @@
+{
+  "sourceFile": "maextro_s800.glb",
+  "sourceSha256": "dc2c6049f17ef63f520f2a2295d75a26ed4391968fe240bff9750cb0125825a2",
+  "sourceBytes": 89771936,
+  "sourceTriangles": 1498984,
+  "file": "maextro-s800-rival.glb",
+  "bytes": 1635352,
+  "triangles": 17998,
+  "textureMaxSize": 512,
+  "dimensionsMetres": {
+    "width": 2.402411699295044,
+    "height": 1.694636344909668,
+    "length": 5.484125137329102
+  },
+  "gltfCoordinates": "Y up, ground pivot, longitudinal Z axis; runtime orientation verified visually",
+  "sha256": "324966dc6c29b3184172f6be42bfcfa9d26e87d845134ad20e117e31d39c5834",
+  "tools": {
+    "blender": "5.2.2 LTS"
+  },
+  "notes": "AI reconstruction; single static mesh, no wheel rig. Original source retained separately."
+}

@@ -9,8 +9,27 @@ import {
   parseSave,
   buyUpgrade,
   unlocked,
+  vehicleContact,
 } from "../.test-build.mjs";
 const idle = { steer: 0, throttle: false, brake: false, nitro: false };
+test("sedan footprint detects bumper contact, permits side-by-side passes and resolves crossed/coincident bodies", () => {
+  const a = { x: 0, y: 0, angle: 0 };
+  assert.equal(vehicleContact(a, { x: 55, y: 0, angle: 0 }), null);
+  assert.ok(Math.abs(vehicleContact(a, { x: 50, y: 0, angle: 0 }).penetration - 4.8) < 1e-5);
+  assert.equal(vehicleContact(a, { x: 0, y: 25, angle: 0 }), null);
+  assert.ok(vehicleContact(a, { x: 0, y: 23, angle: 0 }).penetration > 0);
+  for (const angle of [0, Math.PI / 2, Math.PI]) {
+    const b = { x: 0, y: 0, angle };
+    for (let i = 0; i < 8; i++) {
+      const hit = vehicleContact(a, b);
+      if (!hit) break;
+      b.x += hit.x * (hit.penetration + 0.01);
+      b.y += hit.y * (hit.penetration + 0.01);
+    }
+    assert.equal(vehicleContact(a, b), null);
+    assert.ok(Number.isFinite(b.x) && Number.isFinite(b.y));
+  }
+});
 function run(r, controller, max = 300) {
   for (let i = 0; i < max * 120 && !r.result; i++)
     r.step(1 / 120, controller(r));

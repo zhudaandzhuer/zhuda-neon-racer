@@ -9,7 +9,7 @@ const { default: esbuild } = await import(
   pathToFileURL(path.join(engine, "node_modules/esbuild/lib/main.js"))
 );
 fs.mkdirSync(path.join(root, "dist/libs"), { recursive: true });
-for (const file of ["laya.core.js", "laya.d3.js", "laya.webgl_2D.js", "laya.webgl_3D.js", "laya.postProcess.js"])
+for (const file of ["laya.core.js", "laya.d3.js", "laya.webgl_2D.js", "laya.webgl_3D.js", "laya.gltf.js", "laya.postProcess.js"])
   fs.copyFileSync(
     path.join(engine, "vendor/laya-3.4.2/libs", file),
     path.join(root, "dist/libs", file),
