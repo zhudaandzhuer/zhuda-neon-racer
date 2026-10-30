@@ -393,8 +393,9 @@ try {
   assert.ok(handling.acceleration.freeSpeed>3, 'throttle builds speed');
   assert.ok(handling.active && handling.originalHidden);
   const turnRadians=(handling.turning.freeYaw-handling.acceleration.freeYaw)*Math.PI/180;
-  assert.ok(Math.abs(Math.atan2(Math.sin(turnRadians),Math.cos(turnRadians)))>Math.PI/180, 'moving vehicle follows a turning arc');
+  assert.ok(Math.atan2(Math.sin(turnRadians),Math.cos(turnRadians)) < -Math.PI/180, 'right input turns toward the driver\'s right in the +Z-forward rig');
   assert.ok(Math.abs(handling.turning.driving.roll)>.001, 'suspension reacts to lateral acceleration');
+  assert.ok(handling.turning.driving.roll < 0, 'right turn loads the outside left side of the body');
   assert.ok(handling.coast.freeSpeed>handling.turning.freeSpeed*.6, 'release retains momentum');
   assert.ok(Math.abs(handling.brake.freeSpeed)<.15, 'handbrake stops the vehicle');
   assert.equal(handling.turning.wheels.length,4);

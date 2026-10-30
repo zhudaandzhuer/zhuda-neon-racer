@@ -242,7 +242,7 @@ class HarborStudy {
   private freeStep(dt: number) {
     this.vehicle.update(dt, {
       throttle: Number(this.freeKeys.has("KeyW") || this.freeKeys.has("ArrowUp")) - Number(this.freeKeys.has("KeyS") || this.freeKeys.has("ArrowDown")),
-      steer: Number(this.freeKeys.has("KeyD") || this.freeKeys.has("ArrowRight")) - Number(this.freeKeys.has("KeyA") || this.freeKeys.has("ArrowLeft")),
+      steer: Number(this.freeKeys.has("KeyA") || this.freeKeys.has("ArrowLeft")) - Number(this.freeKeys.has("KeyD") || this.freeKeys.has("ArrowRight")),
       boost: this.freeKeys.has("ShiftLeft") || this.freeKeys.has("ShiftRight"),
       handbrake: this.freeKeys.has("Space"),
     });

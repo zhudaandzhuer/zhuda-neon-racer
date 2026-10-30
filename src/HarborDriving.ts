@@ -1,6 +1,7 @@
 /** Consumer-owned arcade vehicle dynamics. Coordinates: metres, +Y up, heading 0 = +Z. */
 export interface DriveInput {
   throttle: number;
+  /** Positive steers toward local +X (the vehicle's left with +Z forward). */
   steer: number;
   handbrake: boolean;
   boost: boolean;
@@ -123,7 +124,7 @@ export class HarborVehicle {
     this.acceleration = clamp((this.speed - oldSpeed) / dt, -12, 10);
     this.lateralAcceleration = this.speed * this.yawRate;
     const pitchTarget = -this.acceleration * 0.0036;
-    const rollTarget = -clamp(this.lateralAcceleration, -9, 9) * 0.006;
+    const rollTarget = clamp(this.lateralAcceleration, -9, 9) * 0.006;
     this.pitchVelocity += ((pitchTarget - this.pitch) * 100 - this.pitchVelocity * 18) * dt;
     this.rollVelocity += ((rollTarget - this.roll) * 100 - this.rollVelocity * 18) * dt;
     this.pitch += this.pitchVelocity * dt;

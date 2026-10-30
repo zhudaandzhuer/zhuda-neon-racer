@@ -20,6 +20,10 @@ test('harbor: grip, suspension and movement agree at 30, 60 and 120 render FPS',
  const drive=fps=>{const v=car();for(const [s,i]of [[1,input(1)],[1,input(1,.3)],[.5,input()],[.5,input(0,0,true)]])run(v,s,i,fps);return v.snapshot();};
  const ref=drive(120);for(const fps of[30,60]){const v=drive(fps);for(const k of ['x','z','speed','yaw','roll','pitch','wheelTravel'])assert.ok(Math.abs(v[k]-ref[k])<1e-6,`${fps} ${k}: ${v[k]} vs ${ref[k]}`);}
 });
+test('harbor: a left arc loads the outside right side of the suspended body',()=>{
+ const v=car();run(v,1,input(1));run(v,.55,input(1,.5));
+ assert.ok(v.yaw>.02);assert.ok(v.roll>.001);
+});
 test('harbor: full car footprint contacts bridge rails and solid containers without crossing them',()=>{
  const v=new HarborVehicle();v.reset(3,20,Math.PI/2);run(v,3,input(1));assert.ok(v.contacts>0);assert.ok(harborDriveable(v.x,v.z,v.yaw));assert.ok(v.x<7);
  const obstacle={minX:-32,maxX:-28,minZ:60,maxZ:63,minY:-5,maxY:-2};
