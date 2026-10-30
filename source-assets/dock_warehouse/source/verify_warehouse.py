@@ -5,8 +5,9 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--views',nargs='*',default=['preview','front','rear','left90','loading_detail','roof_detail'])
+parser.add_argument('--views',nargs='*',default=['preview','front','loading_detail'])
 parser.add_argument('--samples',type=int,default=48)
+parser.add_argument('--device',choices=['CPU','GPU'],default='CPU')
 args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 OUT=Path(__file__).resolve().parent.parent
 path=OUT/'dock_warehouse.glb'
@@ -76,15 +77,16 @@ if not report['passed']:raise RuntimeError('Warehouse fresh-import verification 
 
 scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=args.samples
 scene.cycles.use_denoising=True;scene.cycles.adaptive_threshold=.035
-try:
-    prefs=bpy.context.preferences.addons['cycles'].preferences
-    prefs.compute_device_type='METAL';prefs.get_devices()
-    gpu=False
-    for device in prefs.devices:
-        device.use=device.type=='METAL';gpu=gpu or device.use
-    if gpu:scene.cycles.device='GPU'
-    print('CYCLES_DEVICE',scene.cycles.device,flush=True)
-except Exception as ex:print('CYCLES_CPU',str(ex),flush=True)
+if args.device=='GPU':
+    try:
+        prefs=bpy.context.preferences.addons['cycles'].preferences
+        prefs.compute_device_type='METAL';prefs.get_devices()
+        gpu=False
+        for device in prefs.devices:
+            device.use=device.type=='METAL';gpu=gpu or device.use
+        if gpu:scene.cycles.device='GPU'
+    except Exception as ex:print('CYCLES_CPU',str(ex),flush=True)
+print('CYCLES_DEVICE',scene.cycles.device,flush=True)
 scene.render.resolution_x=1600;scene.render.resolution_y=1200;scene.render.resolution_percentage=100
 scene.render.image_settings.file_format='PNG';scene.render.film_transparent=False
 scene.world=bpy.data.worlds.new('Neutral studio environment');scene.world.use_nodes=True

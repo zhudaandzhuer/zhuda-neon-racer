@@ -11,7 +11,7 @@ python3 source-assets/dock_warehouse/source/make_materials.py
 blender -b --python source-assets/dock_warehouse/source/build_warehouse.py
 cp source-assets/dock_warehouse/dock_warehouse_full.glb source-assets/dock_warehouse/dock_warehouse.glb
 cp source-assets/dock_warehouse/full_stats.json source-assets/dock_warehouse/stats.json
-blender -b --python source-assets/dock_warehouse/source/verify_warehouse.py -- --views preview front loading_detail
+blender -b --python source-assets/dock_warehouse/source/verify_warehouse.py -- --device CPU --views preview front loading_detail
 ```
 
 The verification freshly imports the exported GLB, checks world bounds, probes the actual door recesses and returns, glazing and skylights with material-aware rays, then renders the actual mesh. Source inventory, SHA-256, byte counts, embedded map channels and the accepted validation report are recorded in [scenery.json](../../public/visual-assets/scenery.json). A matching hash ties the report to the exact game asset. Preview rendering uses studio lights; in-game screenshots are in [the visual quality report](../../docs/visual-quality.md).
