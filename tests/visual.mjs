@@ -377,9 +377,9 @@ try {
   const freeBefore = await ev("harborStudy.report().freePosition");
   await key("keyDown", "KeyW", "w");
   await delay(700);
+  assert.ok(await ev("harborStudy.report().freeSpeed") > 0.5);
   await key("keyUp", "KeyW", "w");
   const freeAfter = await ev("harborStudy.report().freePosition");
-  assert.ok(await ev("harborStudy.report().freeSpeed") > 0.5);
   assert.ok(
     Math.hypot(freeAfter[0] - freeBefore[0], freeAfter[1] - freeBefore[1]) > 1,
     JSON.stringify({ freeBefore, freeAfter }),
