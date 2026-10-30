@@ -2,6 +2,7 @@ name: Verify and publish Neon Apex
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
@@ -11,13 +12,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           repository: zhudaandzhuer/zhuda-laya-engine
-          ref: bdfdf51c46346868138d977aa8432ae8f7c9f828
+          ref: 74b04064208f8afe624896482d7bc438dd15dc29
           path: .engine
       - uses: actions/setup-node@v4
         with:
@@ -33,6 +34,10 @@ jobs:
         env:
           CHROME_PATH: /usr/bin/google-chrome
         run: npm run verify:browser
+      - name: Verify actual HDR, material, reflection and teardown behavior
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: npm run verify:visual
       - name: Preserve verification evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -40,9 +45,11 @@ jobs:
           name: neon-apex-verification
           path: evidence/
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: dist
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:

@@ -34,9 +34,15 @@ This repository owns the game: race simulation, circuits, cars, procedural skyli
 
 The film is an actual canvas capture at 1280 × 720 / 60 FPS with a test driver. The README GIF is a smaller 16 FPS preview. The current film shows the imported S800, with engine branding. A short desktop capture is not a certification of mobile performance.
 
+## HARBOR / 01 · visual study
+
+[Open the separate quality study](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html): a harbor bridge with photographed PBR surfaces, 4K HDR sky, offline GGX light, soft cascaded shadows, real planar pool reflections and an HDR/AO/bloom/ACES/TAA pipeline. Five camera views and a drive-through inspect the same 3D scene. This first slice establishes rendering capability; further scene/vehicle art work is required for the intended AAA visual feel. [Scope, evidence and staged quality plan](docs/visual-quality.md).
+
+[![Actual WebGL harbor scene](docs/visual-dock.jpg)](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html?view=dock)
+
 ## Develop
 
-Node.js 24+. Put the engine and game in adjacent folders, or set `ZHUDA_ENGINE_ROOT` to the engine checkout. CI pins SDK revision `bdfdf51c46346868138d977aa8432ae8f7c9f828` in `.github/workflows/pages.yml`.
+Node.js 24+. Put the engine and game in adjacent folders, or set `ZHUDA_ENGINE_ROOT` to the engine checkout. CI pins SDK revision `74b04064208f8afe624896482d7bc438dd15dc29` in `.github/workflows/pages.yml`.
 
 ```sh
 # In the engine checkout first:
@@ -47,6 +53,7 @@ npm run typecheck
 npm run build
 npm test
 npm run verify:browser
+node tests/visual.mjs
 PORT=8907 npm start
 ```
 

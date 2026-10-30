@@ -1,0 +1,286 @@
+{
+  "passed": true,
+  "url": "http://localhost:8908/zhuda-neon-racer/visual.html",
+  "checkedAt": "2026-10-30T11:56:40.157Z",
+  "checks": [
+    "GPU readback verifies all six cubemap axes and fractional-mip trilinear interpolation",
+    "scene-linear HDR with nine GGX mips, 320K-triangle/4K GLB, imported hard-surface towers and verified PBR texture/factor bindings",
+    "imported warehouse has the correct rotated metre bounds, touches the quay and enables shadows on every renderer",
+    "five camera cuts render and settle using temporal antialiasing, including the imported recessed loading-bay warehouse",
+    "the imported glTF 4K normal texture uses the actual shader uniform and changes rendered car pixels at strength .25 versus 1",
+    "drive control moves the actual GLB and camera",
+    "real HDR mirror camera has reflected pose and its render target changes pool pixels",
+    "native car/building shadow casters change actual ground pixels",
+    "lighting A/B changes actual scene pixels outside UI and disables shadow map, IBL and AO",
+    "30 HDR/AO/bloom/ACES/TAA chain replacements release owned LUTs/materials and reach bounded resource counts"
+  ],
+  "scene": {
+    "ready": true,
+    "view": "hero",
+    "moving": false,
+    "hdr": true,
+    "ibl": 256,
+    "shadows": 3,
+    "materials": 15,
+    "meshCount": 1737,
+    "resources": {
+      "counts": {
+        "mesh": 1929,
+        "texture": 44,
+        "renderTarget": 22
+      },
+      "resources": 2074,
+      "estimatedBytes": 1259011273.3333335,
+      "meshBytes": 86491888,
+      "textureBytes": 906447481.3333335,
+      "renderTargetBytes": 266071904,
+      "memoryMeasurement": "estimate",
+      "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+    },
+    "model": {
+      "entries": 4,
+      "references": 24,
+      "pending": 0,
+      "loads": 4,
+      "phases": [
+        {
+          "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/trackside_barrier.glb?v=5dcb3258dd14",
+          "phase": "ready",
+          "references": 20
+        },
+        {
+          "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/dock_warehouse.glb?v=d3f79b3070e6",
+          "phase": "ready",
+          "references": 1
+        },
+        {
+          "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/skyline_tower.glb?v=674ceea9944e",
+          "phase": "ready",
+          "references": 2
+        },
+        {
+          "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-hero.glb?v=2b90ba68e11c",
+          "phase": "ready",
+          "references": 1
+        }
+      ],
+      "gpuReady": "requires-first-draw",
+      "instances": 24
+    },
+    "carMaterial": {
+      "normalScale": 0.25,
+      "normalTextureSize": [
+        4096,
+        4096
+      ]
+    },
+    "warehouse": {
+      "min": [
+        -56,
+        -5,
+        45
+      ],
+      "max": [
+        -38,
+        13,
+        75
+      ],
+      "renderers": 169,
+      "shadowCasters": 169,
+      "shadowReceivers": 169
+    },
+    "normalMapTextures": [
+      {
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "frameIntervalP95": 101.69999992847443,
+    "scope": "first visual slice; no claim of UE parity or mobile performance"
+  },
+  "axes": {
+    "actual": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255,
+      0,
+      0,
+      255,
+      255,
+      255,
+      255,
+      0,
+      255,
+      255,
+      0,
+      255,
+      255,
+      0,
+      255,
+      255,
+      255
+    ],
+    "expected": [
+      255,
+      0,
+      0,
+      255,
+      0,
+      255,
+      0,
+      255,
+      0,
+      0,
+      255,
+      255,
+      255,
+      255,
+      0,
+      255,
+      255,
+      0,
+      255,
+      255,
+      0,
+      255,
+      255,
+      255
+    ]
+  },
+  "mip": {
+    "actual": [
+      128,
+      0,
+      0,
+      255,
+      0,
+      128,
+      0,
+      255,
+      0,
+      0,
+      128,
+      255,
+      128,
+      128,
+      0,
+      255,
+      128,
+      0,
+      128,
+      255,
+      0,
+      128,
+      128,
+      255
+    ],
+    "expected": [
+      127.5,
+      0,
+      0,
+      255,
+      0,
+      127.5,
+      0,
+      255,
+      0,
+      0,
+      127.5,
+      255,
+      127.5,
+      127.5,
+      0,
+      255,
+      127.5,
+      0,
+      127.5,
+      255,
+      0,
+      127.5,
+      127.5,
+      255
+    ]
+  },
+  "material": {
+    "color": [
+      0.66,
+      0.68,
+      0.7
+    ],
+    "metallic": 0,
+    "smoothness": 0.040000000000000036,
+    "normal": [
+      2048,
+      2048
+    ],
+    "albedo": [
+      2048,
+      2048
+    ],
+    "convention": "opengl"
+  },
+  "reflection": {
+    "width": 1280,
+    "height": 800,
+    "eyeY": 1.5,
+    "reflectedY": -1.448,
+    "isTarget": true
+  },
+  "reflectionDifference": {
+    "changedFraction": 0.15775,
+    "meanChannelDifference": 6.161556462585253
+  },
+  "shadowDifference": {
+    "changedFraction": 0.3292173469387755,
+    "meanChannelDifference": 6.689389115646729
+  },
+  "lightingDifference": {
+    "changedFraction": 0.7845755102040817,
+    "meanChannelDifference": 36.13214217686812
+  },
+  "carNormalDifference": {
+    "changedFraction": 0.01673265306122449,
+    "meanChannelDifference": 0.5638180272100465
+  },
+  "teardown": {
+    "start": {
+      "counts": {
+        "mesh": 1929,
+        "texture": 44,
+        "renderTarget": 22
+      },
+      "resources": 2074,
+      "estimatedBytes": 1259011273.3333335,
+      "meshBytes": 86491888,
+      "textureBytes": 906447481.3333335,
+      "renderTargetBytes": 266071904,
+      "memoryMeasurement": "estimate",
+      "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+    },
+    "end": {
+      "counts": {
+        "mesh": 1929,
+        "texture": 44,
+        "renderTarget": 22
+      },
+      "resources": 2074,
+      "estimatedBytes": 1259011273.3333335,
+      "meshBytes": 86491888,
+      "textureBytes": 906447481.3333335,
+      "renderTargetBytes": 266071904,
+      "memoryMeasurement": "estimate",
+      "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+    }
+  },
+  "errors": [],
+  "failures": []
+}

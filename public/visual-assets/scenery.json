@@ -1,0 +1,3591 @@
+[
+  {
+    "file": "skyline_tower.glb",
+    "bytes": 15150928,
+    "sha256": "674ceea9944e1ef14f7d94240f8625fe774564085b39aa35d67d88b6a659bc04",
+    "source": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/skyline_tower/skyline_tower.glb",
+    "validation": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/skyline_tower/skyline_tower.glb",
+      "method": "Fresh Blender glTF import; all mesh vertices transformed by matrix_world",
+      "triangles": 50184,
+      "world_bounds_gltf_xyz": [
+        [
+          -12.000000953674316,
+          0.0,
+          -11.0
+        ],
+        [
+          12.000000953674316,
+          90.0,
+          11.0
+        ]
+      ],
+      "dimensions_m": [
+        24.000001907348633,
+        90.0,
+        22.0
+      ],
+      "expected_dimensions_m": [
+        24.0,
+        90.0,
+        22.0
+      ],
+      "dimensions_passed": true,
+      "bottom_centre_pivot_passed": true,
+      "passed": true
+    },
+    "materials": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/skyline_tower/skyline_tower.glb",
+      "sha256": "674ceea9944e1ef14f7d94240f8625fe774564085b39aa35d67d88b6a659bc04",
+      "materials": [
+        {
+          "name": "Coated glazing 0",
+          "pbr": {
+            "baseColorFactor": [
+              0.07699999958276749,
+              0.1120000034570694,
+              0.1420000046491623,
+              1
+            ],
+            "metallicFactor": 0.2800000011920929,
+            "roughnessFactor": 0.1599999964237213
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Coated glazing 1",
+          "pbr": {
+            "baseColorFactor": [
+              0.08100000023841858,
+              0.11599999666213989,
+              0.1459999978542328,
+              1
+            ],
+            "metallicFactor": 0.2800000011920929,
+            "roughnessFactor": 0.164000004529953
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Coated glazing 2",
+          "pbr": {
+            "baseColorFactor": [
+              0.08500000089406967,
+              0.11999999731779099,
+              0.15000000596046448,
+              1
+            ],
+            "metallicFactor": 0.2800000011920929,
+            "roughnessFactor": 0.1679999977350235
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Coated glazing 3",
+          "pbr": {
+            "baseColorFactor": [
+              0.08900000154972076,
+              0.12399999797344208,
+              0.15399999916553497,
+              1
+            ],
+            "metallicFactor": 0.2800000011920929,
+            "roughnessFactor": 0.1720000058412552
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Coated glazing 4",
+          "pbr": {
+            "baseColorFactor": [
+              0.09300000220537186,
+              0.12800000607967377,
+              0.15800000727176666,
+              1
+            ],
+            "metallicFactor": 0.2800000011920929,
+            "roughnessFactor": 0.17599999904632568
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Concrete",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 1
+            },
+            "metallicRoughnessTexture": {
+              "index": 2
+            }
+          },
+          "normalTexture": {
+            "index": 0,
+            "scale": 0.3499999940395355
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Graphite steel",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 4
+            },
+            "metallicRoughnessTexture": {
+              "index": 5
+            }
+          },
+          "normalTexture": {
+            "index": 3,
+            "scale": 0.3499999940395355
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Interior dark",
+          "pbr": {
+            "baseColorFactor": [
+              0.03500000014901161,
+              0.03999999910593033,
+              0.0430000014603138,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.8199999928474426
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Roof membrane",
+          "pbr": {
+            "baseColorFactor": [
+              0.07000000029802322,
+              0.07800000160932541,
+              0.07999999821186066,
+              1
+            ],
+            "metallicFactor": 0.05000000074505806,
+            "roughnessFactor": 0.8199999928474426
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Rubber window seals",
+          "pbr": {
+            "baseColorFactor": [
+              0.014000000432133675,
+              0.017000000923871994,
+              0.017999999225139618,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.8199999928474426
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Warm anodized trim",
+          "pbr": {
+            "baseColorFactor": [
+              0.3199999928474426,
+              0.25,
+              0.15000000596046448,
+              1
+            ],
+            "metallicFactor": 0.7200000286102295,
+            "roughnessFactor": 0.33000001311302185
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Warm white entry light",
+          "pbr": {
+            "baseColorFactor": [
+              0.8999999761581421,
+              0.800000011920929,
+              0.6299999952316284,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.3799999952316284
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0.699999988079071,
+            0.6019999997615813,
+            0.4690000036954878
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "extensionsUsed": [],
+      "external_images": 0
+    },
+    "notes": "Authored hard-surface replacement after the AI candidate failed planar-surface review; see asset production thread."
+  },
+  {
+    "file": "trackside_barrier.glb",
+    "bytes": 15003628,
+    "sha256": "5dcb3258dd14fdfa1a605b5a6682a95467afbbc6c67a123546dd58bde1bff274",
+    "source": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/trackside_barrier/trackside_barrier.glb",
+    "validation": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/trackside_barrier/trackside_barrier.glb",
+      "method": "Fresh Blender glTF import; all mesh vertices transformed by matrix_world",
+      "triangles": 6156,
+      "world_bounds_gltf_xyz": [
+        [
+          -2.0,
+          0.0,
+          -0.30000001192092896
+        ],
+        [
+          2.0,
+          1.100000023841858,
+          0.30000001192092896
+        ]
+      ],
+      "dimensions_m": [
+        4.0,
+        1.100000023841858,
+        0.6000000238418579
+      ],
+      "expected_dimensions_m": [
+        4.0,
+        1.1,
+        0.6
+      ],
+      "dimensions_passed": true,
+      "bottom_centre_pivot_passed": true,
+      "passed": true,
+      "repeatable_ends": {
+        "centre_spacing_m": 4,
+        "end_planes_x_m": [
+          -2,
+          2
+        ],
+        "matched_ray_samples": 6431,
+        "mismatches": [],
+        "socket_depths_m": [
+          0.07299999296665191,
+          0.07299996316432952,
+          0.07299999296665191,
+          0.07299996316432952
+        ],
+        "socket_recesses_passed": true,
+        "profiles_match": true
+      },
+      "sha256": "5dcb3258dd14fdfa1a605b5a6682a95467afbbc6c67a123546dd58bde1bff274"
+    },
+    "materials": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/trackside_barrier/trackside_barrier.glb",
+      "sha256": "5dcb3258dd14fdfa1a605b5a6682a95467afbbc6c67a123546dd58bde1bff274",
+      "materials": [
+        {
+          "name": "Amber passive reflector",
+          "pbr": {
+            "baseColorFactor": [
+              0.8999999761581421,
+              0.4699999988079071,
+              0.03500000014901161,
+              1
+            ],
+            "metallicFactor": 0.10000000149011612,
+            "roughnessFactor": 0.23999999463558197
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Cyan passive reflector",
+          "pbr": {
+            "baseColorFactor": [
+              0.03500000014901161,
+              0.3400000035762787,
+              0.3799999952316284,
+              1
+            ],
+            "metallicFactor": 0.15000000596046448,
+            "roughnessFactor": 0.23999999463558197
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Graphite galvanized cap",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 1
+            },
+            "metallicRoughnessTexture": {
+              "index": 2
+            }
+          },
+          "normalTexture": {
+            "index": 0,
+            "scale": 0.44999998807907104
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "packed_texture_channels": {
+            "roughness_G": {
+              "min": 0.3686,
+              "median": 0.4275,
+              "max": 0.4863
+            },
+            "metallic_B": {
+              "min": 0.7765,
+              "median": 0.7765,
+              "max": 0.7765
+            }
+          }
+        },
+        {
+          "name": "Precast concrete",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 4
+            },
+            "metallicRoughnessTexture": {
+              "index": 5
+            }
+          },
+          "normalTexture": {
+            "index": 3,
+            "scale": 0.44999998807907104
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "packed_texture_channels": {
+            "roughness_G": {
+              "min": 0.7137,
+              "median": 0.7882,
+              "max": 0.9216
+            },
+            "metallic_B": {
+              "min": 0.0,
+              "median": 0.0,
+              "max": 0.0
+            }
+          }
+        },
+        {
+          "name": "Recess lining",
+          "pbr": {
+            "baseColorFactor": [
+              0.026000000536441803,
+              0.029999999329447746,
+              0.03099999949336052,
+              1
+            ],
+            "metallicFactor": 0.20000000298023224,
+            "roughnessFactor": 0.7200000286102295
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Reflector gasket",
+          "pbr": {
+            "baseColorFactor": [
+              0.012000000104308128,
+              0.014999999664723873,
+              0.017000000923871994,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.800000011920929
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Zinc fasteners",
+          "pbr": {
+            "baseColorFactor": [
+              0.3799999952316284,
+              0.4000000059604645,
+              0.4099999964237213,
+              1
+            ],
+            "metallicFactor": 0.8199999928474426,
+            "roughnessFactor": 0.30000001192092896
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "extensionsUsed": [],
+      "external_images": 0,
+      "primitives": [
+        {
+          "mesh": "Cube.015",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Cube.011",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Cube.008",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Jersey profile",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Jersey profile",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Cube.001",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Cube.010",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        },
+        {
+          "mesh": "Cylinder",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0"
+          ]
+        }
+      ],
+      "color_spaces": "glTF spec: baseColor/emissive sRGB, metallic/roughness/normal linear"
+    },
+    "notes": "Authored hard-surface Jersey barrier based on four-view generated concept. Physical bolts and recessed end sockets; no emissive reflectors."
+  },
+  {
+    "file": "dock_warehouse.glb",
+    "bytes": 77567276,
+    "sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+    "source": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse.glb",
+    "sourceScripts": "source-assets/dock_warehouse/source",
+    "production": {
+      "asset": "dock_warehouse",
+      "game_file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse.glb",
+      "game_triangles": 372884,
+      "game_bytes": 77567276,
+      "game_dimensions_m": [
+        30,
+        18,
+        18
+      ],
+      "units": "metres",
+      "up": "+Y",
+      "front": "+Z",
+      "pivot": "bottom centre",
+      "method": "Authored hard-surface warehouse. Existing project concepts informed material palette; no warehouse AI reconstruction or new generated concept is claimed.",
+      "material_count": 14,
+      "embedded_texture_target": [
+        2048,
+        2048
+      ],
+      "geometry_components": 169,
+      "normalization_factors_xyz": [
+        0.9990675449371338,
+        0.9999998807907104,
+        1.0
+      ],
+      "pre_normalization_bounds_blender": [
+        [
+          -15.013999938964844,
+          -9.0,
+          0.0
+        ],
+        [
+          15.013999938964844,
+          9.000001907348633,
+          18.0
+        ]
+      ],
+      "game_sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "blender_version": "5.2.2 LTS",
+      "emission_policy": "All materials zero emission. No text, neon or emissive strips.",
+      "original_retained": "dock_warehouse.blend; editable named components with packed images; no decimation.",
+      "full_file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse_full.glb",
+      "full_sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "full_bytes": 77567276,
+      "packaging": "Final is byte-identical to full-detail GLB. All POSITION/NORMAL/TANGENT/UV/index accessors and all 12 embedded lossless PNGs retained. No geometry/texture reduction or JPEG."
+    },
+    "validation": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse.glb",
+      "sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "method": "Fresh final-GLB import in Blender; world-space bounds, actual imported triangles and material-aware BVH rays.",
+      "triangles": 372884,
+      "vertices_after_import": 834387,
+      "world_bounds_gltf_xyz": [
+        [
+          -15.0,
+          0.0,
+          -9.0
+        ],
+        [
+          15.0,
+          18.0,
+          9.0
+        ]
+      ],
+      "dimensions_m": [
+        30.0,
+        18.0,
+        18.0
+      ],
+      "expected_dimensions_m": [
+        30,
+        18,
+        18
+      ],
+      "dimensions_passed": true,
+      "bottom_centre_pivot_passed": true,
+      "finite_vertices_passed": true,
+      "loading_bays": [
+        {
+          "center_x_m": -9.2,
+          "front_ray_samples": [
+            {
+              "offset_x_m": -1.5,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -10.690022468566895,
+                  -5.815000534057617,
+                  1.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 1 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": -1.5,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  -10.690022468566895,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 1 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": -1.5,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -10.690022468566895,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 1 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -9.191421508789062,
+                  -5.815000534057617,
+                  1.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 1 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  -9.191421508789062,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 1 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -9.191421508789062,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 1 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -7.692820072174072,
+                  -5.815000534057617,
+                  1.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 1 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116340637207031,
+              "hit": {
+                "point_blender": [
+                  -7.692820072174072,
+                  -5.8383660316467285,
+                  3.0
+                ],
+                "distance": 4.1616339683532715,
+                "object": "Loading bay 1 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -7.692820072174072,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 1 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            }
+          ],
+          "side_returns": [
+            {
+              "side": -1,
+              "hit": {
+                "point_blender": [
+                  -11.79898738861084,
+                  -6.100000381469727,
+                  3.0999999046325684
+                ],
+                "distance": 2.6075658798217773,
+                "object": "Loading bay 1 steel jamb | Painted structural steel",
+                "material": "Painted structural steel"
+              },
+              "passed": true
+            },
+            {
+              "side": 1,
+              "hit": {
+                "point_blender": [
+                  -6.583854675292969,
+                  -6.100000381469727,
+                  3.0999999046325684
+                ],
+                "distance": 2.6075668334960938,
+                "object": "Loading bay 1 steel jamb | Painted structural steel",
+                "material": "Painted structural steel"
+              },
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "center_x_m": 0,
+          "front_ray_samples": [
+            {
+              "offset_x_m": -1.5,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -1.4986013174057007,
+                  -5.815000534057617,
+                  1.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 2 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": -1.5,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  -1.4986013174057007,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 2 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": -1.5,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  -1.4986013174057007,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 2 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349990844726562,
+              "hit": {
+                "point_blender": [
+                  0.0,
+                  -5.815001010894775,
+                  1.5
+                ],
+                "distance": 4.184998989105225,
+                "object": "Loading bay 2 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  0.0,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 2 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  0.0,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 2 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349990844726562,
+              "hit": {
+                "point_blender": [
+                  1.4986013174057007,
+                  -5.815001010894775,
+                  1.5
+                ],
+                "distance": 4.184998989105225,
+                "object": "Loading bay 2 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  1.4986013174057007,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 2 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349990844726562,
+              "hit": {
+                "point_blender": [
+                  1.4986013174057007,
+                  -5.815001010894775,
+                  5.5
+                ],
+                "distance": 4.184998989105225,
+                "object": "Loading bay 2 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            }
+          ],
+          "side_returns": [
+            {
+              "side": -1,
+              "hit": {
+                "point_blender": [
+                  -2.6075661182403564,
+                  -6.100000381469727,
+                  3.0999999046325684
+                ],
+                "distance": 2.6075661182403564,
+                "object": "Loading bay 2 steel jamb | Painted structural steel",
+                "material": "Painted structural steel"
+              },
+              "passed": true
+            },
+            {
+              "side": 1,
+              "hit": {
+                "point_blender": [
+                  2.6075661182403564,
+                  -6.100000381469727,
+                  3.0999999046325684
+                ],
+                "distance": 2.6075661182403564,
+                "object": "Loading bay 2 steel jamb | Painted structural steel",
+                "material": "Painted structural steel"
+              },
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        {
+          "center_x_m": 9.2,
+          "front_ray_samples": [
+            {
+              "offset_x_m": -1.5,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8350000381469727,
+              "hit": {
+                "point_blender": [
+                  7.692820072174072,
+                  -5.815000057220459,
+                  1.5
+                ],
+                "distance": 4.184999942779541,
+                "object": "Loading bay 3 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": -1.5,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  7.692820072174072,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 3 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": -1.5,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  7.692820072174072,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 3 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  9.191421508789062,
+                  -5.815000534057617,
+                  1.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 3 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116335868835449,
+              "hit": {
+                "point_blender": [
+                  9.191421508789062,
+                  -5.838366508483887,
+                  3.0
+                ],
+                "distance": 4.161633491516113,
+                "object": "Loading bay 3 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 0,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8349995613098145,
+              "hit": {
+                "point_blender": [
+                  9.191421508789062,
+                  -5.815000534057617,
+                  5.5
+                ],
+                "distance": 4.184999465942383,
+                "object": "Loading bay 3 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 1.5,
+              "recess_depth_m": 0.8350000381469727,
+              "hit": {
+                "point_blender": [
+                  10.690022468566895,
+                  -5.815000057220459,
+                  1.5
+                ],
+                "distance": 4.184999942779541,
+                "object": "Loading bay 3 shutter panels | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 3.0,
+              "recess_depth_m": 0.8116340637207031,
+              "hit": {
+                "point_blender": [
+                  10.690022468566895,
+                  -5.8383660316467285,
+                  3.0
+                ],
+                "distance": 4.1616339683532715,
+                "object": "Loading bay 3 pressed ribs | Door blue-grey enamel",
+                "material": "Door blue-grey enamel"
+              },
+              "passed": true
+            },
+            {
+              "offset_x_m": 1.5,
+              "height_m": 5.5,
+              "recess_depth_m": 0.8350000381469727,
+              "hit": {
+                "point_blender": [
+                  10.690022468566895,
+                  -5.815000057220459,
+                  5.5
+                ],
+                "distance": 4.184999942779541,
+                "object": "Loading bay 3 shutter panels | Door alternate enamel",
+                "material": "Door alternate enamel"
+              },
+              "passed": true
+            }
+          ],
+          "side_returns": [
+            {
+              "side": -1,
+              "hit": {
+                "point_blender": [
+                  6.583854675292969,
+                  -6.100000381469727,
+                  3.0999999046325684
+                ],
+                "distance": 2.6075668334960938,
+                "object": "Loading bay 3 steel jamb | Painted structural steel",
+                "material": "Painted structural steel"
+              },
+              "passed": true
+            },
+            {
+              "side": 1,
+              "hit": {
+                "point_blender": [
+                  11.79898738861084,
+                  -6.100000381469727,
+                  3.0999999046325684
+                ],
+                "distance": 2.6075658798217773,
+                "object": "Loading bay 3 steel jamb | Painted structural steel",
+                "material": "Painted structural steel"
+              },
+              "passed": true
+            }
+          ],
+          "passed": true
+        }
+      ],
+      "front_glazing": [
+        {
+          "center_x_m": -11.7,
+          "hit": {
+            "point_blender": [
+              -11.274477005004883,
+              -6.587500095367432,
+              9.920000076293945
+            ],
+            "distance": 3.4124999046325684,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        },
+        {
+          "center_x_m": -7.8,
+          "hit": {
+            "point_blender": [
+              -7.378113746643066,
+              -6.587500095367432,
+              9.920000076293945
+            ],
+            "distance": 3.4124999046325684,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        },
+        {
+          "center_x_m": -3.9,
+          "hit": {
+            "point_blender": [
+              -3.48175048828125,
+              -6.587500095367432,
+              9.920000076293945
+            ],
+            "distance": 3.4124999046325684,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        },
+        {
+          "center_x_m": 0,
+          "hit": {
+            "point_blender": [
+              0.4146130383014679,
+              -6.587500095367432,
+              9.920000076293945
+            ],
+            "distance": 3.4124999046325684,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        },
+        {
+          "center_x_m": 3.9,
+          "hit": {
+            "point_blender": [
+              4.310976505279541,
+              -6.587499618530273,
+              9.920000076293945
+            ],
+            "distance": 3.4125001430511475,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        },
+        {
+          "center_x_m": 7.8,
+          "hit": {
+            "point_blender": [
+              8.207340240478516,
+              -6.587500095367432,
+              9.920000076293945
+            ],
+            "distance": 3.4124999046325684,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        },
+        {
+          "center_x_m": 11.7,
+          "hit": {
+            "point_blender": [
+              12.103703498840332,
+              -6.587500095367432,
+              9.920000076293945
+            ],
+            "distance": 3.4124999046325684,
+            "object": "front industrial windows | Window glazing aged",
+            "material": "Window glazing aged"
+          },
+          "passed": true
+        }
+      ],
+      "roof_skylights": [
+        {
+          "center_xy_m": [
+            -7.2,
+            -2.2
+          ],
+          "hit": {
+            "point_blender": [
+              -6.943519592285156,
+              -1.800000786781311,
+              15.83799934387207
+            ],
+            "distance": 4.1620001792907715,
+            "object": "Individual skylight glass | Wired skylight glass",
+            "material": "Wired skylight glass"
+          },
+          "passed": true
+        },
+        {
+          "center_xy_m": [
+            7.2,
+            -2.2
+          ],
+          "hit": {
+            "point_blender": [
+              7.443053245544434,
+              -1.800000786781311,
+              15.757999420166016
+            ],
+            "distance": 4.242000102996826,
+            "object": "Individual skylight glass | Wired skylight glass",
+            "material": "Wired skylight glass"
+          },
+          "passed": true
+        },
+        {
+          "center_xy_m": [
+            -7.2,
+            4.25
+          ],
+          "hit": {
+            "point_blender": [
+              -6.943519592285156,
+              4.649998664855957,
+              15.838000297546387
+            ],
+            "distance": 4.161999702453613,
+            "object": "Individual skylight glass | Wired skylight glass",
+            "material": "Wired skylight glass"
+          },
+          "passed": true
+        },
+        {
+          "center_xy_m": [
+            7.2,
+            4.25
+          ],
+          "hit": {
+            "point_blender": [
+              7.443053245544434,
+              4.649998664855957,
+              15.757999420166016
+            ],
+            "distance": 4.242000102996826,
+            "object": "Individual skylight glass | Wired skylight glass",
+            "material": "Wired skylight glass"
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    "materials": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse.glb",
+      "sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "materials": [
+        {
+          "name": "Bare galvanized hardware",
+          "pbr": {
+            "baseColorFactor": [
+              0.4300000071525574,
+              0.47999998927116394,
+              0.47999998927116394,
+              1
+            ],
+            "metallicFactor": 0.8299999833106995,
+            "roughnessFactor": 0.3400000035762787
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Painted structural steel",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 1
+            },
+            "metallicRoughnessTexture": {
+              "index": 2
+            }
+          },
+          "normalTexture": {
+            "index": 0,
+            "scale": 0.30000001192092896
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "packed_texture_channels": {
+            "roughness_G": {
+              "min": 0.4431,
+              "median": 0.4902,
+              "max": 0.651
+            },
+            "metallic_B": {
+              "min": 0.0,
+              "median": 0.0,
+              "max": 0.7765
+            }
+          }
+        },
+        {
+          "name": "Weathered zinc",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 4
+            },
+            "metallicRoughnessTexture": {
+              "index": 5
+            }
+          },
+          "normalTexture": {
+            "index": 3,
+            "scale": 0.2199999988079071
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "packed_texture_channels": {
+            "roughness_G": {
+              "min": 0.4431,
+              "median": 0.5451,
+              "max": 0.6941
+            },
+            "metallic_B": {
+              "min": 0.5176,
+              "median": 0.7765,
+              "max": 0.8392
+            }
+          }
+        },
+        {
+          "name": "Cast concrete",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 7
+            },
+            "metallicRoughnessTexture": {
+              "index": 8
+            }
+          },
+          "normalTexture": {
+            "index": 6,
+            "scale": 0.3799999952316284
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "packed_texture_channels": {
+            "roughness_G": {
+              "min": 0.7529,
+              "median": 0.7882,
+              "max": 0.9137
+            },
+            "metallic_B": {
+              "min": 0.0,
+              "median": 0.0,
+              "max": 0.0
+            }
+          }
+        },
+        {
+          "name": "Weathered red-brown brick",
+          "pbr": {
+            "baseColorTexture": {
+              "index": 10
+            },
+            "metallicRoughnessTexture": {
+              "index": 11
+            }
+          },
+          "normalTexture": {
+            "index": 9,
+            "scale": 0.550000011920929
+          },
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true,
+          "packed_texture_channels": {
+            "roughness_G": {
+              "min": 0.7922,
+              "median": 0.8314,
+              "max": 0.9216
+            },
+            "metallic_B": {
+              "min": 0.0,
+              "median": 0.0,
+              "max": 0.0
+            }
+          }
+        },
+        {
+          "name": "Rubber seals and buffers",
+          "pbr": {
+            "baseColorFactor": [
+              0.017999999225139618,
+              0.02199999988079071,
+              0.019999999552965164,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.8399999737739563
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Window frame aluminium",
+          "pbr": {
+            "baseColorFactor": [
+              0.23000000417232513,
+              0.28999999165534973,
+              0.28999999165534973,
+              1
+            ],
+            "metallicFactor": 0.6499999761581421,
+            "roughnessFactor": 0.3799999952316284
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Window glazing aged",
+          "pbr": {
+            "baseColorFactor": [
+              0.11500000208616257,
+              0.16500000655651093,
+              0.16500000655651093,
+              1
+            ],
+            "metallicFactor": 0.1599999964237213,
+            "roughnessFactor": 0.3199999928474426
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Window glazing muted blue",
+          "pbr": {
+            "baseColorFactor": [
+              0.08500000089406967,
+              0.14000000059604645,
+              0.15000000596046448,
+              1
+            ],
+            "metallicFactor": 0.20000000298023224,
+            "roughnessFactor": 0.23000000417232513
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Door blue-grey enamel",
+          "pbr": {
+            "baseColorFactor": [
+              0.23000000417232513,
+              0.30000001192092896,
+              0.3199999928474426,
+              1
+            ],
+            "metallicFactor": 0.07999999821186066,
+            "roughnessFactor": 0.47999998927116394
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Door alternate enamel",
+          "pbr": {
+            "baseColorFactor": [
+              0.20000000298023224,
+              0.25999999046325684,
+              0.2800000011920929,
+              1
+            ],
+            "metallicFactor": 0.07999999821186066,
+            "roughnessFactor": 0.5099999904632568
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Duct dark interior",
+          "pbr": {
+            "baseColorFactor": [
+              0.03500000014901161,
+              0.039000000804662704,
+              0.03500000014901161,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.9200000166893005
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Wired skylight glass",
+          "pbr": {
+            "baseColorFactor": [
+              0.20000000298023224,
+              0.2800000011920929,
+              0.27000001072883606,
+              1
+            ],
+            "metallicFactor": 0.15000000596046448,
+            "roughnessFactor": 0.28999999165534973
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "Interior shadow lining",
+          "pbr": {
+            "baseColorFactor": [
+              0.054999999701976776,
+              0.05999999865889549,
+              0.054999999701976776,
+              1
+            ],
+            "metallicFactor": 0,
+            "roughnessFactor": 0.8999999761581421
+          },
+          "normalTexture": null,
+          "emissiveFactor": [
+            0,
+            0,
+            0
+          ],
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "extensionsUsed": [],
+      "external_images": 0,
+      "primitives": [
+        {
+          "mesh": "Base anchors",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy anchor bolts",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy cantilever I beams",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy diagonal brackets",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy drainage",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy front folded gutter",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy standing seams",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy transverse purlins",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy wall anchor plates",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Canopy zinc roof",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Column base plates",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Column connection plates",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Conduit junction boxes",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Downpipe collars",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Eave box gutter",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Exterior I section columns",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Folded ridge cap",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Foundation front",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Foundation rear",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Foundation sides",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front brick piers",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front cladding screws",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front electrical conduit",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front exposed rake beam",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front gable infill",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front horizontal girts",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front industrial windows.004",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front industrial windows",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front industrial windows.003",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front industrial windows.001",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front industrial windows.002",
+          "material": 8,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front personnel door",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front personnel glazing",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front personnel handle",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front personnel hinges",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front personnel reveal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front reinforced lintel",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Front service cabinet",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "front zinc cladding",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "HVAC fan guard spokes",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "HVAC fan opening",
+          "material": 11,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "HVAC fan wire guard",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "HVAC grille shadow",
+          "material": 11,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "HVAC grille slats",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "HVAC support curb",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Individual skylight glass",
+          "material": 12,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ladder safety cage hoops",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ladder safety cage uprights",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ladder wall standoffs",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left cladding screws",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left eave closure",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left horizontal girts",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left industrial windows.004",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left industrial windows",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left industrial windows.003",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left industrial windows.001",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left industrial windows.002",
+          "material": 8,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "left zinc cladding",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 bottom seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 buffer fixings",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 central handle grip",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 concrete jamb",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 dark reveal backing",
+          "material": 13,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 dock buffer",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 leveller lip",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 outer seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 pressed ribs",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 pressed ribs.001",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 pull handle",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 rail bolts",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 rail",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 shutter panels",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 shutter panels.001",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 shutter vision glass",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 shutter vision seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 soffit",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 steel jamb",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 1 threshold",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 bottom seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 buffer fixings",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 central handle grip",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 concrete jamb",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 dark reveal backing",
+          "material": 13,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 dock buffer",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 leveller lip",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 outer seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 pressed ribs",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 pressed ribs.001",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 pull handle",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 rail bolts",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 rail",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 shutter panels",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 shutter panels.001",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 shutter vision glass",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 shutter vision seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 soffit",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 steel jamb",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 2 threshold",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 bottom seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 buffer fixings",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 central handle grip",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 concrete jamb",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 dark reveal backing",
+          "material": 13,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 dock buffer",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 leveller lip",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 outer seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 pressed ribs",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 pressed ribs.001",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 pull handle",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 rail bolts",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 rail",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 shutter panels",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 shutter panels.001",
+          "material": 9,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 shutter vision glass",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 shutter vision seal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 soffit",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 steel jamb",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Loading bay 3 threshold",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Maintenance ladder rails",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Maintenance ladder rungs",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Personnel door lintel",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Pipe wall clips",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Pitched roof zinc sheets",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Portal structural bolts",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rainwater downpipes",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear brick wall",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear cladding screws",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear door handle",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear door lintel",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear door reveal",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear exposed rake beam",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear gable infill",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear horizontal girts",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear industrial windows.004",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear industrial windows",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear industrial windows.003",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear industrial windows.001",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear industrial windows.002",
+          "material": 8,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear service double doors",
+          "material": 10,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear ventilation louvers",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Rear ventilation shadow",
+          "material": 11,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "rear zinc cladding",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ridge extraction dark chamber",
+          "material": 11,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ridge monitor end cheeks",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ridge monitor louvers",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Ridge monitor weather hood",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right cladding screws",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right eave closure",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right horizontal girts",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right industrial windows.004",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right industrial windows",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right industrial windows.003",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right industrial windows.001",
+          "material": 7,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right industrial windows.002",
+          "material": 8,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "right zinc cladding",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof access hatch frame",
+          "material": 5,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof access hatch",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof hatch lifting handles",
+          "material": 0,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof HVAC cabinet",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof portal top chords",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof truss diagonal webs",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Roof truss tie",
+          "material": 1,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Service cabinet cooling slots",
+          "material": 11,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Side brick infill",
+          "material": 4,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Side precast column",
+          "material": 3,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Skylight cross bars",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Skylight intermediate bars",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Skylight perimeter frames",
+          "material": 6,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        },
+        {
+          "mesh": "Standing roof seams",
+          "material": 2,
+          "attributes": [
+            "POSITION",
+            "NORMAL",
+            "TEXCOORD_0",
+            "TANGENT"
+          ]
+        }
+      ],
+      "color_spaces": "glTF spec: baseColor/emissive sRGB, metallic/roughness/normal linear"
+    },
+    "payload": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse.glb",
+      "bytes": 77567276,
+      "triangles": 372884,
+      "stored_triangles": 372884,
+      "textures": [
+        {
+          "name": "paint_normal",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 2919530,
+          "format": "PNG"
+        },
+        {
+          "name": "paint_basecolor",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 2534988,
+          "format": "PNG"
+        },
+        {
+          "name": "paint_orm",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 979672,
+          "format": "PNG"
+        },
+        {
+          "name": "zinc_normal",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 3053693,
+          "format": "PNG"
+        },
+        {
+          "name": "zinc_basecolor",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 1940015,
+          "format": "PNG"
+        },
+        {
+          "name": "zinc_orm",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 1489647,
+          "format": "PNG"
+        },
+        {
+          "name": "concrete_normal",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 5147673,
+          "format": "PNG"
+        },
+        {
+          "name": "concrete_basecolor",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 2384032,
+          "format": "PNG"
+        },
+        {
+          "name": "concrete_orm",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 2444117,
+          "format": "PNG"
+        },
+        {
+          "name": "brick_normal",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 5384015,
+          "format": "PNG"
+        },
+        {
+          "name": "brick_basecolor",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 4118010,
+          "format": "PNG"
+        },
+        {
+          "name": "brick_orm",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "bytes": 2392717,
+          "format": "PNG"
+        }
+      ],
+      "materials": 14,
+      "meshes": 169,
+      "embedded_buffers": true,
+      "sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e"
+    },
+    "packaging": {
+      "selected_policy": "Preserve full expression; GitHub Pages 100 MiB single-file cap. Earlier 50 MB target superseded by user.",
+      "full_sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "release_sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "release_bytes": 77567276,
+      "byte_identical_to_full": true,
+      "all_position_normal_tangent_uv_and_indices_preserved": true,
+      "all_png_images_preserved": true,
+      "jpeg_basecolor_used": false,
+      "under_100_mib": true,
+      "under_50_mb_required": false
+    },
+    "notes": "Authored hard-surface warehouse; full geometry, normals, tangents, UVs and embedded PNG maps retained. Fresh-import BVH rays verify three recessed loading bays, upper glazing and roof skylights. The full 77.57 MB asset is intentionally kept for visual capability acceptance."
+  }
+]
