@@ -3586,6 +3586,150 @@
       "under_100_mib": true,
       "under_50_mb_required": false
     },
-    "notes": "Authored hard-surface warehouse; full geometry, normals, tangents, UVs and embedded PNG maps retained. Fresh-import BVH rays verify three recessed loading bays, upper glazing and roof skylights. The full 77.57 MB asset is intentionally kept for visual capability acceptance."
+    "notes": "Authored hard-surface warehouse; full geometry, normals, tangents, UVs and embedded PNG maps retained. Fresh-import BVH rays verify three recessed loading bays, upper glazing and roof skylights. The full 77.57 MB asset is intentionally kept for visual capability acceptance.",
+    "preview": {
+      "glb_sha256": "d3f79b3070e65b884545c9d6681ef1d2224f42bafd8eac6c94ae2d7624be568e",
+      "method": "Fresh import of the final GLB. Actual mesh, UVs and embedded PBR materials.",
+      "views": [
+        "preview",
+        "front",
+        "loading_detail",
+        "rear",
+        "left90",
+        "roof_detail"
+      ],
+      "resolution": [
+        1600,
+        1200
+      ],
+      "samples": 40,
+      "lighting": "Neutral studio area lights; no game scene or ground plane.",
+      "front_direction": "+Z glTF",
+      "front45_azimuth_degrees": 45,
+      "left90_azimuth_degrees": 90,
+      "concept_reference_images_used_as_model_previews": false
+    },
+    "sourceValidation": {
+      "file": "/Users/yaowei/ZhudaAI/generated_models/neon_apex_scenery/dock_warehouse/dock_warehouse.blend",
+      "sha256": "c294baa1f545226f50dd434d6247a5d3eace80dc15dc28b384cdcf040121eb2b",
+      "bytes": 42546977,
+      "mesh_components": 169,
+      "named_component_metadata": true,
+      "images": [
+        {
+          "name": "brick_basecolor.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "sRGB"
+        },
+        {
+          "name": "brick_normal.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "brick_orm.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "concrete_basecolor.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "sRGB"
+        },
+        {
+          "name": "concrete_normal.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "concrete_orm.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "paint_basecolor.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "sRGB"
+        },
+        {
+          "name": "paint_normal.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "paint_orm.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "zinc_basecolor.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "sRGB"
+        },
+        {
+          "name": "zinc_normal.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        },
+        {
+          "name": "zinc_orm.png",
+          "size": [
+            2048,
+            2048
+          ],
+          "packed": true,
+          "colour_space": "Non-Color"
+        }
+      ],
+      "all_file_images_packed": true,
+      "active_decimate_modifiers": 0,
+      "coordinate_note": "Blender -Y front / Z up; export glTF +Z front / +Y up. Bottom centre pivot.",
+      "placement_note": "Bottom-centre origin Y=0 in asset. Game places this origin at dock Y=-5. Front glTF +Z toward road.",
+      "no_cameras_or_lights_in_asset": true
+    }
   }
 ]

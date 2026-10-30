@@ -2,7 +2,7 @@
 
 The 30 × 18 × 18 m warehouse is authored geometry with three recessed loading bays, a canopy, industrial windows, roof skylights, ventilation, pipes and a caged maintenance ladder. Dimensions use metres, glTF +Y up, +Z front and a bottom-centre pivot. The scene places it on the quay at Y = −5 m.
 
-The published GLB preserves all positions, geometric normals, tangents, UVs and 12 embedded 2K PNG maps. It has 372,884 triangles, 15 materials and 169 named mesh components. Its 77,567,276-byte size is intentional for this visual capability study. The original editable Blender file remains in the local model-production archive; these scripts reproduce the asset and authored materials.
+The published GLB preserves all positions, geometric normals, tangents, UVs and 12 embedded 2K PNG maps. It has 372,884 triangles, 14 materials and 169 named mesh components. Its 77,567,276-byte size is intentional for this visual capability study. The original editable Blender file remains in the local model-production archive; these scripts reproduce the asset and authored materials.
 
 Requirements: Blender 5.2.2 LTS; Python with NumPy and Pillow. From the repository root:
 
