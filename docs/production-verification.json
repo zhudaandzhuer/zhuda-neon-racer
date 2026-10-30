@@ -1,7 +1,7 @@
 {
   "passed": true,
   "url": "https://zhudaandzhuer.github.io/zhuda-neon-racer/",
-  "checkedAt": "2026-10-30T04:34:42.209Z",
+  "checkedAt": "2026-10-30T05:22:23.401Z",
   "checks": [
     "locked circuits do not start",
     "real keyboard steering and nitro create engine particles and historical trails",
@@ -17,7 +17,7 @@
     "result": {
       "won": true,
       "place": 1,
-      "time": 14.008333333333178,
+      "time": 14.016666666666511,
       "stars": 3,
       "reward": 650,
       "reason": "finish",
@@ -30,7 +30,7 @@
     "nitro": true,
     "particles": 36
   },
-  "webglDrawCalls": 23,
+  "webglDrawCalls": 25,
   "errors": [],
   "failures": []
 }
