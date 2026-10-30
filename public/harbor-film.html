@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101820" />
+    <title>HARBOR / 01 — 4K film · zhuda-laya-engine</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #0a1119; color: #f1eee6; font: 15px system-ui,sans-serif; }
+      main { width: min(1440px,92vw); margin: 5vh auto; }
+      header { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+      small { color: #d5bc8c; font-size: 10px; letter-spacing: .28em; }
+      h1 { margin: 12px 0 0; font-size: clamp(30px,4.5vw,64px); font-weight: 450; letter-spacing: .04em; }
+      a { color: #e1c999; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .play { background: #dfc794; color: #18202a; padding: 15px 20px; font-size: 11px; font-weight: 650; letter-spacing: .13em; white-space: nowrap; }
+      video { display: block; width: 100%; aspect-ratio: 16/9; background: #101923; border: 1px solid #ffffff20; border-radius: 5px; }
+      .bar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-top: 18px; flex-wrap: wrap; }
+      .quality { display: flex; gap: 7px; }
+      button { font: inherit; font-size: 11px; color: #d5dce1; background: transparent; border: 1px solid #ffffff30; padding: 9px 14px; border-radius: 4px; cursor: pointer; }
+      button[aria-pressed="true"] { color: #efe3c9; border-color: #dfc794; background: #dfc79413; }
+      button:focus-visible,a:focus-visible { outline: 2px solid #dfc794; outline-offset: 4px; }
+      .links { display: flex; gap: 22px; flex-wrap: wrap; font-size: 12px; }
+      p { max-width: 900px; color: #9baab8; font-size: 12px; line-height: 1.85; }
+      strong { color: #cbd4dc; font-weight: 500; }
+      @media(max-width:650px) { header { align-items: start; flex-direction: column; } main { margin: 4vh auto; } .bar { align-items: start; flex-direction: column; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header><div><small>ZHUDA-LAYA-ENGINE / WEBGL FILM</small><h1>HARBOR / 01</h1></div><a class="play" href="visual.html?view=dock">EXPLORE THE HARBOR →</a></header>
+      <video id="film" controls autoplay muted loop playsinline preload="metadata" poster="media/harbor-poster.jpg?v=harbor-01" src="media/harbor-4k60.mp4?v=harbor-01"></video>
+      <div class="bar"><div class="quality" role="group" aria-label="Video quality"><button type="button" data-quality="4k" aria-pressed="true">4K / 60 FPS</button><button type="button" data-quality="1080p" aria-pressed="false">1080p / 60 FPS</button></div><div class="links"><a href="media/harbor-4k60.mp4" download>Download 4K ↗</a><a href="https://github.com/zhudaandzhuer/zhuda-laya-engine">Engine on GitHub ↗</a></div></div>
+      <p><strong>Light, surface and motion in a playable Web 3D harbor.</strong> The actual High preset: PBR materials, HDR lighting, 4096 px shadows, planar reflections, ambient occlusion, bloom and temporal antialiasing. Drive the bridge and dock with the real S800 wheel rig.</p>
+      <p>20 seconds · 3840 × 2160 · 60 FPS. Every frame comes from the actual WebGL scene, advanced at a fixed 1/60 second with the normal 120 Hz vehicle simulation. This is an offline frame capture; playback frame rate is not a claim about live performance. <a href="https://github.com/zhudaandzhuer/zhuda-neon-racer/blob/main/docs/media/harbor-recording.json">Recording details ↗</a></p>
+    </main>
+    <script>
+      const film=document.getElementById('film');
+      const buttons=[...document.querySelectorAll('[data-quality]')];
+      function selectQuality(quality){
+        const time=film.currentTime,playing=!film.paused;
+        film.autoplay=false;
+        film.src=`media/harbor-${quality==='1080p'?'1080p60':'4k60'}.mp4?v=harbor-01`;
+        buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.quality===quality)));
+        film.addEventListener('loadedmetadata',()=>{film.currentTime=Math.min(time,Math.max(0,film.duration-.05));if(playing)film.play().catch(()=>{});else film.pause();},{once:true});
+      }
+      buttons.forEach(button=>button.addEventListener('click',()=>selectQuality(button.dataset.quality)));
+      if(new URLSearchParams(location.search).get('quality')==='1080p')selectQuality('1080p');
+    </script>
+  </body>
+</html>

@@ -40,7 +40,11 @@ The film is an actual canvas capture at 1280 × 720 / 60 FPS with a test driver.
 
 Open **SETTINGS** for Auto, Performance, Balanced or High quality and a 30/60 FPS target. Auto starts conservatively and adapts resolution and effects to actual render cadence; manual selections stay fixed and save on the device. The panel shows measured FPS and current settings, and pauses driving while open. High retains the full visual baseline.
 
-[![Actual WebGL harbor scene](docs/visual-dock.jpg)](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html?view=dock)
+<a href="https://zhudaandzhuer.github.io/zhuda-neon-racer/harbor-film.html"><picture><source type="image/webp" srcset="docs/media/harbor-preview.webp?v=harbor-01" /><img src="docs/media/harbor-preview.gif?v=harbor-01" alt="High-preset WebGL harbor film" width="1280" /></picture></a>
+
+[Watch the 4K / 60 FPS harbor film](https://zhudaandzhuer.github.io/zhuda-neon-racer/harbor-film.html). The 20-second film uses actual High-preset WebGL frames, advanced at fixed 1/60-second intervals with the normal 120 Hz vehicle simulation. It is an offline capture, not a claim of 60 FPS live performance. Both 4K and 1080p playback versions are available. [Recording provenance](docs/media/harbor-recording.json).
+
+Reproduce with `node scripts/record-harbor.mjs` against the running local server; `--preview` captures composition samples and `--reuse` validates and reuses completed frame sets. Chrome, ffmpeg, ffprobe and Python/Pillow with animated WebP support are required. Frames stay in ignored `evidence/harbor-film/`; game media stays in this consumer repository. The full-color README WebP preview runs at 60 FPS, with a smaller GIF fallback. Run `node scripts/verify-harbor-player.mjs` against `PORT=8910 npm start` (or set `FILM_URL`) to check actual 4K playback, dropped frames and quality switching. The reference Apple M4 / Chrome check presented 480 frames over 8 seconds with zero dropped frames; this does not guarantee decoding or network performance on every device.
 
 ## Develop
 

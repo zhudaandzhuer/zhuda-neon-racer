@@ -1,0 +1,358 @@
+{
+  "sourceRevision": "de180b47b33f18921943268b5c27422cf5b043f9",
+  "engineRevision": "74b04064208f8afe624896482d7bc438dd15dc29",
+  "checkedAt": "2026-10-30T19:39:40.367Z",
+  "method": "Actual High-preset WebGL frames, each advanced by 1/60 s, using the normal 120 Hz vehicle simulation. Offline capture; playback FPS is not a live-performance claim. No frame interpolation or duplicate-frame padding.",
+  "fps": 60,
+  "width": 3840,
+  "height": 2160,
+  "durationSeconds": 20,
+  "frames": 1200,
+  "warmupPerClip": 48,
+  "initial": {
+    "quality": {
+      "mode": "high",
+      "targetFPS": 60,
+      "tier": "high",
+      "scale": 1,
+      "fps": 0,
+      "p90": 0,
+      "reason": "Measuring performance\u2026",
+      "canvas": [
+        3840,
+        2160
+      ],
+      "reflectionSize": [
+        1280,
+        800
+      ],
+      "reflectionFPS": 60,
+      "reflectionEnabled": true,
+      "ao": true,
+      "bloom": true,
+      "taa": true,
+      "shadowResolution": 4096,
+      "panelOpen": false
+    },
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)"
+  },
+  "clips": [
+    {
+      "clip": {
+        "id": "waterfront",
+        "label": "LIGHT / SURFACE / SCALE",
+        "seconds": 4,
+        "x": -29,
+        "z": 52,
+        "yaw": 3.141592653589793,
+        "speed": 0,
+        "throttle": false,
+        "camera": "hero"
+      },
+      "frames": 240,
+      "samples": [
+        {
+          "index": 0,
+          "frame": 49,
+          "position": [
+            -29,
+            -4.994,
+            52
+          ],
+          "speed": 0,
+          "contacts": 0
+        },
+        {
+          "index": 120,
+          "frame": 169,
+          "position": [
+            -29,
+            -4.994,
+            52
+          ],
+          "speed": 0,
+          "contacts": 0
+        },
+        {
+          "index": 239,
+          "frame": 288,
+          "position": [
+            -29,
+            -4.994,
+            52
+          ],
+          "speed": 0,
+          "contacts": 0
+        }
+      ],
+      "uniqueFrames": 240,
+      "frameHashDigest": "2bfce87fa9e8ab5262bf777ab11679b693046c011319034700c5dbf4cb51433f"
+    },
+    {
+      "clip": {
+        "id": "bridge",
+        "label": "THE BRIDGE / IN MOTION",
+        "seconds": 6,
+        "x": 0,
+        "z": 35,
+        "yaw": 0,
+        "speed": 0,
+        "throttle": true,
+        "camera": "front"
+      },
+      "frames": 360,
+      "samples": [
+        {
+          "index": 0,
+          "frame": 337,
+          "position": [
+            0,
+            0,
+            35
+          ],
+          "speed": 0,
+          "contacts": 0
+        },
+        {
+          "index": 180,
+          "frame": 517,
+          "position": [
+            0,
+            0,
+            60.25835278132902
+          ],
+          "speed": 16.27602625800344,
+          "contacts": 0
+        },
+        {
+          "index": 359,
+          "frame": 696,
+          "position": [
+            0,
+            0,
+            127.20415505833657
+          ],
+          "speed": 27,
+          "contacts": 0
+        }
+      ],
+      "uniqueFrames": 360,
+      "frameHashDigest": "09546c8cf2b5772a8bb55b463b524a7a6164418c5d13f9e59a19e195508c4cec"
+    },
+    {
+      "clip": {
+        "id": "dock",
+        "label": "THE DOCK / FREE DRIVE",
+        "seconds": 6,
+        "x": -29,
+        "z": 80,
+        "yaw": 3.141592653589793,
+        "speed": 8,
+        "throttle": false,
+        "camera": "chase"
+      },
+      "frames": 360,
+      "samples": [
+        {
+          "index": 0,
+          "frame": 745,
+          "position": [
+            -29,
+            -4.994,
+            80
+          ],
+          "speed": 8,
+          "contacts": 0
+        },
+        {
+          "index": 180,
+          "frame": 925,
+          "position": [
+            -29,
+            -4.994,
+            58.40117266072291
+          ],
+          "speed": 6.446088207342296,
+          "contacts": 0
+        },
+        {
+          "index": 359,
+          "frame": 1104,
+          "position": [
+            -29,
+            -4.994,
+            41.20817000149672
+          ],
+          "speed": 5.112739150796251,
+          "contacts": 0
+        }
+      ],
+      "uniqueFrames": 360,
+      "frameHashDigest": "228ab933bfde2291444047f490feeab4d2859a7186e2c60de232390f08ecceab"
+    },
+    {
+      "clip": {
+        "id": "warehouse",
+        "label": "HARBOR / 01",
+        "seconds": 4,
+        "x": -29,
+        "z": 52,
+        "yaw": 3.141592653589793,
+        "speed": 0,
+        "throttle": false,
+        "camera": "wide"
+      },
+      "frames": 240,
+      "samples": [
+        {
+          "index": 0,
+          "frame": 1153,
+          "position": [
+            -29,
+            -4.994,
+            52
+          ],
+          "speed": 0,
+          "contacts": 0
+        },
+        {
+          "index": 120,
+          "frame": 1273,
+          "position": [
+            -29,
+            -4.994,
+            52
+          ],
+          "speed": 0,
+          "contacts": 0
+        },
+        {
+          "index": 239,
+          "frame": 1392,
+          "position": [
+            -29,
+            -4.994,
+            52
+          ],
+          "speed": 0,
+          "contacts": 0
+        }
+      ],
+      "uniqueFrames": 240,
+      "frameHashDigest": "386c78f03df15a502f7cf90ab3057215b0692c47f1540707abcd4ed5debb76c2"
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "wallSeconds": 787.251,
+  "outputs": [
+    {
+      "name": "harbor-4k60.mp4",
+      "bytes": 103443563,
+      "sha256": "c3252b8eddc4fe94c86141fdbb487648564d6c9b554f079b157add64c39a3332",
+      "width": 3840,
+      "height": 2160,
+      "frames": 1200,
+      "fps": "60/1",
+      "duration": 20
+    },
+    {
+      "name": "harbor-1080p60.mp4",
+      "bytes": 28697504,
+      "sha256": "83afe944d2667d5d48db5f392c09aed2beb84ec7dd4c1fa2684dd73ad42fca7b",
+      "width": 1920,
+      "height": 1080,
+      "frames": 1200,
+      "fps": "60/1",
+      "duration": 20
+    }
+  ],
+  "independentValidation": [
+    {
+      "file": "harbor-4k60.mp4",
+      "metadata": {
+        "width": 3840,
+        "height": 2160,
+        "r_frame_rate": "60/1",
+        "avg_frame_rate": "60/1",
+        "duration": "20.000000",
+        "nb_frames": "1200"
+      },
+      "decodedUniqueFrames": 1200,
+      "maxTimestampStepErrorSeconds": 6.666666694833678e-07,
+      "faststart": true,
+      "atoms": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    },
+    {
+      "file": "harbor-1080p60.mp4",
+      "metadata": {
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "60/1",
+        "avg_frame_rate": "60/1",
+        "duration": "20.000000",
+        "nb_frames": "1200"
+      },
+      "decodedUniqueFrames": 1200,
+      "maxTimestampStepErrorSeconds": 6.666666694833678e-07,
+      "faststart": true,
+      "atoms": [
+        "ftyp",
+        "moov",
+        "free",
+        "mdat"
+      ]
+    }
+  ],
+  "playbackValidation": {
+    "checkedAt": "2026-10-30T19:48:54.067Z",
+    "url": "http://localhost:8910/harbor-film.html",
+    "metadata": {
+      "width": 3840,
+      "height": 2160,
+      "duration": 20,
+      "source": "http://localhost:8910/media/harbor-4k60.mp4?v=harbor-01",
+      "error": null
+    },
+    "playback": {
+      "seconds": 8.002100000023843,
+      "mediaSeconds": 8.001900000000001,
+      "presentedFrames": 480,
+      "droppedFrames": 0,
+      "reference": "Apple M4 / Chrome headless / 1440\u00d71050 viewport / 4K source"
+    },
+    "fallback": {
+      "width": 1920,
+      "height": 1080,
+      "time": 9.0927,
+      "paused": true,
+      "selected": "true"
+    },
+    "errors": []
+  },
+  "previews": [
+    {
+      "file": "harbor-preview.webp",
+      "width": 800,
+      "height": 450,
+      "frames": 360,
+      "durationMs": 6000,
+      "bytes": 9141716,
+      "sha256": "417faa81b9649191bcdad55eaebcf3aa5b103d9382e8ce0c6de9e7ab1253411e"
+    },
+    {
+      "file": "harbor-preview.gif",
+      "width": 640,
+      "height": 360,
+      "frames": 36,
+      "durationMs": 3000,
+      "bytes": 3513807,
+      "sha256": "3209a69d2099a2ca0a40f1a79b88621d9facaa23b1906a2aa977b89a7af43037"
+    }
+  ]
+}
