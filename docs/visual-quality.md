@@ -22,6 +22,8 @@ Run `node tests/visual.mjs` after typecheck/build. It uses a clean Chrome profil
 
 Local capture uses a 1600 × 1000 viewport; software-rendered CI uses 1024 × 768 with the same scene assets, shader pipeline, reflection target and shadow settings. The report records the viewport. Each check logs progress, and transport timeouts/renderer crashes fail explicitly.
 
+The complete 10-check suite also passed locally using SwiftShader software rendering at the CI viewport, including all 30 full-scene pipeline replacements with unchanged resource totals. The first bounded cloud run passed all nine visual checks and reached replacement 5/30 before its 20-minute job budget expired. The job budget is now 40 minutes; this is a correctness run without a frame-rate acceptance target.
+
 Rendering tests establish that the features are active and consistent. Screenshot review remains a separate art gate: the current scene still has generic distant architecture, limited prop storytelling and reconstructed car surfaces. The near-field warehouse is authored geometry with recessed doors, canopy, skylights, pipes and ladders; it is reviewed in the actual game lighting. It is not accepted as final AAA quality and does not claim Unreal, Lumen or Nanite parity.
 
 ### Accepted rendering evidence

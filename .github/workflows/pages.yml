@@ -12,7 +12,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # The full-quality harbor is intentionally expensive on CPU-only runners.
+    # Keep the rendered checks and give software rasterization enough time.
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
