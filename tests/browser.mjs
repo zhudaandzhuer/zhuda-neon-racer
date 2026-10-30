@@ -127,6 +127,11 @@ try {
   const load = async () => {
     await cdp("Page.navigate", { url });
     await wait("window.neonGame?.ready", 20);
+    assert.equal(
+      await ev('document.getElementById("title-screen").hidden'),
+      false,
+    );
+    await click("title-enter");
   };
   const setViewport = (width, height, mobile = false) =>
     cdp("Emulation.setDeviceMetricsOverride", {

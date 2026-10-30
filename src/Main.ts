@@ -65,7 +65,14 @@ class Game {
     this.refreshLobby();
     this.applySettings();
     $("loading").hidden = true;
-    $("app").hidden = false;
+    const enter = $<HTMLButtonElement>("title-enter");
+    enter.disabled = false;
+    enter.textContent = "進入遊戲 →";
+    enter.onclick = () => {
+      $("title-screen").hidden = true;
+      $("app").hidden = false;
+      this.sound.unlock();
+    };
     this.ready = true;
     document.body.dataset.ready = "true";
     let previous = performance.now();

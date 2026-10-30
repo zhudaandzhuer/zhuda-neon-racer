@@ -2,7 +2,9 @@
 
 Neon Apex uses [zhuda-laya-engine](https://github.com/zhudaandzhuer/zhuda-laya-engine), pinned to `0ec1d3717756544467ab065ef23062f0755ef2c5` (MIT; copyright 2026 豬大 / zhudaandzhuer).
 
-The two bundled LayaAir 3.4.2 runtime files (`laya.core.js`, `laya.webgl_2D.js`) are from [Layabox / LayaAir](https://github.com/layabox/LayaAir), distributed under MIT. No Spine runtime, third-party art, music or fonts are loaded. Tracks, vehicles, textures and sounds are procedurally authored in this separate game project.
+The two bundled LayaAir 3.4.2 runtime files (`laya.core.js`, `laya.webgl_2D.js`) are from [Layabox / LayaAir](https://github.com/layabox/LayaAir), distributed under MIT. No Spine runtime, remote music or fonts are loaded. Tracks, vehicles, textures and sounds are procedurally authored in this separate game project.
+
+The launch image combines the user-provided 豬大 character with the official LayaAir 3 logo from https://layaair.com/3.x/doc/_astro/layaair3-logo.DHjbuK9G.png. The master was generated with gpt-image-2.5-flare through remote-imagegen; the exact official logo was composited onto the generated plaque. Source artwork and provenance are preserved in https://github.com/zhudaandzhuer/zhuda-arcade/tree/main/source-assets. The project code is MIT; character and brand artwork retain their respective owners’ rights.
 
 ## zhuda-laya-engine
 

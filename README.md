@@ -4,6 +4,8 @@
 
 **[立即遊玩 ↗](https://zhudaandzhuer.github.io/zhuda-neon-racer/)**
 
+以「豬大 × LayaAir」主視覺與獨立標題畫面啟動。另有四款完整新作收錄於 **[豬大遊戲館](https://zhudaandzhuer.github.io/zhuda-arcade/)**。
+
 ![氮氣超車的實際遊戲畫面](docs/race.jpg)
 
 四條逐步解鎖的賽道、三名電腦對手、限時比賽與勝負結算。跑進前三名獲得獎金並解鎖下一關；冠軍、金牌時間各增加一顆星。獎金可升級動力、抓地與氮氣，累積星星能解鎖不同操控特性的車款。
