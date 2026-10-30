@@ -93,6 +93,13 @@ let server, socket;
 const errors = [],
   failures = [],
   checks = [];
+const viewport = process.env.CI
+  ? { width: 1024, height: 768 }
+  : { width: 1600, height: 1000 };
+const pass = (check) => {
+  checks.push(check);
+  console.log("PASS " + check);
+};
 if (!process.env.GAME_URL) {
   server = spawn(process.execPath, ["scripts/server.mjs"], {
     cwd: root,
@@ -138,36 +145,67 @@ try {
   });
   let id = 0;
   const pending = new Map();
+  const rejectPending = (error) => {
+    for (const p of pending.values()) {
+      clearTimeout(p.timer);
+      p.reject(error);
+    }
+    pending.clear();
+  };
+  socket.onclose = () =>
+    rejectPending(new Error("Chrome target closed during WebGL verification"));
+  socket.onerror = () =>
+    rejectPending(new Error("Chrome debugging transport failed"));
   socket.onmessage = ({ data }) => {
     const m = JSON.parse(data);
     if (m.id) {
       const p = pending.get(m.id);
       pending.delete(m.id);
+      if (p) clearTimeout(p.timer);
       m.error
         ? p?.reject(new Error(JSON.stringify(m.error)))
         : p?.resolve(m.result);
-    } else if (m.method === "Runtime.exceptionThrown")
+    } else if (m.method === "Inspector.targetCrashed")
+      rejectPending(
+        new Error("Chrome renderer crashed during WebGL verification"),
+      );
+    else if (m.method === "Runtime.exceptionThrown")
       errors.push(m.params.exceptionDetails);
     else if (
       m.method === "Runtime.consoleAPICalled" &&
       m.params.type === "error"
     )
       errors.push(m.params.args.map((a) => a.value || a.description));
+    else if (
+      m.method === "Runtime.consoleAPICalled" &&
+      String(m.params.args[0]?.value).startsWith("[QA]")
+    )
+      console.log(m.params.args.map((a) => a.value || a.description).join(" "));
     else if (m.method === "Network.loadingFailed" && !m.params.canceled)
       failures.push(m.params.errorText);
   };
-  const cdp = (method, params = {}) =>
+  const cdp = (method, params = {}, timeoutMs = 120000) =>
     new Promise((r, j) => {
+      if (socket.readyState !== WebSocket.OPEN)
+        return j(new Error("Chrome debugging target is no longer connected"));
       const n = ++id;
-      pending.set(n, { resolve: r, reject: j });
+      const timer = setTimeout(() => {
+        pending.delete(n);
+        j(new Error(`Chrome timed out after ${timeoutMs} ms: ${method}`));
+      }, timeoutMs);
+      pending.set(n, { resolve: r, reject: j, timer });
       socket.send(JSON.stringify({ id: n, method, params }));
     });
-  const ev = async (expression) => {
-    const r = await cdp("Runtime.evaluate", {
-      expression,
-      awaitPromise: true,
-      returnByValue: true,
-    });
+  const ev = async (expression, timeoutMs) => {
+    const r = await cdp(
+      "Runtime.evaluate",
+      {
+        expression,
+        awaitPromise: true,
+        returnByValue: true,
+      },
+      timeoutMs,
+    );
     if (r.exceptionDetails) throw new Error(JSON.stringify(r.exceptionDetails));
     return r.result.value;
   };
@@ -204,11 +242,11 @@ try {
         ] || 0,
     });
   await cdp("Page.enable");
+  await cdp("Inspector.enable");
   await cdp("Runtime.enable");
   await cdp("Network.enable");
   await cdp("Emulation.setDeviceMetricsOverride", {
-    width: 1600,
-    height: 1000,
+    ...viewport,
     deviceScaleFactor: 1,
     mobile: false,
   });
@@ -223,7 +261,13 @@ try {
     (
       await cdp("Page.captureScreenshot", {
         format: "png",
-        clip: { x: 100, y: 160, width: 1400, height: 700, scale: 1 },
+        clip: {
+          x: viewport.width / 16,
+          y: 160,
+          width: (viewport.width * 7) / 8,
+          height: viewport.height - 300,
+          scale: 1,
+        },
       })
     ).data;
   await settle();
@@ -235,7 +279,7 @@ try {
       Math.abs(mip.actual[i] - mip.expected[i]) <= 1,
       JSON.stringify(mip),
     );
-  checks.push(
+  pass(
     "GPU readback verifies all six cubemap axes and fractional-mip trilinear interpolation",
   );
   const initial = await ev("harborStudy.report()");
@@ -269,10 +313,10 @@ try {
   assert.deepEqual(material.normal, [2048, 2048]);
   assert.equal(material.convention, "opengl");
   await shot("visual-hero");
-  checks.push(
+  pass(
     "scene-linear HDR with nine GGX mips, 320K-triangle/4K GLB, imported hard-surface towers and verified PBR texture/factor bindings",
   );
-  checks.push(
+  pass(
     "imported warehouse has the correct rotated metre bounds, touches the quay and enables shadows on every renderer",
   );
   for (const view of ["road", "wide", "detail", "dock"]) {
@@ -281,7 +325,7 @@ try {
     assert.equal(await ev("harborStudy.view"), view);
     await shot("visual-" + view);
   }
-  checks.push(
+  pass(
     "five camera cuts render and settle using temporal antialiasing, including the imported recessed loading-bay warehouse",
   );
   await ev("document.querySelector('[data-view=detail]').click()");
@@ -300,7 +344,7 @@ try {
     "harborStudy.carInstance.materials.forEach(m=>m.setFloat('u_NormalScale',.25))",
   );
   await settle();
-  checks.push(
+  pass(
     "the imported glTF 4K normal texture uses the actual shader uniform and changes rendered car pixels at strength .25 versus 1",
   );
   await ev("document.querySelector('[data-view=hero]').click()");
@@ -318,7 +362,7 @@ try {
       1e-5,
     "Stopping DRIVE must preserve the vehicle position",
   );
-  checks.push("drive control moves the actual GLB and camera");
+  pass("drive control moves the actual GLB and camera");
   await ev("document.querySelector('[data-view=hero]').click()");
   await settle();
   const reflected = await crop();
@@ -341,7 +385,7 @@ try {
     "harborStudy.puddle.setTexture('u_ZhudaReflection',harborStudy.reflection.texture)",
   );
   await settle();
-  checks.push(
+  pass(
     "real HDR mirror camera has reflected pose and its render target changes pool pixels",
   );
   const shadowed = await crop();
@@ -354,7 +398,7 @@ try {
   );
   await ev("harborStudy.sun.shadowMode=Laya.ShadowMode.SoftHigh");
   await settle();
-  checks.push("native car/building shadow casters change actual ground pixels");
+  pass("native car/building shadow casters change actual ground pixels");
   const lit = await crop();
   await click("compare");
   await settle();
@@ -368,11 +412,12 @@ try {
   assert.equal(await ev("harborStudy.sun.shadowMode"), 0);
   await click("compare");
   await settle();
-  checks.push(
+  pass(
     "lighting A/B changes actual scene pixels outside UI and disables shadow map, IBL and AO",
   );
   const teardown = await ev(
-    `(async()=>{const snapshots=[];for(let i=0;i<30;i++){const old=harborStudy.pipeline;harborStudy.rebuildPipeline();if(!old.grade._lutTex.destroyed||!old.grade._lutBuilderMat.destroyed)throw Error('Owned LUT/material leaked');await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));snapshots.push(harborStudy.report().resources);}return {start:snapshots[4],end:snapshots[29]};})()`,
+    `(async()=>{const snapshots=[];for(let i=0;i<30;i++){const old=harborStudy.pipeline;harborStudy.rebuildPipeline();if(!old.grade._lutTex.destroyed||!old.grade._lutBuilderMat.destroyed)throw Error('Owned LUT/material leaked');await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));snapshots.push(harborStudy.report().resources);if((i+1)%5===0)console.log('[QA] Drawn pipeline replacements '+(i+1)+'/30');}return {start:snapshots[4],end:snapshots[29]};})()`,
+    300000,
   );
   assert.ok(
     teardown.end.counts.renderTarget <= teardown.start.counts.renderTarget + 2,
@@ -382,7 +427,7 @@ try {
     teardown.end.resources <= teardown.start.resources + 3,
     JSON.stringify(teardown),
   );
-  checks.push(
+  pass(
     "30 HDR/AO/bloom/ACES/TAA chain replacements release owned LUTs/materials and reach bounded resource counts",
   );
   assert.deepEqual(errors, []);
@@ -391,6 +436,7 @@ try {
     passed: true,
     url,
     checkedAt: new Date().toISOString(),
+    viewport,
     checks,
     scene: initial,
     axes,

@@ -20,6 +20,8 @@ The goal is a believable, controllable Web 3D scene with an eventual AAA visual 
 
 Run `node tests/visual.mjs` after typecheck/build. It uses a clean Chrome profile and repository subpath, captures five views and saves `evidence/visual-verification.json` plus screenshots. Checks include actual GPU cube-face readback, PBR bindings, motion, reflection pose/target contribution, shadow-only differences, lighting A/B outside the UI and 30 drawn pipeline replacements. Estimated resource memory is labeled as an estimate, not measured GPU usage. This quality study has no mobile performance acceptance claim.
 
+Local capture uses a 1600 × 1000 viewport; software-rendered CI uses 1024 × 768 with the same scene assets, shader pipeline, reflection target and shadow settings. The report records the viewport. Each check logs progress, and transport timeouts/renderer crashes fail explicitly.
+
 Rendering tests establish that the features are active and consistent. Screenshot review remains a separate art gate: the current scene still has generic distant architecture, limited prop storytelling and reconstructed car surfaces. The near-field warehouse is authored geometry with recessed doors, canopy, skylights, pipes and ladders; it is reviewed in the actual game lighting. It is not accepted as final AAA quality and does not claim Unreal, Lumen or Nanite parity.
 
 ### Accepted rendering evidence
