@@ -38,6 +38,8 @@ The film is an actual canvas capture at 1280 × 720 / 60 FPS with a test driver.
 
 [Open the separate quality study](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html): a harbor bridge with photographed PBR surfaces, 4K HDR sky, offline GGX light, soft cascaded shadows, real planar pool reflections and an HDR/AO/bloom/ACES/TAA pipeline. Five camera views, third-person free driving with momentum, brake/reverse, independent wheel animation, tyre grip, suspension motion and an orbiting chase camera, and a drive-through inspect the same 3D scene. This first slice establishes rendering capability; further scene/vehicle art work is required for the intended AAA visual feel. [Scope, evidence and staged quality plan](docs/visual-quality.md).
 
+Open **SETTINGS** for Auto, Performance, Balanced or High quality and a 30/60 FPS target. Auto starts conservatively and adapts resolution and effects to actual render cadence; manual selections stay fixed and save on the device. The panel shows measured FPS and current settings, and pauses driving while open. High retains the full visual baseline.
+
 [![Actual WebGL harbor scene](docs/visual-dock.jpg)](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html?view=dock)
 
 ## Develop

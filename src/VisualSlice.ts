@@ -13,6 +13,7 @@ import {
 } from "zhuda-laya-engine";
 import { Geometry, type V } from "./Geometry";
 import { HarborVehicle, harborHeight, cameraObstruction, wrapAngle, type DriveObstacle } from "./HarborDriving";
+import { HarborQualityGovernor, QUALITY_PROFILES, QUALITY_STORAGE, initialQuality, isQualityMode, qualityDPR, readQualityPreference, type QualityMode, type QualityPreference } from "./HarborQuality";
 import { verifyEnvironmentUpload } from "./VisualVerification";
 import environment from "../public/visual-assets/harbor-ibl.json";
 import carAsset from "../public/visual-assets/maextro-s800-hero.json";
@@ -20,6 +21,15 @@ import scenery from "../public/visual-assets/scenery.json";
 declare const Laya: any;
 const $ = (id: string) => document.getElementById(id)!;
 const radians = (n: number) => (n * Math.PI) / 180;
+function startingQuality(): QualityPreference {
+  let saved: string | null = null;
+  try { saved = localStorage.getItem(QUALITY_STORAGE); } catch {}
+  const preference = readQualityPreference(saved), query = new URLSearchParams(location.search);
+  const mode = query.get("quality"), target = query.get("targetFPS");
+  if (isQualityMode(mode)) preference.mode = mode;
+  if (target === "30" || target === "60") preference.targetFPS = Number(target) as 30 | 60;
+  return preference;
+}
 const materialNodes: any[] = [];
 const meshes: ZhudaDynamicMesh[] = [];
 const normalTextures: any[] = [];
@@ -174,6 +184,103 @@ class HarborStudy {
   reflection!: ZhudaPlanarReflection;
   puddle!: ZhudaShaderMaterial;
   verifyEnvironmentUpload = verifyEnvironmentUpload;
+  private boot?: Awaited<ReturnType<typeof ZhudaEngine.boot>>;
+  private quality = new HarborQualityGovernor(startingQuality(), initialQuality({
+    memory: (navigator as Navigator & {deviceMemory?: number}).deviceMemory,
+    cores: navigator.hardwareConcurrency || undefined,
+    coarse: matchMedia("(pointer: coarse)").matches,
+  }), performance.now());
+  private qualityPanelOpen = false;
+  private lastReflection = -Infinity;
+  private lastQualityUI = 0;
+  private clearDrivingInput() { this.freeKeys.clear(); this.freePointer = null; }
+  private resizeQuality() {
+    if (!this.boot) return;
+    this.boot.runtime.options.dprCap = qualityDPR(this.quality.tier, innerWidth, innerHeight, devicePixelRatio, this.quality.scale);
+    this.boot.resize();
+    this.pipeline?.resetHistory();
+    this.quality.resetMeasurements(performance.now());
+  }
+  private createReflection() {
+    const p = QUALITY_PROFILES[this.quality.tier];
+    this.reflection?.dispose();
+    this.reflection = new ZhudaPlanarReflection(this.scene, {
+      width: Math.max(1,p.reflection[0]), height: Math.max(1,p.reflection[1]),
+      planeY: .026, excludedLayer: 2,
+    });
+    this.reflection.camera.enableRender = p.reflectionFPS > 0;
+    this.puddle?.setTexture("u_ZhudaReflection", p.reflectionFPS ? this.reflection.texture : Laya.Texture2D.blackTexture);
+    this.lastReflection = -Infinity;
+  }
+  private syncLighting() {
+    const p = QUALITY_PROFILES[this.quality.tier];
+    this.pipeline.ao.active = p.ao && !this.comparison;
+    this.scene.reflectionIntensity = this.comparison ? 0 : 1;
+    this.sun.shadowMode = this.comparison || !p.shadow ? Laya.ShadowMode.None :
+      this.quality.tier === "high" ? Laya.ShadowMode.SoftHigh : Laya.ShadowMode.SoftLow;
+  }
+  private applyLightingQuality() {
+    const p = QUALITY_PROFILES[this.quality.tier];
+    this.sun.shadowDistance = p.shadowDistance;
+    if (p.shadow) this.sun.shadowResolution = p.shadow;
+    this.sun.shadowCascadesMode = p.cascades === 4 ? Laya.ShadowCascadesMode.FourCascades :
+      p.cascades === 2 ? Laya.ShadowCascadesMode.TwoCascades : Laya.ShadowCascadesMode.NoCascades;
+    this.syncLighting();
+  }
+  private applyQuality() {
+    const p = QUALITY_PROFILES[this.quality.tier];
+    this.rebuildPipeline();
+    this.applyLightingQuality();
+    const width = Math.max(1,p.reflection[0]), height = Math.max(1,p.reflection[1]);
+    if (this.reflection.texture.width !== width || this.reflection.texture.height !== height) this.createReflection();
+    this.reflection.camera.enableRender = p.reflectionFPS > 0;
+    this.puddle.setTexture("u_ZhudaReflection", p.reflectionFPS ? this.reflection.texture : Laya.Texture2D.blackTexture);
+    Laya.stage.frameRate = this.quality.preference.targetFPS === 30 ? "slow" : "fast";
+    this.resizeQuality();
+    this.lastReflection = -Infinity;
+    this.updateQualityUI();
+  }
+  private selectQuality(mode: QualityMode, targetFPS: 30 | 60) {
+    this.clearDrivingInput();
+    this.quality.select({mode,targetFPS}, performance.now());
+    try {
+      localStorage.setItem(QUALITY_STORAGE, JSON.stringify(this.quality.preference));
+      $("quality-save").textContent = localStorage instanceof Storage ? "Your selection is saved on this device." : "Your selection is kept for this session.";
+    } catch { $("quality-save").textContent = "Your selection is kept for this session."; }
+    this.applyQuality();
+  }
+  private updateQualityUI() {
+    const q = this.quality, p = QUALITY_PROFILES[q.tier], title = q.tier[0].toUpperCase()+q.tier.slice(1);
+    $("quality-open").textContent = `SETTINGS · ${q.preference.mode === "auto" ? "AUTO" : title.toUpperCase()}`;
+    $("quality-current").textContent = `${q.preference.mode === "auto" ? "Auto · " : ""}${title}`;
+    $("quality-fps").textContent = q.fps ? `${Math.round(q.fps)} FPS` : "Measuring…";
+    if ($("quality-reason").textContent !== q.reason) $("quality-reason").textContent = q.reason;
+    $("quality-resolution").textContent = `${this.boot?.canvas.width ?? 0} × ${this.boot?.canvas.height ?? 0}`;
+    $("quality-effects").textContent = `${p.shadow ? `${p.shadow}px shadows` : "Shadows off"} · ${p.reflectionFPS ? `${p.reflection[0]} × ${p.reflection[1]} reflections · up to ${p.reflectionFPS} FPS` : "Reflections off"} · AO ${p.ao ? "on" : "off"} · TAA ${p.taa ? "on" : "off"}`;
+    document.querySelectorAll<HTMLInputElement>('input[name="quality-mode"]').forEach(input=>{input.checked=input.value===q.preference.mode;});
+    ( $("quality-target") as HTMLSelectElement).value=String(q.preference.targetFPS);
+  }
+  private bindQualityUI() {
+    const panel = $("quality-panel") as HTMLDialogElement;
+    $("quality-open").onclick = () => {
+      this.clearDrivingInput(); this.qualityPanelOpen = true;
+      $("quality-open").setAttribute("aria-expanded","true");
+      panel.showModal(); this.updateQualityUI();
+    };
+    $("quality-close").onclick = () => panel.close();
+    panel.addEventListener("close",()=>{
+      this.qualityPanelOpen=false; this.clearDrivingInput(); this.last=performance.now();
+      this.quality.resetMeasurements(this.last);
+      $("quality-open").setAttribute("aria-expanded","false");
+    });
+    document.querySelectorAll<HTMLInputElement>('input[name="quality-mode"]').forEach(input=>{
+      input.onchange=()=>{if(input.checked && isQualityMode(input.value))this.selectQuality(input.value,this.quality.preference.targetFPS);};
+    });
+    $("quality-target").onchange=()=>this.selectQuality(this.quality.preference.mode,Number(($("quality-target") as HTMLSelectElement).value) as 30 | 60);
+    $("quality-recheck").onclick=()=>this.selectQuality("auto",this.quality.preference.targetFPS);
+    window.addEventListener("resize",()=>this.resizeQuality());
+    this.updateQualityUI();
+  }
   private enterFreeExplore() {
     const p = this.car.transform.position;
     this.driveSpawn = [p.x, p.y, p.z];
@@ -270,6 +377,7 @@ class HarborStudy {
     return {eye,target,fov:56+Math.min(7,Math.abs(v.speed)*0.2)};
   }
   rebuildPipeline() {
+    const p = QUALITY_PROFILES[this.quality.tier];
     this.pipeline?.dispose();
     this.pipeline = new ZhudaFilmicPipeline(this.camera, {
       exposure: 1.45,
@@ -278,16 +386,22 @@ class HarborStudy {
       aoIntensity: 0.4,
       aoRadius: 0.45,
       bloomIntensity: 0.08,
-      temporalAA: true,
+      ao: p.ao && !this.comparison,
+      bloom: p.bloom,
+      temporalAA: p.taa,
     });
+    this.pipeline.bloom.diffusion = this.quality.tier === "high" ? 4 : 2;
+    if (p.taa) this.camera.taaSettings.quality = this.quality.tier === "high" ? Laya.TemporalAAQuality.High : Laya.TemporalAAQuality.Low;
+    this.camera.msaa = false;
   }
   async init() {
-    await ZhudaEngine.boot({
+    this.boot = await ZhudaEngine.boot({
       width: innerWidth,
       height: innerHeight,
       features: ["core", "3d", "gltf", "postProcess"],
-      dprCap: 2,
-      antialias: true,
+      dprCap: qualityDPR(this.quality.tier,innerWidth,innerHeight,devicePixelRatio),
+      antialias: false,
+      targetFPS: this.quality.preference.targetFPS,
       preserveDrawingBuffer: false,
       bgColor: "#131924",
     });
@@ -310,10 +424,7 @@ class HarborStudy {
     this.sun = sunNode.addComponent(l.DirectionLightCom);
     this.sun.color = new l.Color(1, 0.79, 0.57, 1);
     this.sun.intensity = 2.4;
-    this.sun.shadowMode = l.ShadowMode.SoftHigh;
-    this.sun.shadowResolution = 4096;
-    this.sun.shadowDistance = 130;
-    this.sun.shadowCascadesMode = l.ShadowCascadesMode.FourCascades;
+    this.applyLightingQuality();
     this.sun.shadowDepthBias = 0.7;
     this.sun.shadowNormalBias = 0.7;
     const sd = environment.sunDirection;
@@ -1085,12 +1196,7 @@ class HarborStudy {
       instance.node.transform.localScale = new l.Vector3(scale, scale, scale);
     }
     // Actual scene reflection, blended only into shallow pools; the main road stays rough.
-    this.reflection = new ZhudaPlanarReflection(this.scene, {
-      width: 1280,
-      height: 800,
-      planeY: 0.026,
-      excludedLayer: 2,
-    });
+    this.createReflection();
     this.puddle = new ZhudaShaderMaterial(
       {
         schemaVersion: 1,
@@ -1205,6 +1311,7 @@ class HarborStudy {
       "Space",
     ]);
     window.addEventListener("keydown", (event) => {
+      if (this.qualityPanelOpen) return;
       if (event.code === "KeyR" && this.freeExplore && !event.repeat) {this.resetDriving();event.preventDefault();return;}
       if (!this.freeExplore || !navigationCodes.has(event.code)) return;
       this.freeKeys.add(event.code);
@@ -1213,9 +1320,9 @@ class HarborStudy {
     window.addEventListener("keyup", (event) => {
       if (navigationCodes.has(event.code)) this.freeKeys.delete(event.code);
     });
-    const clearInput = () => {this.freeKeys.clear();this.freePointer=null;};
+    const clearInput = () => this.clearDrivingInput();
     window.addEventListener("blur", clearInput);
-    document.addEventListener("visibilitychange", () => {if(document.hidden)clearInput();this.last=performance.now();});
+    document.addEventListener("visibilitychange", () => {if(document.hidden)clearInput();this.last=performance.now();this.quality.resetMeasurements(this.last);});
     $("reset-drive").onclick=()=>this.resetDriving();
     document.querySelectorAll<HTMLButtonElement>("[data-free-key]").forEach((button) => {
       const code = button.dataset.freeKey!;
@@ -1231,7 +1338,7 @@ class HarborStudy {
       button.addEventListener("lostpointercapture", release);
     });
     window.addEventListener("pointerdown", (event) => {
-      if (!this.freeExplore || (event.target as Element)?.closest("button,a"))
+      if (!this.freeExplore || this.qualityPanelOpen || (event.target as Element)?.closest("button,a"))
         return;
       if(this.freePointer) return;
       this.freePointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
@@ -1284,11 +1391,7 @@ class HarborStudy {
     $("compare").onclick = () => {
       this.comparison = !this.comparison;
       $("compare").setAttribute("aria-pressed", String(this.comparison));
-      this.pipeline.ao.active = !this.comparison;
-      this.scene.reflectionIntensity = this.comparison ? 0 : 1;
-      this.sun.shadowMode = this.comparison
-        ? l.ShadowMode.None
-        : l.ShadowMode.SoftHigh;
+      this.syncLighting();
     };
     document.querySelector("canvas")!.style.touchAction="none";
     const requestedView = new URLSearchParams(location.search).get("view");
@@ -1299,25 +1402,30 @@ class HarborStudy {
       document
         .querySelector<HTMLButtonElement>(`[data-view="${requestedView}"]`)!
         .click();
+    this.bindQualityUI();
+    this.applyQuality();
     this.last = performance.now();
     this.ready = true;
     $("loading").hidden = true;
     $("status").textContent = "Live 3D scene · first visual study";
     const frame = () => {
-      const now = performance.now(),
-        dt = Math.min(1, (now - this.last) / 1000);
+      const now = performance.now(), elapsed = now-this.last,
+        dt = Math.min(1, elapsed / 1000);
       this.frameIntervals.push(now - this.last);
       if (this.frameIntervals.length > 600) this.frameIntervals.shift();
       this.last = now;
+      if (document.hidden) {this.quality.sample(0,now,false);return;}
       this.draw(dt);
-      requestAnimationFrame(frame);
+      if (this.quality.sample(elapsed,now)) this.applyQuality();
+      if (now-this.lastQualityUI>500) {this.updateQualityUI();this.lastQualityUI=now;}
     };
-    requestAnimationFrame(frame);
+    // Sample real engine ticks, including its 30 FPS setting, rather than an independent RAF.
+    Laya.timer.frameLoop(1,this,frame);
   }
   draw(dt: number) {
     const oldLoop = Math.floor((this.time * 8) / 110);
-    if (this.moving) this.time += dt;
-    if (this.freeExplore) this.freeStep(dt);
+    if (this.moving && !this.qualityPanelOpen) this.time += dt;
+    if (this.freeExplore && !this.qualityPanelOpen) this.freeStep(dt);
     if (Math.floor((this.time * 8) / 110) !== oldLoop)
       this.pipeline.resetHistory();
     this.frames++;
@@ -1354,6 +1462,9 @@ class HarborStudy {
       new Laya.Vector3(0, 1, 0),
       false,
     );
+    const reflectionFPS = QUALITY_PROFILES[this.quality.tier].reflectionFPS, now = performance.now();
+    this.reflection.camera.enableRender = reflectionFPS > 0 && now-this.lastReflection >= 1000/reflectionFPS-2;
+    if (this.reflection.camera.enableRender) {
     const columns = this.reflection.update(
       p.eye,
       p.target,
@@ -1362,10 +1473,12 @@ class HarborStudy {
     );
     for (let i = 0; i < 4; i++)
       this.puddle.setUniform("u_ZhudaProjection" + i, columns[i]);
+    this.lastReflection = now;
+    }
     this.puddle.setUniform("u_ZhudaEye", p.eye);
     if (this.frames % 30 === 0) {
       $("status").textContent =
-        `HDR / GGX IBL / PBR / SHADOWS / ACES\n${this.freeExplore ? `Harbor free drive · ${Math.round(Math.abs(this.vehicle.speed)*3.6)} km/h` : this.comparison ? "A/B: shadows, IBL and AO disabled" : "Live 3D scene · first visual study"}`;
+        `HDR / PBR / ACES · ${this.quality.tier.toUpperCase()}\n${this.freeExplore ? `Harbor free drive · ${Math.round(Math.abs(this.vehicle.speed)*3.6)} km/h` : this.comparison ? "A/B: shadows, IBL and AO disabled" : "Live 3D scene · first visual study"}`;
     }
   }
   report() {
@@ -1401,6 +1514,11 @@ class HarborStudy {
       freeYaw: this.freeYaw,
       driving: this.vehicle.snapshot(),
       wheels: this.wheels.map(w=>({steering:w.steer.transform.localRotationEuler.y,spin:w.axle.transform.localRotationEuler.x})),
+      quality: { ...this.quality.preference, tier:this.quality.tier, scale:this.quality.scale, fps:this.quality.fps, p90:this.quality.p90, reason:this.quality.reason,
+        canvas:[this.boot?.canvas.width,this.boot?.canvas.height], reflectionSize:[this.reflection.texture.width,this.reflection.texture.height],
+        reflectionFPS:QUALITY_PROFILES[this.quality.tier].reflectionFPS, reflectionEnabled:this.reflection.camera.enableRender,
+        ao:this.pipeline.ao.active, bloom:this.pipeline.bloom.active, taa:this.camera.taa, shadowResolution:this.sun.shadowResolution,
+        panelOpen:this.qualityPanelOpen },
       hdr: this.camera.enableHDR,
       ibl: this.environment.texture.width,
       shadows: this.sun.shadowMode,

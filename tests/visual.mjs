@@ -86,9 +86,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
   evidence = path.join(root, "evidence");
 fs.mkdirSync(evidence, { recursive: true });
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), "neon-apex-qa-")),
-  url =
-    process.env.GAME_URL ||
-    "http://localhost:8908/zhuda-neon-racer/visual.html";
+  url = (()=>{
+    const u=new URL(process.env.GAME_URL || "http://localhost:8908/zhuda-neon-racer/visual.html");
+    // Fixed presentation quality keeps lighting and resource regressions deterministic.
+    u.searchParams.set('quality','high');u.searchParams.set('targetFPS','60');return u.href;
+  })();
 let server, socket;
 const errors = [],
   failures = [],
@@ -475,7 +477,8 @@ try {
   );
   const teardown = await ev(
     `(async()=>{const snapshots=[];for(let i=0;i<30;i++){const old=harborStudy.pipeline;harborStudy.rebuildPipeline();if(!old.grade._lutTex.destroyed||!old.grade._lutBuilderMat.destroyed)throw Error('Owned LUT/material leaked');await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));snapshots.push(harborStudy.report().resources);if((i+1)%5===0)console.log('[QA] Drawn pipeline replacements '+(i+1)+'/30');}return {start:snapshots[4],end:snapshots[29]};})()`,
-    300000,
+    // CPU-only CI took ~11 seconds per two drawn frames; retain all 30 cycles.
+    600000,
   );
   assert.ok(
     teardown.end.counts.renderTarget <= teardown.start.counts.renderTarget + 2,
@@ -488,6 +491,51 @@ try {
   pass(
     "30 HDR/AO/bloom/ACES/TAA chain replacements release owned LUTs/materials and reach bounded resource counts",
   );
+  await click('quality-open');
+  assert.ok(await ev('document.getElementById("quality-panel").open'));
+  const selectTier=tier=>ev(`document.querySelector('input[name="quality-mode"][value="${tier}"]').click()`);
+  const switchDown=await ev(`(()=>{const texture=harborStudy.reflection.texture;document.querySelector('input[name="quality-mode"][value="performance"]').click();return {released:texture.destroyed,quality:harborStudy.report().quality};})()`);
+  await settle();
+  assert.ok(switchDown.released,'switching reflection size releases the old GPU target');
+  assert.equal(switchDown.quality.tier,'performance');
+  for(const effect of ['ao','bloom','taa','reflectionEnabled'])assert.equal(switchDown.quality[effect],false,effect);
+  assert.equal(await ev('harborStudy.sun.shadowMode'),0);
+  assert.ok(switchDown.quality.canvas[0]*switchDown.quality.canvas[1] < initial.quality.canvas[0]*initial.quality.canvas[1]);
+  await ev(`(()=>{const s=document.getElementById('quality-target');s.value='30';s.dispatchEvent(new Event('change'));})()`);
+  assert.equal(await ev('Laya.stage.frameRate'),'slow');
+  assert.equal(await ev('harborStudy.report().quality.targetFPS'),30);
+  await click('quality-close');
+  // A full reload without QA overrides must restore the user's real saved selection.
+  await ev('history.replaceState(null,"",location.pathname)');
+  await cdp('Page.reload');
+  await wait('window.harborStudy?.ready',60);
+  assert.equal(await ev('harborStudy.report().quality.mode'),'performance');
+  assert.equal(await ev('harborStudy.report().quality.targetFPS'),30);
+  await click('explore');await click('quality-open');
+  const paused=await ev('harborStudy.report().driving');
+  await key('keyDown','KeyW','w');await settle(4);await key('keyUp','KeyW','w');
+  assert.deepEqual(await ev('harborStudy.report().driving'),paused,'settings blocks driving input and pauses the vehicle');
+  await key('keyDown','Escape','Escape');await key('keyUp','Escape','Escape');
+  assert.equal(await ev('document.getElementById("quality-panel").open'),false);
+  await click('explore');await click('quality-open');
+  await ev(`(()=>{const s=document.getElementById('quality-target');s.value='60';s.dispatchEvent(new Event('change'));})()`);
+  const qualityMeasurements=[];
+  for(const tier of ['high','balanced','performance']){
+    await selectTier(tier);await settle(4);
+    qualityMeasurements.push(await ev(`(async()=>{const start=performance.now(),before=harborStudy.frames;while(harborStudy.frames<before+16)await new Promise(requestAnimationFrame);return {...harborStudy.report().quality,meanRenderInterval:(performance.now()-start)/(harborStudy.frames-before)};})()`));
+  }
+  await shot('visual-quality-panel');
+  // Warm every target size once, then verify repeated switches reach a bounded pool.
+  await selectTier('high');await settle(3);
+  const qualityPoolStart=await ev('harborStudy.report().resources');
+  for(const tier of ['balanced','performance','high','balanced','performance','high']){await selectTier(tier);await settle(3);}
+  const qualityPoolEnd=await ev('harborStudy.report().resources');
+  assert.ok(qualityPoolEnd.counts.renderTarget<=qualityPoolStart.counts.renderTarget+3,JSON.stringify({qualityPoolStart,qualityPoolEnd}));
+  assert.ok(qualityPoolEnd.resources<=qualityPoolStart.resources+6,JSON.stringify({qualityPoolStart,qualityPoolEnd}));
+  await selectTier('auto');
+  assert.equal(await ev('harborStudy.report().quality.mode'),'auto');
+  await click('quality-close');
+  pass('settings change real resolution/shadows/effects/reflection cadence, persist through reload, pause driving input and release replaced reflection targets across repeated quality switches');
   assert.deepEqual(errors, []);
   assert.deepEqual(failures, []);
   const report = {
@@ -507,6 +555,9 @@ try {
     carNormalDifference,
     handling,
     teardown,
+    qualityMeasurements,
+    qualityPoolStart,
+    qualityPoolEnd,
     errors,
     failures,
   };

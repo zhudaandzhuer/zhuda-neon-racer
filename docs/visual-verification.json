@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "url": "http://localhost:8908/zhuda-neon-racer/visual.html",
-  "checkedAt": "2026-10-30T17:24:46.167Z",
+  "url": "http://localhost:8908/zhuda-neon-racer/visual.html?quality=high&targetFPS=60",
+  "checkedAt": "2026-10-30T18:45:13.482Z",
   "viewport": {
     "width": 1600,
     "height": 1000
@@ -17,7 +17,8 @@
     "real HDR mirror camera has reflected pose and its render target changes pool pixels",
     "native car/building shadow casters change actual ground pixels",
     "lighting A/B changes actual scene pixels outside UI and disables shadow map, IBL and AO",
-    "30 HDR/AO/bloom/ACES/TAA chain replacements release owned LUTs/materials and reach bounded resource counts"
+    "30 HDR/AO/bloom/ACES/TAA chain replacements release owned LUTs/materials and reach bounded resource counts",
+    "settings change real resolution/shadows/effects/reflection cadence, persist through reload, pause driving input and release replaced reflection targets across repeated quality switches"
   ],
   "scene": {
     "ready": true,
@@ -61,6 +62,30 @@
         "spin": 0
       }
     ],
+    "quality": {
+      "mode": "high",
+      "targetFPS": 60,
+      "tier": "high",
+      "scale": 1,
+      "fps": 15.268968757768429,
+      "p90": 77.20000004768372,
+      "reason": "Measuring performance…",
+      "canvas": [
+        1600,
+        1000
+      ],
+      "reflectionSize": [
+        1280,
+        800
+      ],
+      "reflectionFPS": 60,
+      "reflectionEnabled": true,
+      "ao": true,
+      "bloom": true,
+      "taa": true,
+      "shadowResolution": 4096,
+      "panelOpen": false
+    },
     "hdr": true,
     "ibl": 256,
     "shadows": 3,
@@ -147,7 +172,7 @@
         "height": 2048
       }
     ],
-    "frameIntervalP95": 156.39999997615814,
+    "frameIntervalP95": 88.70000004768372,
     "scope": "first visual slice; no claim of UE parity or mobile performance"
   },
   "axes": {
@@ -284,20 +309,20 @@
     "isTarget": true
   },
   "reflectionDifference": {
-    "changedFraction": 0.1665704081632653,
-    "meanChannelDifference": 6.287552040816384
+    "changedFraction": 0.1625908163265306,
+    "meanChannelDifference": 6.234911904761697
   },
   "shadowDifference": {
-    "changedFraction": 0.3258010204081633,
-    "meanChannelDifference": 6.548993537415819
+    "changedFraction": 0.32673061224489797,
+    "meanChannelDifference": 6.64689421768697
   },
   "lightingDifference": {
-    "changedFraction": 0.7831061224489796,
-    "meanChannelDifference": 36.026111904759624
+    "changedFraction": 0.7821030612244898,
+    "meanChannelDifference": 36.03287585033842
   },
   "carNormalDifference": {
-    "changedFraction": 0.02503469387755102,
-    "meanChannelDifference": 0.7608020408171782
+    "changedFraction": 0.021520408163265305,
+    "meanChannelDifference": 0.6902034013610099
   },
   "handling": {
     "acceleration": {
@@ -307,41 +332,65 @@
       "freeExplore": true,
       "freePosition": [
         -1.4,
-        9.170786745744147
+        8.965483322763863
       ],
-      "freeSpeed": 7.235589288142091,
+      "freeSpeed": 7.189082473536959,
       "freeYaw": 180,
       "driving": {
         "x": -1.4,
         "y": 0,
-        "z": 9.170786745744147,
+        "z": 8.965483322763863,
         "yaw": 3.141592653589793,
-        "speed": 7.235589288142091,
+        "speed": 7.189082473536959,
         "steering": 0,
         "yawRate": 0,
         "roll": 0,
-        "pitch": -0.020263424995188004,
-        "wheelTravel": 4.639613254828052,
+        "pitch": -0.020271469344516905,
+        "wheelTravel": 4.579316677426868,
         "contacts": 0
       },
       "wheels": [
         {
           "steering": 0,
-          "spin": 325.12953112010894
+          "spin": 316.22556358358383
         },
         {
           "steering": 0,
-          "spin": 325.12953112010894
+          "spin": 316.22556358358383
         },
         {
           "steering": 0,
-          "spin": 325.12953112010894
+          "spin": 316.22556358358383
         },
         {
           "steering": 0,
-          "spin": 325.12953112010894
+          "spin": 316.22556358358383
         }
       ],
+      "quality": {
+        "mode": "high",
+        "targetFPS": 60,
+        "tier": "high",
+        "scale": 1,
+        "fps": 7.472078024015084,
+        "p90": 155.10000002384186,
+        "reason": "Measuring performance…",
+        "canvas": [
+          1600,
+          1000
+        ],
+        "reflectionSize": [
+          1280,
+          800
+        ],
+        "reflectionFPS": 60,
+        "reflectionEnabled": true,
+        "ao": true,
+        "bloom": true,
+        "taa": true,
+        "shadowResolution": 4096,
+        "panelOpen": false
+      },
       "hdr": true,
       "ibl": 256,
       "shadows": 3,
@@ -428,7 +477,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 177.19999992847443,
+      "frameIntervalP95": 123.10000002384186,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "turning": {
@@ -437,42 +486,66 @@
       "moving": false,
       "freeExplore": true,
       "freePosition": [
-        -0.6453191875613995,
-        2.999306803484308
+        -0.893677525880747,
+        3.594947192057704
       ],
-      "freeSpeed": 10.965165360515904,
-      "freeYaw": 156.24534309443752,
+      "freeSpeed": 10.520245481232347,
+      "freeYaw": 159.76432653470332,
       "driving": {
-        "x": -0.6453191875613995,
+        "x": -0.893677525880747,
         "y": 0,
-        "z": 2.999306803484308,
-        "yaw": 2.72699567790612,
-        "speed": 10.965165360515904,
-        "steering": -0.3683055294124241,
-        "yawRate": -0.8171777865017075,
-        "roll": -0.04968836340926684,
-        "pitch": -0.019421126894733614,
-        "wheelTravel": 10.883826673340476,
+        "z": 3.594947192057704,
+        "yaw": 2.7884135252619155,
+        "speed": 10.520245481232347,
+        "steering": -0.3738687122501333,
+        "yawRate": -0.8432333110736089,
+        "roll": -0.046381909928209133,
+        "pitch": -0.019542298169867103,
+        "wheelTravel": 9.98672651453044,
         "contacts": 0
       },
       "wheels": [
         {
-          "steering": -19.35721365242402,
-          "spin": 167.20962199567043
+          "steering": -19.627099051090408,
+          "spin": 34.73525885048775
         },
         {
-          "steering": -23.174452911978808,
-          "spin": 167.20962199567043
-        },
-        {
-          "steering": 0,
-          "spin": 167.20962199567043
+          "steering": -23.55569190643718,
+          "spin": 34.73525885048775
         },
         {
           "steering": 0,
-          "spin": 167.20962199567043
+          "spin": 34.73525885048775
+        },
+        {
+          "steering": 0,
+          "spin": 34.73525885048775
         }
       ],
+      "quality": {
+        "mode": "high",
+        "targetFPS": 60,
+        "tier": "high",
+        "scale": 1,
+        "fps": 7.472078024015084,
+        "p90": 155.10000002384186,
+        "reason": "Measuring performance…",
+        "canvas": [
+          1600,
+          1000
+        ],
+        "reflectionSize": [
+          1280,
+          800
+        ],
+        "reflectionFPS": 60,
+        "reflectionEnabled": true,
+        "ao": true,
+        "bloom": true,
+        "taa": true,
+        "shadowResolution": 4096,
+        "panelOpen": false
+      },
       "hdr": true,
       "ibl": 256,
       "shadows": 3,
@@ -559,7 +632,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 178.39999997615814,
+      "frameIntervalP95": 131.29999995231628,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "coast": {
@@ -568,42 +641,66 @@
       "moving": false,
       "freeExplore": true,
       "freePosition": [
-        2.5513812844337047,
-        -2.576016373964921
+        1.5466816057114223,
+        -1.4226422148727664
       ],
-      "freeSpeed": 10.510183579201726,
-      "freeYaw": 144.4008698320631,
+      "freeSpeed": 10.127435753820189,
+      "freeYaw": 147.6864447120685,
       "driving": {
-        "x": 2.5513812844337047,
+        "x": 1.5466816057114223,
         "y": 0,
-        "z": -2.576016373964921,
-        "yaw": 2.5202706213132524,
-        "speed": 10.510183579201726,
+        "z": -1.4226422148727664,
+        "yaw": 2.577614720790164,
+        "speed": 10.127435753820189,
         "steering": 0,
-        "yawRate": -0.0213306037624305,
-        "roll": -0.00848506337927633,
-        "pitch": 0.0026074316223813824,
-        "wheelTravel": 17.323421422926454,
+        "yawRate": -0.03493620588950337,
+        "roll": -0.012159677130614055,
+        "pitch": 0.00237298874215521,
+        "wheelTravel": 15.57641639322577,
         "contacts": 0
       },
       "wheels": [
         {
           "steering": 0,
-          "spin": 38.14158314484803
+          "spin": 140.16216306758952
         },
         {
           "steering": 0,
-          "spin": 38.14158314484803
+          "spin": 140.16216306758952
         },
         {
           "steering": 0,
-          "spin": 38.14158314484803
+          "spin": 140.16216306758952
         },
         {
           "steering": 0,
-          "spin": 38.14158314484803
+          "spin": 140.16216306758952
         }
       ],
+      "quality": {
+        "mode": "high",
+        "targetFPS": 60,
+        "tier": "high",
+        "scale": 1,
+        "fps": 7.472078024015084,
+        "p90": 155.10000002384186,
+        "reason": "Measuring performance…",
+        "canvas": [
+          1600,
+          1000
+        ],
+        "reflectionSize": [
+          1280,
+          800
+        ],
+        "reflectionFPS": 60,
+        "reflectionEnabled": true,
+        "ao": true,
+        "bloom": true,
+        "taa": true,
+        "shadowResolution": 4096,
+        "panelOpen": false
+      },
       "hdr": true,
       "ibl": 256,
       "shadows": 3,
@@ -690,7 +787,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 178,
+      "frameIntervalP95": 131.29999995231628,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "brake": {
@@ -699,42 +796,66 @@
       "moving": false,
       "freeExplore": true,
       "freePosition": [
-        5.754462865797765,
-        -7.655733438860384
+        4.495512898188989,
+        -6.241375647071476
       ],
       "freeSpeed": 0,
-      "freeYaw": 144.25317156096807,
+      "freeYaw": 147.44450824381755,
       "driving": {
-        "x": 5.754462865797765,
+        "x": 4.495512898188989,
         "y": 0,
-        "z": -7.655733438860384,
-        "yaw": 2.517692800183141,
+        "z": -6.241375647071476,
+        "yaw": 2.5733921328385385,
         "speed": 0,
         "steering": 0,
         "yawRate": 0,
-        "roll": 4.571286009625745e-9,
-        "pitch": 0.0016005932312820935,
-        "wheelTravel": 23.317010791279618,
-        "contacts": 1
+        "roll": 5.395676043592032e-9,
+        "pitch": 0.0012742405785723119,
+        "wheelTravel": 21.224864920864427,
+        "contacts": 0
       },
       "wheels": [
         {
           "steering": 0,
-          "spin": 203.2121371167991
+          "spin": 254.26592964124666
         },
         {
           "steering": 0,
-          "spin": 203.2121371167991
+          "spin": 254.26592964124666
         },
         {
           "steering": 0,
-          "spin": 203.2121371167991
+          "spin": 254.26592964124666
         },
         {
           "steering": 0,
-          "spin": 203.2121371167991
+          "spin": 254.26592964124666
         }
       ],
+      "quality": {
+        "mode": "high",
+        "targetFPS": 60,
+        "tier": "high",
+        "scale": 1,
+        "fps": 10.167370561836082,
+        "p90": 132,
+        "reason": "Measuring performance…",
+        "canvas": [
+          1600,
+          1000
+        ],
+        "reflectionSize": [
+          1280,
+          800
+        ],
+        "reflectionFPS": 60,
+        "reflectionEnabled": true,
+        "ao": true,
+        "bloom": true,
+        "taa": true,
+        "shadowResolution": 4096,
+        "panelOpen": false
+      },
       "hdr": true,
       "ibl": 256,
       "shadows": 3,
@@ -821,7 +942,7 @@
           "height": 2048
         }
       ],
-      "frameIntervalP95": 183.89999997615814,
+      "frameIntervalP95": 131.19999992847443,
       "scope": "first visual slice; no claim of UE parity or mobile performance"
     },
     "active": true,
@@ -856,6 +977,111 @@
       "memoryMeasurement": "estimate",
       "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
     }
+  },
+  "qualityMeasurements": [
+    {
+      "mode": "high",
+      "targetFPS": 60,
+      "tier": "high",
+      "scale": 1,
+      "fps": 0,
+      "p90": 0,
+      "reason": "Quality is fixed to your selection.",
+      "canvas": [
+        1600,
+        1000
+      ],
+      "reflectionSize": [
+        1280,
+        800
+      ],
+      "reflectionFPS": 60,
+      "reflectionEnabled": true,
+      "ao": true,
+      "bloom": true,
+      "taa": true,
+      "shadowResolution": 4096,
+      "panelOpen": false,
+      "meanRenderInterval": 88.49375000596046
+    },
+    {
+      "mode": "balanced",
+      "targetFPS": 60,
+      "tier": "balanced",
+      "scale": 1,
+      "fps": 0,
+      "p90": 0,
+      "reason": "Quality is fixed to your selection.",
+      "canvas": [
+        1600,
+        1000
+      ],
+      "reflectionSize": [
+        640,
+        400
+      ],
+      "reflectionFPS": 15,
+      "reflectionEnabled": true,
+      "ao": false,
+      "bloom": true,
+      "taa": true,
+      "shadowResolution": 2048,
+      "panelOpen": false,
+      "meanRenderInterval": 66.19374999403954
+    },
+    {
+      "mode": "performance",
+      "targetFPS": 60,
+      "tier": "performance",
+      "scale": 1,
+      "fps": 0,
+      "p90": 0,
+      "reason": "Quality is fixed to your selection.",
+      "canvas": [
+        1131,
+        707
+      ],
+      "reflectionSize": [
+        1,
+        1
+      ],
+      "reflectionFPS": 0,
+      "reflectionEnabled": false,
+      "ao": false,
+      "bloom": false,
+      "taa": false,
+      "shadowResolution": 2048,
+      "panelOpen": false,
+      "meanRenderInterval": 23.512500002980232
+    }
+  ],
+  "qualityPoolStart": {
+    "counts": {
+      "mesh": 2500,
+      "texture": 46,
+      "renderTarget": 29
+    },
+    "resources": 3238,
+    "estimatedBytes": 1360485852.0000002,
+    "meshBytes": 121622824,
+    "textureBytes": 917632292.0000002,
+    "renderTargetBytes": 321230736,
+    "memoryMeasurement": "estimate",
+    "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+  },
+  "qualityPoolEnd": {
+    "counts": {
+      "mesh": 2500,
+      "texture": 46,
+      "renderTarget": 29
+    },
+    "resources": 3238,
+    "estimatedBytes": 1360485852.0000002,
+    "meshBytes": 121622824,
+    "textureBytes": 917632292.0000002,
+    "renderTargetBytes": 321230736,
+    "memoryMeasurement": "estimate",
+    "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
   },
   "errors": [],
   "failures": []
