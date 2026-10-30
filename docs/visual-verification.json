@@ -1,7 +1,11 @@
 {
   "passed": true,
   "url": "http://localhost:8908/zhuda-neon-racer/visual.html",
-  "checkedAt": "2026-10-30T11:56:40.157Z",
+  "checkedAt": "2026-10-30T17:24:46.167Z",
+  "viewport": {
+    "width": 1600,
+    "height": 1000
+  },
   "checks": [
     "GPU readback verifies all six cubemap axes and fractional-mip trilinear interpolation",
     "scene-linear HDR with nine GGX mips, 320K-triangle/4K GLB, imported hard-surface towers and verified PBR texture/factor bindings",
@@ -9,6 +13,7 @@
     "five camera cuts render and settle using temporal antialiasing, including the imported recessed loading-bay warehouse",
     "the imported glTF 4K normal texture uses the actual shader uniform and changes rendered car pixels at strength .25 versus 1",
     "drive control moves the actual GLB and camera",
+    "vehicle accelerates, coasts, brakes and turns on real independent steering/spinning wheel nodes; orbit preserves heading and touch cancellation clears input",
     "real HDR mirror camera has reflected pose and its render target changes pool pixels",
     "native car/building shadow casters change actual ground pixels",
     "lighting A/B changes actual scene pixels outside UI and disables shadow map, IBL and AO",
@@ -18,30 +23,68 @@
     "ready": true,
     "view": "hero",
     "moving": false,
+    "freeExplore": false,
+    "freePosition": [
+      0,
+      0
+    ],
+    "freeSpeed": 0,
+    "freeYaw": 0,
+    "driving": {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "yaw": 0,
+      "speed": 0,
+      "steering": 0,
+      "yawRate": 0,
+      "roll": 0,
+      "pitch": 0,
+      "wheelTravel": 0,
+      "contacts": 0
+    },
+    "wheels": [
+      {
+        "steering": 0,
+        "spin": 0
+      },
+      {
+        "steering": 0,
+        "spin": 0
+      },
+      {
+        "steering": 0,
+        "spin": 0
+      },
+      {
+        "steering": 0,
+        "spin": 0
+      }
+    ],
     "hdr": true,
     "ibl": 256,
     "shadows": 3,
     "materials": 15,
-    "meshCount": 1737,
+    "meshCount": 1741,
     "resources": {
       "counts": {
-        "mesh": 1929,
-        "texture": 44,
+        "mesh": 2500,
+        "texture": 46,
         "renderTarget": 22
       },
-      "resources": 2074,
-      "estimatedBytes": 1259011273.3333335,
-      "meshBytes": 86491888,
-      "textureBytes": 906447481.3333335,
+      "resources": 3231,
+      "estimatedBytes": 1305327020.0000002,
+      "meshBytes": 121622824,
+      "textureBytes": 917632292.0000002,
       "renderTargetBytes": 266071904,
       "memoryMeasurement": "estimate",
       "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
     },
     "model": {
-      "entries": 4,
-      "references": 24,
+      "entries": 5,
+      "references": 25,
       "pending": 0,
-      "loads": 4,
+      "loads": 5,
       "phases": [
         {
           "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/trackside_barrier.glb?v=5dcb3258dd14",
@@ -62,10 +105,15 @@
           "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-hero.glb?v=2b90ba68e11c",
           "phase": "ready",
           "references": 1
+        },
+        {
+          "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-driving.glb?v=487ad7cb03d3",
+          "phase": "ready",
+          "references": 1
         }
       ],
       "gpuReady": "requires-first-draw",
-      "instances": 24
+      "instances": 25
     },
     "carMaterial": {
       "normalScale": 0.25,
@@ -99,7 +147,7 @@
         "height": 2048
       }
     ],
-    "frameIntervalP95": 101.69999992847443,
+    "frameIntervalP95": 156.39999997615814,
     "scope": "first visual slice; no claim of UE parity or mobile performance"
   },
   "axes": {
@@ -236,46 +284,574 @@
     "isTarget": true
   },
   "reflectionDifference": {
-    "changedFraction": 0.15775,
-    "meanChannelDifference": 6.161556462585253
+    "changedFraction": 0.1665704081632653,
+    "meanChannelDifference": 6.287552040816384
   },
   "shadowDifference": {
-    "changedFraction": 0.3292173469387755,
-    "meanChannelDifference": 6.689389115646729
+    "changedFraction": 0.3258010204081633,
+    "meanChannelDifference": 6.548993537415819
   },
   "lightingDifference": {
-    "changedFraction": 0.7845755102040817,
-    "meanChannelDifference": 36.13214217686812
+    "changedFraction": 0.7831061224489796,
+    "meanChannelDifference": 36.026111904759624
   },
   "carNormalDifference": {
-    "changedFraction": 0.01673265306122449,
-    "meanChannelDifference": 0.5638180272100465
+    "changedFraction": 0.02503469387755102,
+    "meanChannelDifference": 0.7608020408171782
+  },
+  "handling": {
+    "acceleration": {
+      "ready": true,
+      "view": "free",
+      "moving": false,
+      "freeExplore": true,
+      "freePosition": [
+        -1.4,
+        9.170786745744147
+      ],
+      "freeSpeed": 7.235589288142091,
+      "freeYaw": 180,
+      "driving": {
+        "x": -1.4,
+        "y": 0,
+        "z": 9.170786745744147,
+        "yaw": 3.141592653589793,
+        "speed": 7.235589288142091,
+        "steering": 0,
+        "yawRate": 0,
+        "roll": 0,
+        "pitch": -0.020263424995188004,
+        "wheelTravel": 4.639613254828052,
+        "contacts": 0
+      },
+      "wheels": [
+        {
+          "steering": 0,
+          "spin": 325.12953112010894
+        },
+        {
+          "steering": 0,
+          "spin": 325.12953112010894
+        },
+        {
+          "steering": 0,
+          "spin": 325.12953112010894
+        },
+        {
+          "steering": 0,
+          "spin": 325.12953112010894
+        }
+      ],
+      "hdr": true,
+      "ibl": 256,
+      "shadows": 3,
+      "materials": 15,
+      "meshCount": 1741,
+      "resources": {
+        "counts": {
+          "mesh": 2500,
+          "texture": 46,
+          "renderTarget": 22
+        },
+        "resources": 3231,
+        "estimatedBytes": 1305327020.0000002,
+        "meshBytes": 121622824,
+        "textureBytes": 917632292.0000002,
+        "renderTargetBytes": 266071904,
+        "memoryMeasurement": "estimate",
+        "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+      },
+      "model": {
+        "entries": 5,
+        "references": 25,
+        "pending": 0,
+        "loads": 5,
+        "phases": [
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/trackside_barrier.glb?v=5dcb3258dd14",
+            "phase": "ready",
+            "references": 20
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/dock_warehouse.glb?v=d3f79b3070e6",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/skyline_tower.glb?v=674ceea9944e",
+            "phase": "ready",
+            "references": 2
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-hero.glb?v=2b90ba68e11c",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-driving.glb?v=487ad7cb03d3",
+            "phase": "ready",
+            "references": 1
+          }
+        ],
+        "gpuReady": "requires-first-draw",
+        "instances": 25
+      },
+      "carMaterial": {
+        "normalScale": 0.25,
+        "normalTextureSize": [
+          4096,
+          4096
+        ]
+      },
+      "warehouse": {
+        "min": [
+          -56,
+          -5,
+          45
+        ],
+        "max": [
+          -38,
+          13,
+          75
+        ],
+        "renderers": 169,
+        "shadowCasters": 169,
+        "shadowReceivers": 169
+      },
+      "normalMapTextures": [
+        {
+          "width": 2048,
+          "height": 2048
+        },
+        {
+          "width": 2048,
+          "height": 2048
+        }
+      ],
+      "frameIntervalP95": 177.19999992847443,
+      "scope": "first visual slice; no claim of UE parity or mobile performance"
+    },
+    "turning": {
+      "ready": true,
+      "view": "free",
+      "moving": false,
+      "freeExplore": true,
+      "freePosition": [
+        -0.6453191875613995,
+        2.999306803484308
+      ],
+      "freeSpeed": 10.965165360515904,
+      "freeYaw": 156.24534309443752,
+      "driving": {
+        "x": -0.6453191875613995,
+        "y": 0,
+        "z": 2.999306803484308,
+        "yaw": 2.72699567790612,
+        "speed": 10.965165360515904,
+        "steering": -0.3683055294124241,
+        "yawRate": -0.8171777865017075,
+        "roll": -0.04968836340926684,
+        "pitch": -0.019421126894733614,
+        "wheelTravel": 10.883826673340476,
+        "contacts": 0
+      },
+      "wheels": [
+        {
+          "steering": -19.35721365242402,
+          "spin": 167.20962199567043
+        },
+        {
+          "steering": -23.174452911978808,
+          "spin": 167.20962199567043
+        },
+        {
+          "steering": 0,
+          "spin": 167.20962199567043
+        },
+        {
+          "steering": 0,
+          "spin": 167.20962199567043
+        }
+      ],
+      "hdr": true,
+      "ibl": 256,
+      "shadows": 3,
+      "materials": 15,
+      "meshCount": 1741,
+      "resources": {
+        "counts": {
+          "mesh": 2500,
+          "texture": 46,
+          "renderTarget": 22
+        },
+        "resources": 3231,
+        "estimatedBytes": 1305327020.0000002,
+        "meshBytes": 121622824,
+        "textureBytes": 917632292.0000002,
+        "renderTargetBytes": 266071904,
+        "memoryMeasurement": "estimate",
+        "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+      },
+      "model": {
+        "entries": 5,
+        "references": 25,
+        "pending": 0,
+        "loads": 5,
+        "phases": [
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/trackside_barrier.glb?v=5dcb3258dd14",
+            "phase": "ready",
+            "references": 20
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/dock_warehouse.glb?v=d3f79b3070e6",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/skyline_tower.glb?v=674ceea9944e",
+            "phase": "ready",
+            "references": 2
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-hero.glb?v=2b90ba68e11c",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-driving.glb?v=487ad7cb03d3",
+            "phase": "ready",
+            "references": 1
+          }
+        ],
+        "gpuReady": "requires-first-draw",
+        "instances": 25
+      },
+      "carMaterial": {
+        "normalScale": 0.25,
+        "normalTextureSize": [
+          4096,
+          4096
+        ]
+      },
+      "warehouse": {
+        "min": [
+          -56,
+          -5,
+          45
+        ],
+        "max": [
+          -38,
+          13,
+          75
+        ],
+        "renderers": 169,
+        "shadowCasters": 169,
+        "shadowReceivers": 169
+      },
+      "normalMapTextures": [
+        {
+          "width": 2048,
+          "height": 2048
+        },
+        {
+          "width": 2048,
+          "height": 2048
+        }
+      ],
+      "frameIntervalP95": 178.39999997615814,
+      "scope": "first visual slice; no claim of UE parity or mobile performance"
+    },
+    "coast": {
+      "ready": true,
+      "view": "free",
+      "moving": false,
+      "freeExplore": true,
+      "freePosition": [
+        2.5513812844337047,
+        -2.576016373964921
+      ],
+      "freeSpeed": 10.510183579201726,
+      "freeYaw": 144.4008698320631,
+      "driving": {
+        "x": 2.5513812844337047,
+        "y": 0,
+        "z": -2.576016373964921,
+        "yaw": 2.5202706213132524,
+        "speed": 10.510183579201726,
+        "steering": 0,
+        "yawRate": -0.0213306037624305,
+        "roll": -0.00848506337927633,
+        "pitch": 0.0026074316223813824,
+        "wheelTravel": 17.323421422926454,
+        "contacts": 0
+      },
+      "wheels": [
+        {
+          "steering": 0,
+          "spin": 38.14158314484803
+        },
+        {
+          "steering": 0,
+          "spin": 38.14158314484803
+        },
+        {
+          "steering": 0,
+          "spin": 38.14158314484803
+        },
+        {
+          "steering": 0,
+          "spin": 38.14158314484803
+        }
+      ],
+      "hdr": true,
+      "ibl": 256,
+      "shadows": 3,
+      "materials": 15,
+      "meshCount": 1741,
+      "resources": {
+        "counts": {
+          "mesh": 2500,
+          "texture": 46,
+          "renderTarget": 22
+        },
+        "resources": 3231,
+        "estimatedBytes": 1305327020.0000002,
+        "meshBytes": 121622824,
+        "textureBytes": 917632292.0000002,
+        "renderTargetBytes": 266071904,
+        "memoryMeasurement": "estimate",
+        "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+      },
+      "model": {
+        "entries": 5,
+        "references": 25,
+        "pending": 0,
+        "loads": 5,
+        "phases": [
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/trackside_barrier.glb?v=5dcb3258dd14",
+            "phase": "ready",
+            "references": 20
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/dock_warehouse.glb?v=d3f79b3070e6",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/skyline_tower.glb?v=674ceea9944e",
+            "phase": "ready",
+            "references": 2
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-hero.glb?v=2b90ba68e11c",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-driving.glb?v=487ad7cb03d3",
+            "phase": "ready",
+            "references": 1
+          }
+        ],
+        "gpuReady": "requires-first-draw",
+        "instances": 25
+      },
+      "carMaterial": {
+        "normalScale": 0.25,
+        "normalTextureSize": [
+          4096,
+          4096
+        ]
+      },
+      "warehouse": {
+        "min": [
+          -56,
+          -5,
+          45
+        ],
+        "max": [
+          -38,
+          13,
+          75
+        ],
+        "renderers": 169,
+        "shadowCasters": 169,
+        "shadowReceivers": 169
+      },
+      "normalMapTextures": [
+        {
+          "width": 2048,
+          "height": 2048
+        },
+        {
+          "width": 2048,
+          "height": 2048
+        }
+      ],
+      "frameIntervalP95": 178,
+      "scope": "first visual slice; no claim of UE parity or mobile performance"
+    },
+    "brake": {
+      "ready": true,
+      "view": "free",
+      "moving": false,
+      "freeExplore": true,
+      "freePosition": [
+        5.754462865797765,
+        -7.655733438860384
+      ],
+      "freeSpeed": 0,
+      "freeYaw": 144.25317156096807,
+      "driving": {
+        "x": 5.754462865797765,
+        "y": 0,
+        "z": -7.655733438860384,
+        "yaw": 2.517692800183141,
+        "speed": 0,
+        "steering": 0,
+        "yawRate": 0,
+        "roll": 4.571286009625745e-9,
+        "pitch": 0.0016005932312820935,
+        "wheelTravel": 23.317010791279618,
+        "contacts": 1
+      },
+      "wheels": [
+        {
+          "steering": 0,
+          "spin": 203.2121371167991
+        },
+        {
+          "steering": 0,
+          "spin": 203.2121371167991
+        },
+        {
+          "steering": 0,
+          "spin": 203.2121371167991
+        },
+        {
+          "steering": 0,
+          "spin": 203.2121371167991
+        }
+      ],
+      "hdr": true,
+      "ibl": 256,
+      "shadows": 3,
+      "materials": 15,
+      "meshCount": 1741,
+      "resources": {
+        "counts": {
+          "mesh": 2500,
+          "texture": 46,
+          "renderTarget": 22
+        },
+        "resources": 3231,
+        "estimatedBytes": 1305327020.0000002,
+        "meshBytes": 121622824,
+        "textureBytes": 917632292.0000002,
+        "renderTargetBytes": 266071904,
+        "memoryMeasurement": "estimate",
+        "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
+      },
+      "model": {
+        "entries": 5,
+        "references": 25,
+        "pending": 0,
+        "loads": 5,
+        "phases": [
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/trackside_barrier.glb?v=5dcb3258dd14",
+            "phase": "ready",
+            "references": 20
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/dock_warehouse.glb?v=d3f79b3070e6",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/skyline_tower.glb?v=674ceea9944e",
+            "phase": "ready",
+            "references": 2
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-hero.glb?v=2b90ba68e11c",
+            "phase": "ready",
+            "references": 1
+          },
+          {
+            "key": "http://localhost:8908/zhuda-neon-racer/visual-assets/maextro-s800-driving.glb?v=487ad7cb03d3",
+            "phase": "ready",
+            "references": 1
+          }
+        ],
+        "gpuReady": "requires-first-draw",
+        "instances": 25
+      },
+      "carMaterial": {
+        "normalScale": 0.25,
+        "normalTextureSize": [
+          4096,
+          4096
+        ]
+      },
+      "warehouse": {
+        "min": [
+          -56,
+          -5,
+          45
+        ],
+        "max": [
+          -38,
+          13,
+          75
+        ],
+        "renderers": 169,
+        "shadowCasters": 169,
+        "shadowReceivers": 169
+      },
+      "normalMapTextures": [
+        {
+          "width": 2048,
+          "height": 2048
+        },
+        {
+          "width": 2048,
+          "height": 2048
+        }
+      ],
+      "frameIntervalP95": 183.89999997615814,
+      "scope": "first visual slice; no claim of UE parity or mobile performance"
+    },
+    "active": true,
+    "originalHidden": true
   },
   "teardown": {
     "start": {
       "counts": {
-        "mesh": 1929,
-        "texture": 44,
+        "mesh": 2500,
+        "texture": 46,
         "renderTarget": 22
       },
-      "resources": 2074,
-      "estimatedBytes": 1259011273.3333335,
-      "meshBytes": 86491888,
-      "textureBytes": 906447481.3333335,
+      "resources": 3231,
+      "estimatedBytes": 1305327020.0000002,
+      "meshBytes": 121622824,
+      "textureBytes": 917632292.0000002,
       "renderTargetBytes": 266071904,
       "memoryMeasurement": "estimate",
       "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."
     },
     "end": {
       "counts": {
-        "mesh": 1929,
-        "texture": 44,
+        "mesh": 2500,
+        "texture": 46,
         "renderTarget": 22
       },
-      "resources": 2074,
-      "estimatedBytes": 1259011273.3333335,
-      "meshBytes": 86491888,
-      "textureBytes": 906447481.3333335,
+      "resources": 3231,
+      "estimatedBytes": 1305327020.0000002,
+      "meshBytes": 121622824,
+      "textureBytes": 917632292.0000002,
       "renderTargetBytes": 266071904,
       "memoryMeasurement": "estimate",
       "assumptions": "Texture RGBA8, render target RGBA8 + 32-bit depth; vendor mesh accounting. Excludes driver overhead and compressed/HDR format corrections."

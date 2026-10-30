@@ -18,6 +18,7 @@
       canvas {
         position: absolute;
         inset: 0;
+        touch-action: none;
       }
       body:after {
         content: "";
@@ -112,7 +113,23 @@
       }
       body.exploring #explore-help {
         display: block;
+        left: auto;
+        right: 28px;
+        top: 28px;
+        font-size: 10px;
+        background: #10182096;
       }
+      #drive-hud { display: none; position: fixed; z-index: 4; right: 30px; bottom: 32px; color: #f4f1e9; text-align: right; pointer-events: none; text-shadow: 0 2px 15px #000; }
+      body.exploring #drive-hud { display: block; }
+      #speed-value { font: 300 62px/1 system-ui; letter-spacing: -.05em; }
+      #gear-value { display: inline-block; margin-right: 12px; color: #dfc794; font: 22px monospace; }
+      #drive-hud small { display: block; font-size: 9px; letter-spacing: .2em; margin-top: 5px; }
+      #reset-drive { display: none; }
+      body.exploring #reset-drive { display: inline-block; }
+      body.exploring nav [data-view], body.exploring #motion, body.exploring #compare, body.exploring #status { display: none; }
+      body.exploring header h1 { font-size: 21px; }
+      body.exploring header p { display: none; }
+      body.exploring footer { right: 180px; }
       #touch-controls {
         position: fixed;
         left: 38px;
@@ -126,8 +143,9 @@
         user-select: none;
       }
       body.exploring #touch-controls {
-        display: grid;
+        display: none;
       }
+      @media (pointer: coarse) { body.exploring #touch-controls { display: grid; } }
       #touch-controls button {
         padding: 0;
         font-size: 16px;
@@ -148,6 +166,7 @@
         grid-column: 3;
         grid-row: 2;
       }
+      #touch-controls [data-free-key="Space"] { grid-column: 4; grid-row: 2; font-size: 11px; }
       #loading {
         position: fixed;
         inset: 0;
@@ -192,6 +211,10 @@
           top: 100px;
           font-size: 10px;
         }
+        body.exploring #explore-help { top: 82px; right: 18px; max-width: 255px; font-size: 9px; }
+        #drive-hud { right: 18px; bottom: 25px; }
+        #speed-value { font-size: 44px; }
+        #touch-controls { left: 18px; bottom: 85px; }
         button,
         a {
           padding: 9px;
@@ -214,6 +237,7 @@
         ><button data-view="detail">04 / SURFACE</button
         ><button data-view="dock">05 / DOCK</button
         ><button id="explore" aria-pressed="false">EXPLORE</button
+        ><button id="reset-drive">RESET · R</button
         ><button id="motion" aria-pressed="false">DRIVE</button
         ><button id="compare" aria-pressed="false">LIGHTING A/B</button
         ><a href="index.html">RACE ↗</a>
@@ -221,14 +245,16 @@
       <div id="status">Loading scene…</div>
     </footer>
     <div id="explore-help">
-      W A S D / ARROWS · DRIVE<br />
-      DRAG · LOOK AROUND &nbsp; SHIFT · BOOST &nbsp; SPACE · BRAKE
+      W · ACCELERATE &nbsp; S · BRAKE / REVERSE &nbsp; A D · STEER<br />
+      DRAG · ORBIT &nbsp; SHIFT · BOOST &nbsp; SPACE · HANDBRAKE &nbsp; R · RESET
     </div>
+    <div id="drive-hud"><span id="gear-value">N</span><span id="speed-value">000</span><small>KM / H · HARBOR DRIVE</small></div>
     <div id="touch-controls" aria-label="Explore controls">
       <button data-free-key="KeyW" aria-label="Drive forward">▲</button>
       <button data-free-key="KeyA" aria-label="Turn left">◀</button>
       <button data-free-key="KeyS" aria-label="Drive reverse">▼</button>
       <button data-free-key="KeyD" aria-label="Turn right">▶</button>
+      <button data-free-key="Space" aria-label="Handbrake">BRAKE</button>
     </div>
     <div id="loading">
       <div>

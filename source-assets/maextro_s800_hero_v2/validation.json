@@ -1,0 +1,760 @@
+{
+  "file": "/Users/yaowei/ZhudaAI/generated_models/maextro_s800_hero_v2/maextro_s800_hero_v2.glb",
+  "sha256": "487ad7cb03d39cda089a8693cb95ebc09f6a3b8932fca522af2a9a67d30cceee",
+  "raw_gltf_bounds_xyz": [
+    [
+      -1.1768325567245483,
+      0.0,
+      -2.740000009536743
+    ],
+    [
+      1.1768325567245483,
+      1.541998028755188,
+      2.743149518966675
+    ]
+  ],
+  "body_bounds_xyz": [
+    [
+      -0.9999999403953552,
+      0.19050000607967377,
+      -2.740000009536743
+    ],
+    [
+      0.9999999403953552,
+      1.541998028755188,
+      2.743149518966675
+    ]
+  ],
+  "dimensions_including_mirrors_m": [
+    2.3536651134490967,
+    1.541998028755188,
+    5.483149528503418
+  ],
+  "body_shell_bbox_dimensions_m": [
+    1.9999998807907104,
+    1.3514980226755142,
+    5.483149528503418
+  ],
+  "measured_spec_width_height_length_m": [
+    1.9999998807907104,
+    1.541998028755188,
+    5.483149528503418
+  ],
+  "expected_body_width_m": 2,
+  "expected_ground_to_roof_height_m": 1.542,
+  "expected_length_m": 5.48,
+  "wheelbase_m": 3.3700000047683716,
+  "track_estimated_m": 1.7200000286102295,
+  "wheels": {
+    "FL": {
+      "center_gltf_m": [
+        0.8600000143051147,
+        0.3880000114440918,
+        1.7699999809265137
+      ],
+      "tyre_bounds_gltf_m": [
+        [
+          0.7260000109672546,
+          0.0,
+          1.3819999694824219
+        ],
+        [
+          0.9940000176429749,
+          0.7760000228881836,
+          2.1579999923706055
+        ]
+      ],
+      "center_matches_tyre": true,
+      "tyre_contacts_ground": true,
+      "axle_at_root": true,
+      "axle_direct_child": true
+    },
+    "FR": {
+      "center_gltf_m": [
+        -0.8600000143051147,
+        0.3880000114440918,
+        1.7699999809265137
+      ],
+      "tyre_bounds_gltf_m": [
+        [
+          -0.9940000176429749,
+          0.0,
+          1.3819999694824219
+        ],
+        [
+          -0.7260000109672546,
+          0.7760000228881836,
+          2.1579999923706055
+        ]
+      ],
+      "center_matches_tyre": true,
+      "tyre_contacts_ground": true,
+      "axle_at_root": true,
+      "axle_direct_child": true
+    },
+    "RL": {
+      "center_gltf_m": [
+        0.8600000143051147,
+        0.3880000114440918,
+        -1.600000023841858
+      ],
+      "tyre_bounds_gltf_m": [
+        [
+          0.7260000109672546,
+          0.0,
+          -1.9880000352859497
+        ],
+        [
+          0.9940000176429749,
+          0.7760000228881836,
+          -1.2120000123977661
+        ]
+      ],
+      "center_matches_tyre": true,
+      "tyre_contacts_ground": true,
+      "axle_at_root": true,
+      "axle_direct_child": true
+    },
+    "RR": {
+      "center_gltf_m": [
+        -0.8600000143051147,
+        0.3880000114440918,
+        -1.600000023841858
+      ],
+      "tyre_bounds_gltf_m": [
+        [
+          -0.9940000176429749,
+          0.0,
+          -1.9880000352859497
+        ],
+        [
+          -0.7260000109672546,
+          0.7760000228881836,
+          -1.2120000123977661
+        ]
+      ],
+      "center_matches_tyre": true,
+      "tyre_contacts_ground": true,
+      "axle_at_root": true,
+      "axle_direct_child": true
+    }
+  },
+  "animation_channels": {
+    "wheel_FL_axle": {
+      "path": "rotation",
+      "duration": 2.0000000782310963,
+      "sample_count": 49,
+      "changes": true
+    },
+    "wheel_FR_axle": {
+      "path": "rotation",
+      "duration": 2.0000000782310963,
+      "sample_count": 49,
+      "changes": true
+    },
+    "wheel_RL_axle": {
+      "path": "rotation",
+      "duration": 2.0000000782310963,
+      "sample_count": 49,
+      "changes": true
+    },
+    "wheel_RR_axle": {
+      "path": "rotation",
+      "duration": 2.0000000782310963,
+      "sample_count": 49,
+      "changes": true
+    },
+    "wheel_FL": {
+      "path": "rotation",
+      "duration": 2.0000000782310963,
+      "sample_count": 49,
+      "changes": true
+    },
+    "wheel_FR": {
+      "path": "rotation",
+      "duration": 2.0000000782310963,
+      "sample_count": 49,
+      "changes": true
+    }
+  },
+  "extensionsUsed": [
+    "KHR_materials_clearcoat",
+    "KHR_materials_transmission",
+    "KHR_materials_ior"
+  ],
+  "extensionsRequired": [],
+  "raw_gltf_checks": {
+    "body_width": true,
+    "height": true,
+    "length": true,
+    "wheelbase": true,
+    "track": true,
+    "physical_left_right": true,
+    "ground": true,
+    "wheel_centers": true,
+    "spin_channels": true,
+    "steer_channels": true,
+    "embedded_maps": true,
+    "normal_map_attributes": true
+  },
+  "images": [
+    {
+      "mimeType": "image/png",
+      "embedded": true,
+      "bytes": 1517189
+    },
+    {
+      "mimeType": "image/png",
+      "embedded": true,
+      "bytes": 574504
+    }
+  ],
+  "fresh_import_rig_motion": {
+    "FL": {
+      "ninety_degree_spin_moves_vertex_m": 0.5487149264389631,
+      "spin_keeps_pivot_m": 0.0,
+      "radius_preserved_m": 9.587966698365591e-09
+    },
+    "FR": {
+      "ninety_degree_spin_moves_vertex_m": 0.5487149264389631,
+      "spin_keeps_pivot_m": 0.0,
+      "radius_preserved_m": 9.587966698365591e-09
+    },
+    "RL": {
+      "ninety_degree_spin_moves_vertex_m": 0.5487149264389631,
+      "spin_keeps_pivot_m": 0.0,
+      "radius_preserved_m": 9.587966698365591e-09
+    },
+    "RR": {
+      "ninety_degree_spin_moves_vertex_m": 0.5487149264389631,
+      "spin_keeps_pivot_m": 0.0,
+      "radius_preserved_m": 9.587966698365591e-09
+    }
+  },
+  "front_steer_directions_blender_xyz": [
+    [
+      0.27635565400123596,
+      -0.9610554575920105,
+      0.0
+    ],
+    [
+      0.27635565400123596,
+      -0.9610554575920105,
+      0.0
+    ]
+  ],
+  "fresh_import_checks": {
+    "spin": true,
+    "same_direction_steering": true,
+    "bounds_equal_raw": true,
+    "physical_closed_shells": true
+  },
+  "fresh_import_bounds_as_gltf_xyz": [
+    [
+      -1.1768325567245483,
+      0.0,
+      -2.740000009536743
+    ],
+    [
+      1.1768325567245483,
+      1.541998028755188,
+      2.743149518966675
+    ]
+  ],
+  "fresh_import_closed_panels": {
+    "Front_door_L": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.003000000026077032
+    },
+    "Front_door_R": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.003000000026077032
+    },
+    "Rear_door_L": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.003000000026077032
+    },
+    "Rear_door_R": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.003000000026077032
+    },
+    "Hood": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.003000000026077032
+    },
+    "Windshield": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.004000000189989805
+    },
+    "Roof_panel": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": 0.004000000189989805
+    },
+    "Tyre_FL": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": null
+    },
+    "Tyre_FR": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": null
+    },
+    "Tyre_RL": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": null
+    },
+    "Tyre_RR": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "shell_thickness_m": null
+    }
+  },
+  "fresh_import_surface_normals": {
+    "Hood": {
+      "outward_surface_area_m2": 2.3144721987555386,
+      "inward_back_surface_area_m2": 2.313364334127982
+    },
+    "Roof_panel": {
+      "outward_surface_area_m2": 2.1684615396370646,
+      "inward_back_surface_area_m2": 2.165977219949127
+    },
+    "Front_door_R": {
+      "outward_surface_area_m2": 1.1243430642789463,
+      "inward_back_surface_area_m2": 1.1207156421005493
+    },
+    "Front_door_L": {
+      "outward_surface_area_m2": 1.1243430617687409,
+      "inward_back_surface_area_m2": 1.1207156473974464
+    },
+    "Windshield": {
+      "outward_surface_area_m2": 1.6417978491663234,
+      "inward_back_surface_area_m2": 1.639044501891476
+    }
+  },
+  "used_materials": [
+    "Brake_Caliper",
+    "Fascia_Black",
+    "Glass_Roof",
+    "Glass_Tinted",
+    "Interior",
+    "Lamp_Clear",
+    "Lamp_Red",
+    "Lamp_Reflector",
+    "Metal_Brake",
+    "Metal_Polished",
+    "Metal_Satin",
+    "Paint_Obsidian",
+    "Paint_Silver",
+    "Rubber_Seal",
+    "Rubber_Tyre"
+  ],
+  "material_count": 15,
+  "triangles": 1055092,
+  "passed": true,
+  "material_parameters": [
+    {
+      "name": "Paint_Obsidian",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.006000000052154064,
+          0.00800000037997961,
+          0.010999999940395355,
+          1
+        ],
+        "metallicFactor": 0.20000000298023224,
+        "roughnessFactor": 0.1899999976158142
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.6499999761581421,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Rubber_Seal",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.008999999612569809,
+          0.012000000104308128,
+          0.014999999664723873,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.6399999856948853
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Metal_Polished",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.6399999856948853,
+          0.6899999976158142,
+          0.75,
+          1
+        ],
+        "metallicFactor": 0.9700000286102295,
+        "roughnessFactor": 0.1599999964237213
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Interior",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.027000000700354576,
+          0.03400000184774399,
+          0.03999999910593033,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.8299999833106995
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Paint_Silver",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.5699999928474426,
+          0.6000000238418579,
+          0.6399999856948853,
+          1
+        ],
+        "metallicFactor": 0.8199999928474426,
+        "roughnessFactor": 0.25
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.550000011920929,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Glass_Tinted",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.04500000178813934,
+          0.07500000298023224,
+          0.08500000089406967,
+          1
+        ],
+        "metallicFactor": 0.03999999910593033,
+        "roughnessFactor": 0.11999999731779099
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.30000001192092896,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        },
+        "KHR_materials_transmission": {
+          "transmissionFactor": 0.550000011920929
+        },
+        "KHR_materials_ior": {
+          "ior": 1.4600000381469727
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Lamp_Reflector",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.800000011920929,
+          0.8500000238418579,
+          0.8999999761581421,
+          1
+        ],
+        "metallicFactor": 0.8799999952316284,
+        "roughnessFactor": 0.17000000178813934
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Fascia_Black",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.006000000052154064,
+          0.00800000037997961,
+          0.012000000104308128,
+          1
+        ],
+        "metallicFactor": 0.3499999940395355,
+        "roughnessFactor": 0.28999999165534973
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.30000001192092896,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Lamp_Clear",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7400000095367432,
+          0.8299999833106995,
+          0.8799999952316284,
+          1
+        ],
+        "metallicFactor": 0.05000000074505806,
+        "roughnessFactor": 0.11999999731779099
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.30000001192092896,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        },
+        "KHR_materials_transmission": {
+          "transmissionFactor": 0.699999988079071
+        },
+        "KHR_materials_ior": {
+          "ior": 1.4600000381469727
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Metal_Satin",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.4000000059604645,
+          0.44999998807907104,
+          0.5099999904632568,
+          1
+        ],
+        "metallicFactor": 0.9100000262260437,
+        "roughnessFactor": 0.30000001192092896
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Lamp_Red",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.44999998807907104,
+          0.006000000052154064,
+          0.009999999776482582,
+          1
+        ],
+        "metallicFactor": 0.20000000298023224,
+        "roughnessFactor": 0.20000000298023224
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.5,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        },
+        "KHR_materials_transmission": {
+          "transmissionFactor": 0.10000000149011612
+        },
+        "KHR_materials_ior": {
+          "ior": 1.4600000381469727
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Glass_Roof",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.017999999225139618,
+          0.029999999329447746,
+          0.03799999877810478,
+          1
+        ],
+        "metallicFactor": 0.03999999910593033,
+        "roughnessFactor": 0.12999999523162842
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.30000001192092896,
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        },
+        "KHR_materials_transmission": {
+          "transmissionFactor": 0.30000001192092896
+        },
+        "KHR_materials_ior": {
+          "ior": 1.4600000381469727
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Brake_Caliper",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.10000000149011612,
+          0.11999999731779099,
+          0.12999999523162842,
+          1
+        ],
+        "metallicFactor": 0.699999988079071,
+        "roughnessFactor": 0.3499999940395355
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Metal_Brake",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.23000000417232513,
+          0.25,
+          0.27000001072883606,
+          1
+        ],
+        "metallicFactor": 0.7799999713897705,
+        "roughnessFactor": 0.4000000059604645
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": null,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Rubber_Tyre",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.008999999612569809,
+          0.010999999940395355,
+          0.014000000432133675,
+          1
+        ],
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatRoughnessFactor": 0.11999999731779099
+        }
+      },
+      "normalTexture": {
+        "index": 0,
+        "scale": 0.2800000011920929
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

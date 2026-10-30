@@ -58,3 +58,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+# Authored driving S800
+
+The HARBOR free-drive model is a separate authored reference reconstruction of the Maextro S800, with 15 standard PBR materials and independent wheel nodes. Its source, reference provenance, exact SHA-256 and limitations are in `source-assets/maextro_s800_hero_v2/`. It is not an official manufacturer CAD asset. The original textured vehicle remains in presentation views.

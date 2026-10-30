@@ -1,0 +1,62 @@
+{
+  "FR": {
+    "center_blender_m": [
+      -0.86,
+      -1.77,
+      0.388
+    ],
+    "center_gltf_m": [
+      -0.86,
+      0.388,
+      1.77
+    ],
+    "radius_m": 0.388,
+    "rim_diameter_m": 0.5334,
+    "track_estimated_m": 1.72
+  },
+  "RR": {
+    "center_blender_m": [
+      -0.86,
+      1.6,
+      0.388
+    ],
+    "center_gltf_m": [
+      -0.86,
+      0.388,
+      -1.6
+    ],
+    "radius_m": 0.388,
+    "rim_diameter_m": 0.5334,
+    "track_estimated_m": 1.72
+  },
+  "FL": {
+    "center_blender_m": [
+      0.86,
+      -1.77,
+      0.388
+    ],
+    "center_gltf_m": [
+      0.86,
+      0.388,
+      1.77
+    ],
+    "radius_m": 0.388,
+    "rim_diameter_m": 0.5334,
+    "track_estimated_m": 1.72
+  },
+  "RL": {
+    "center_blender_m": [
+      0.86,
+      1.6,
+      0.388
+    ],
+    "center_gltf_m": [
+      0.86,
+      0.388,
+      -1.6
+    ],
+    "radius_m": 0.388,
+    "rim_diameter_m": 0.5334,
+    "track_estimated_m": 1.72
+  }
+}
