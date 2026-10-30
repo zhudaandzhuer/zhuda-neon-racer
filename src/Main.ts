@@ -54,7 +54,10 @@ class Game {
       width: innerWidth,
       height: innerHeight,
       bgColor: "#0b1723",
-      features: ["core", "2d"],
+      features: ["core", "3d", "postProcess"],
+      dprCap: 1.5,
+      antialias: true,
+      preserveDrawingBuffer: false,
       scaleMode: "noscale",
     });
     this.resize();
@@ -67,7 +70,7 @@ class Game {
     $("loading").hidden = true;
     const enter = $<HTMLButtonElement>("title-enter");
     enter.disabled = false;
-    enter.textContent = "進入遊戲 →";
+    enter.textContent = "PLAY NOW →";
     enter.onclick = () => {
       $("title-screen").hidden = true;
       $("app").hidden = false;
@@ -435,7 +438,7 @@ class Game {
     this.modal(
       "help",
       this.heading("DRIVER BRIEFING", "先抓住節奏。") +
-        `<p class="modal-copy">預設自動踩油門，專心轉向與超車。想自己控制油門，可在設定切換。</p><div class="key-guide"><div><kbd>← → / A D</kbd>左右轉向</div><div><kbd>↓ / S</kbd>煞車過彎</div><div><kbd>SPACE</kbd>按住氮氣</div><div><kbd>ESC / P</kbd>暫停比賽</div></div><div class="help-tips"><p><span class="tip-number">01</span><b>先慢、再快。</b> 入彎前煞車，出彎後按氮氣；煞車時轉向可漂移充能。</p><p><span class="tip-number">02</span><b>壓過發光箭頭。</b> 充能帶補充氮氣，善用每一段直線。</p><p><span class="tip-number">03</span><b>前三名晉級。</b> 冠軍與金牌時間各多得一顆星；獎金能在車庫升級。</p><p>手機使用下方轉向、煞車與氮氣按鈕，支援同時按住多個按鈕。橫向握持視野更寬。</p></div><button id="help-go" class="primary">${start ? "明白，開始比賽" : "準備上路"} <span>↗︎</span></button>`,
+        `<p class="modal-copy">預設自動踩油門，專心轉向與超車。想自己控制油門，可在設定切換。</p><div class="key-guide"><div><kbd>← → / A D</kbd>左右轉向</div><div><kbd>↓ / S</kbd>煞車過彎</div><div><kbd>SPACE</kbd>按住氮氣</div><div><kbd>ESC / P</kbd>暫停比賽</div></div><div class="help-tips"><p><span class="tip-number">01</span><b>先慢、再快。</b> 入彎前煞車，出彎後按氮氣；煞車時轉向可漂移充能。</p><p><span class="tip-number">02</span><b>壓過發光箭頭。</b> 充能帶補充氮氣，善用每一段直線。</p><p><span class="tip-number">03</span><b>前三名晉級。</b> 冠軍與金牌時間各多得一顆星；獎金能在車庫升級。</p><p>手機使用下方轉向、煞車與氮氣按鈕，支援同時按住多個按鈕。橫向握持視野更寬。</p></div><button id="help-go" class="primary">${start ? "LET’S RACE / 開始比賽" : "準備上路"} <span>↗︎</span></button>`,
     );
     this.wireClose();
     $("help-go").onclick = () => this.startRace();

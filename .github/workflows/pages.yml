@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: zhudaandzhuer/zhuda-laya-engine
-          ref: 0ec1d3717756544467ab065ef23062f0755ef2c5
+          ref: bdfdf51c46346868138d977aa8432ae8f7c9f828
           path: .engine
       - uses: actions/setup-node@v4
         with:

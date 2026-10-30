@@ -1,9 +1,9 @@
 {
   "name": "zhuda-neon-racer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Neon Apex — a complete browser racing game built with zhuda-laya-engine",
+  "description": "Neon Apex: Skyline Tour \u2014 a 3D browser racing game built with zhuda-laya-engine",
   "license": "MIT",
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -13,6 +13,6 @@
     "verify:browser": "node tests/browser.mjs"
   },
   "dependencies": {
-    "zhuda-laya-engine": "file:../Zhuda-LayaAir"
+    "zhuda-laya-engine": "github:zhudaandzhuer/zhuda-laya-engine#bdfdf51c46346868138d977aa8432ae8f7c9f828"
   }
 }

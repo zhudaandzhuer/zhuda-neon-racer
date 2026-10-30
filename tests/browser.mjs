@@ -177,6 +177,9 @@ try {
   await delay(450);
   const boosted = await ev("neonGame.snapshot()");
   assert.ok(boosted.car.boosting);
+  assert.equal(boosted.render.dimension,3);
+  assert.ok(boosted.render.triangles>10000);
+  assert.ok(boosted.render.terrain.every(t=>t.solidDepth===18 && t.renderMeshes===2));
   assert.ok(boosted.render.particles > 0 && boosted.render.trailPoints > 0);
   await shot("03-nitro");
   await key("keyUp", "Space", " ");
@@ -354,6 +357,9 @@ try {
     await click("leave");
   }
   checks.push("all four authored environments render through the public SDK");
+  const resourceCycles=await ev(`(async()=>{const counts=[];for(let i=0;i<12;i++){await neonGame.renderer.selectTrack(i%4);await new Promise(r=>requestAnimationFrame(r));Laya.Resource.destroyUnusedResources(false);counts.push(neonGame.renderer.stats().resources.resources);}return counts;})()`);
+  assert.ok(Math.max(...resourceCycles.slice(4))-Math.min(...resourceCycles.slice(4))<=6,JSON.stringify(resourceCycles));
+  checks.push("3D worlds release bounded resources across twelve track changes");
   await ev("localStorage.setItem('zhuda.neon-apex.v1','{broken')");
   await load();
   assert.equal(await ev("neonGame.save.credits"), 0);
@@ -369,6 +375,8 @@ try {
     liveRace: { result: won.result, gates: won.car.gates },
     touch: { steer: true, nitro: true, particles: touch.render.particles },
     webglDrawCalls: await ev("__drawCalls"),
+    resourceCycles,
+    renderDimension:3,
     errors,
     failures,
   };

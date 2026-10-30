@@ -1,73 +1,58 @@
-# 霓虹疾線 · NEON APEX
+# NEON APEX · Skyline Tour
 
-免費瀏覽器賽車遊戲。抓住彎心，用氮氣超車，從港灣一路跑進能源核心。
+**Drift. Boost. Own the skyline.** A free 3D browser racer: elevated city circuits, sunset ocean, neon rivals and world-space nitro trails.
 
-**[立即遊玩 ↗](https://zhudaandzhuer.github.io/zhuda-neon-racer/)**
+**[PLAY NOW →](https://zhudaandzhuer.github.io/zhuda-neon-racer/)** · [Watch the gameplay film](https://zhudaandzhuer.github.io/zhuda-neon-racer/showcase.html)
 
-以「豬大 × LayaAir」主視覺與獨立標題畫面啟動。另有四款完整新作收錄於 **[豬大遊戲館](https://zhudaandzhuer.github.io/zhuda-arcade/)**。
+[![Actual 3D gameplay](docs/media/skyline-gameplay.gif)](https://zhudaandzhuer.github.io/zhuda-neon-racer/)
 
-![氮氣超車的實際遊戲畫面](docs/race.jpg)
+Four circuits, three AI rivals, time limits and a garage. Finish in the top three to unlock the next circuit. Wins earn credits for power, grip and nitro upgrades; stars unlock different cars. Progress saves in your browser and can be exported/imported as JSON.
 
-四條逐步解鎖的賽道、三名電腦對手、限時比賽與勝負結算。跑進前三名獲得獎金並解鎖下一關；冠軍、金牌時間各增加一顆星。獎金可升級動力、抓地與氮氣，累積星星能解鎖不同操控特性的車款。
+The new 3D renderer preserves the original driving, checkpoints, rewards and existing saves. There is no account, payment or tracking service.
 
-進度自動儲存在目前的瀏覽器，設定內可匯出／匯入 JSON 備份。沒有帳號、後端、追蹤服務或付費項目。
-
-## 操作
-
-| 動作 | 鍵盤 | 手機 |
+| Action | Keyboard | Touch |
 | --- | --- | --- |
-| 轉向 | ← → / A D | 左右轉向鍵 |
-| 煞車／漂移充能 | ↓ / S，同時轉向可漂移 | 煞車，同時轉向 |
-| 氮氣 | 按住 SPACE / Shift | 按住 N₂ |
-| 暫停 | ESC / P | 右上暫停鍵 |
-| 油門 | 預設自動；關閉後使用 ↑ / W | 預設自動；關閉後顯示油門鍵 |
+| Steer | ← → / A D | Left / right buttons |
+| Brake / drift charge | ↓ / S while steering | Brake + steer |
+| Nitro | Hold Space / Shift | Hold N₂ |
+| Pause | Esc / P | Pause button |
+| Throttle | Automatic by default; ↑ / W in manual mode | Throttle button in manual mode |
 
-入彎前減速，出彎後再用氮氣。發光箭頭帶能補充氮氣。手機可同時按住轉向與氮氣，橫向握持視野更寬。
+Brake into the corner and boost on exit. Luminous energy strips replenish nitro. Touch supports steering and nitro together; landscape gives a wider view.
 
-![首頁與賽道選擇](docs/home.jpg)
+![Actual chase-camera gameplay](docs/race.jpg)
 
-## 獨立於引擎
+## Rendering and engine boundary
 
-這個倉庫擁有賽道、賽車物理、對手、關卡、UI、存檔、音效與美術。它使用 [zhuda-laya-engine](https://github.com/zhudaandzhuer/zhuda-laya-engine) 的公開 SDK 與 LayaAir 3.4.2 WebGL 2D 執行環境。氮氣粒子、漂移煙霧、碰撞火花與歷史尾流由引擎模擬／渲染。
+This repository owns the game: race simulation, circuits, cars, procedural skyline, UI, save data, audio and media. It consumes the public [zhuda-laya-engine](https://github.com/zhudaandzhuer/zhuda-laya-engine) SDK and LayaAir 3.4.2 WebGL 3D runtime. It includes:
 
-引擎倉庫不包含本遊戲。CI 固定引擎版本 `0ec1d3717756544467ab065ef23062f0755ef2c5`，不追蹤浮動的 main。
+- A real 3D chase camera, sculpted cars, elevated track geometry and a material-batched skyline.
+- Shader-driven sunset, water and road surfaces; closed heightfield islands.
+- Engine 3D particles, historical ribbons and camera boom collision probes.
+- Desktop bloom, disabled on coarse-pointer devices; reduced effects preserve driving rules.
 
-## 本機開發
+The film is an actual canvas capture at 1280 × 720 / 60 FPS with a test driver. The README GIF is a smaller 16 FPS preview. A short desktop capture is not a certification of mobile performance.
 
-Node.js 24+，引擎與遊戲放在相鄰資料夾：
+## Develop
+
+Node.js 24+. Put the engine and game in adjacent folders, or set `ZHUDA_ENGINE_ROOT` to the engine checkout. CI pins SDK revision `bdfdf51c46346868138d977aa8432ae8f7c9f828` in `.github/workflows/pages.yml`.
 
 ```sh
-git clone https://github.com/zhudaandzhuer/zhuda-laya-engine.git Zhuda-LayaAir
-git -C Zhuda-LayaAir checkout 0ec1d3717756544467ab065ef23062f0755ef2c5
-cd Zhuda-LayaAir
+# In the engine checkout first:
 npm install
 npm run build
-cd ..
-git clone https://github.com/zhudaandzhuer/zhuda-neon-racer.git Zhuda-NeonRacer
-cd Zhuda-NeonRacer
+# In this game checkout:
+npm run typecheck
 npm run build
+npm test
+npm run verify:browser
 PORT=8907 npm start
 ```
 
-開啟 `http://localhost:8907/`。非相鄰資料夾可指定 `ZHUDA_ENGINE_ROOT`。產出的 `dist/` 可直接放到任何靜態網站，無需執行中的開發伺服器或引擎倉庫。
+Open `http://localhost:8907/`. The generated `dist/` is a standalone static site. Live browser tests need Chrome; set `CHROME_PATH` on Linux. `GAME_URL` runs the same checks against a deployment.
 
-## 驗證
+[Browser verification](docs/browser-verification.json) covers an actual completed race, keyboard/nitro, pause, unlocks, purchases, reload, save backup/restore, simultaneous touch input, portrait/landscape, timeout and all four scenes. Twelve successive scene switches return the resource count to the same bounded total. The rule suite drives all four circuits to completion without teleporting.
 
-```sh
-npm run typecheck
-npm test
-npm run verify:browser
-```
+## License
 
-瀏覽器測試需要 Chrome；Linux 可設 `CHROME_PATH=/usr/bin/google-chrome`。可用 `GAME_URL` 對已發布的網址執行同一套測試，使用隔離的臨時瀏覽器與存檔。
-
-- 模型測試：四關皆以駕駛輸入跑完，檢查八區段圈數、勝負、獎金只發一次、禁止逆行／跳過檢查點、護欄、氮氣、升級與壞存檔恢復。
-- WebGL 整合測試：完整即時比賽、實際鍵盤輸入、氮氣粒子／歷史尾流、暫停、購買、重載保存、檔案備份與還原、雙指觸控、390×844 與 844×390 排版、四關場景、超時結算邊界。
-- [驗證紀錄](docs/browser-verification.json)。瀏覽器中的完整比賽使用測試駕駛；響應式測試不等同所有手機的效能認證。音效由 Web Audio 合成，仍需使用者互動才能解鎖播放。
-- [正式站回歸紀錄](docs/production-verification.json)：對 GitHub Pages 正式網址執行同一套完整驗證，包含實際完賽與存檔還原。
-
-![完賽、獎金與下一關](docs/podium.jpg)
-
-## 授權
-
-MIT。所有賽道、車輛圖形、粒子貼圖與音效由本專案程式生成，不載入第三方美術或音樂。引擎與 LayaAir 授權見 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+MIT. Cars, circuits, skyline, textures and sound are generated by this project. The launch screen includes the existing Zhuda / LayaAir community artwork; this game is independently maintained. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for engine/upstream licensing.

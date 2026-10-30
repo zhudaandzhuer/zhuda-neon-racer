@@ -2,9 +2,8 @@
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: #10121c;
-  color: #f8e8cd;
-  font-family: "PingFang TC", sans-serif;
+  background: transparent;
+  color: #f6f9ed;
   overflow: hidden;
 }
 #title-screen[hidden] {
@@ -12,127 +11,167 @@
 }
 #title-screen > img {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  right: 3vw;
+  bottom: 4vh;
+  width: 150px;
+  height: 90px;
   object-fit: cover;
-  object-position: center 25%;
+  border-radius: 8px;
+  border: 1px solid #ffffff25;
+  opacity: 0.8;
 }
 .title-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, #10121c 0%, #10121ce0 10%, #10121c00 55%);
+  background:
+    linear-gradient(90deg, #080f20ec, #080f2070 45%, #080f2000 80%),
+    linear-gradient(0deg, #080f20a0, transparent 50%);
 }
 .title-top {
   position: absolute;
-  top: 35px;
-  left: 40px;
-  right: 40px;
-  font: 9px monospace;
+  top: max(35px, env(safe-area-inset-top));
+  left: 5vw;
+  right: 5vw;
+  font: 10px monospace;
   letter-spacing: 2px;
   display: flex;
   justify-content: space-between;
-  text-shadow: 0 2px 10px #000;
+  color: #b7d8db;
 }
 .title-copy {
   position: absolute;
-  bottom: 35px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: 350px;
+  bottom: 12vh;
+  left: 7vw;
+  width: 60%;
+  text-align: left;
 }
 .title-copy p {
-  font: 9px monospace;
-  letter-spacing: 2px;
-  margin: 0 0 15px;
+  font: 10px monospace;
+  letter-spacing: 3px;
+  color: #8cffe7;
+  margin: 0 0 22px;
 }
 .title-copy h1 {
-  font-size: 42px;
-  letter-spacing: 6px;
-  margin: 0 0 10px;
+  font:
+    italic 950 clamp(74px, 10vw, 150px) / 0.82 "Arial Black",
+    Impact,
+    sans-serif;
+  letter-spacing: -0.07em;
+  margin: 0;
+  text-shadow: 0 10px 50px #06122470;
+}
+.title-copy h1 span {
+  display: inline-block;
+  font-size: 0.7em;
+  color: #d9fc74;
+  margin-left: 12px;
 }
 .title-copy h2 {
-  font: 12px monospace;
-  letter-spacing: 6px;
-  margin: 0 0 25px;
-  color: #c8bcb8;
+  font: 600 12px monospace;
+  letter-spacing: 5px;
+  margin: 30px 0 16px;
+  color: #c8dedf;
+}
+.title-tagline {
+  font: 400 17px sans-serif;
+  margin: 0 0 32px;
+  color: #e2e9e9;
 }
 .title-copy button {
-  display: block;
-  width: 100%;
-  padding: 17px 20px;
-  background: #f4d391;
-  color: #201d21;
+  width: 260px;
+  padding: 19px 24px;
+  background: #d9fc74;
+  color: #101b24;
   border: 0;
-  border-radius: 8px;
-  font: 700 14px sans-serif;
+  border-radius: 3px;
+  font: 800 13px sans-serif;
+  letter-spacing: 2px;
   cursor: pointer;
+  box-shadow: 0 0 50px #d9fc7418;
 }
 .title-copy button:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 .title-copy a {
   display: block;
-  margin-top: 16px;
-  font-size: 10px;
-  color: #c7bfba;
-  text-decoration: none;
+  width: max-content;
+  margin-top: 19px;
+  font: 11px monospace;
+  color: #a5bdc6;
 }
 .title-copy button:focus-visible {
   outline: 2px solid white;
   outline-offset: 4px;
 }
+body.racing:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px #211e67;
+  opacity: calc(var(--boost, 0) * 0.55);
+  border-left: 2px solid #81ffe433;
+  border-right: 2px solid #81ffe433;
+}
 @media (max-width: 650px) {
-  #title-screen > img {
-    height: 58%;
-    object-fit: contain;
-    top: 9%;
-    object-position: center;
+  .title-copy {
+    left: 8vw;
+    width: 84%;
+    bottom: 14vh;
+  }
+  .title-copy h1 {
+    font-size: 24vw;
+  }
+  .title-copy h2 {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+  .title-copy p {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+  .title-tagline {
+    font-size: 14px;
   }
   .title-top {
-    top: 25px;
-    left: 22px;
-    right: 22px;
     font-size: 8px;
+    letter-spacing: 1px;
   }
   .title-top span {
     display: none;
   }
-  .title-copy {
-    width: calc(100% - 60px);
-    bottom: max(45px, env(safe-area-inset-bottom));
+  #title-screen > img {
+    width: 90px;
+    height: 55px;
+    bottom: 3vh;
   }
-  .title-copy h1 {
-    font-size: 36px;
-  }
-  .title-copy p {
-    font-size: 7px;
-    letter-spacing: 1.5px;
+  .title-shade {
+    background: linear-gradient(0deg, #080f20ed, #080f2060 70%, #080f2020);
   }
 }
 @media (max-height: 520px) and (min-width: 651px) {
   .title-copy {
-    bottom: 18px;
-    width: 300px;
+    bottom: 8vh;
   }
   .title-copy h1 {
-    font-size: 28px;
-  }
-  .title-copy h2 {
-    margin-bottom: 12px;
-    font-size: 10px;
+    font-size: 19vh;
   }
   .title-copy p {
-    margin-bottom: 8px;
-    font-size: 7px;
+    margin-bottom: 12px;
+  }
+  .title-copy h2 {
+    margin: 16px 0 10px;
+  }
+  .title-tagline {
+    margin-bottom: 18px;
+    font-size: 14px;
   }
   .title-copy button {
-    padding: 11px;
+    padding: 14px 20px;
   }
   .title-copy a {
-    margin-top: 8px;
-    font-size: 9px;
+    margin-top: 12px;
   }
   .title-top {
     top: 20px;

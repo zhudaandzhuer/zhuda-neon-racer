@@ -1,7 +1,7 @@
 {
   "passed": true,
   "url": "http://localhost:8908/zhuda-neon-racer/",
-  "checkedAt": "2026-10-30T04:26:33.136Z",
+  "checkedAt": "2026-10-30T08:54:13.088Z",
   "checks": [
     "locked circuits do not start",
     "real keyboard steering and nitro create engine particles and historical trails",
@@ -11,6 +11,7 @@
     "simultaneous steering + nitro touch input, capture release, landscape layout",
     "timeout boundary reaches a retryable loss with no reward",
     "all four authored environments render through the public SDK",
+    "3D worlds release bounded resources across twelve track changes",
     "corrupt stored data recovers to a playable fresh game"
   ],
   "liveRace": {
@@ -28,9 +29,24 @@
   "touch": {
     "steer": true,
     "nitro": true,
-    "particles": 36
+    "particles": 38
   },
-  "webglDrawCalls": 24,
+  "webglDrawCalls": 168,
+  "resourceCycles": [
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146
+  ],
+  "renderDimension": 3,
   "errors": [],
   "failures": []
 }

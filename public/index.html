@@ -11,7 +11,7 @@
       name="description"
       content="霓虹疾線：免費瀏覽器賽車遊戲。四條賽道、氮氣超車、車庫升級，鍵盤與觸控皆可玩。"
     />
-    <title>霓虹疾線 NEON APEX — 午夜巡迴賽</title>
+    <title>霓虹疾線 NEON APEX — SKYLINE TOUR</title>
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="launch.css" />
@@ -21,15 +21,16 @@
       <img src="assets/zhuda-x-layaair.webp" alt="豬大 × LayaAir 組合主視覺" />
       <div class="title-shade"></div>
       <div class="title-top">
-        ZHUDA × LAYA AIR <span>ENGINE COLLECTION / 01</span>
+        ZHUDA × LAYA AIR <span>SKYLINE TOUR / 3D</span>
       </div>
       <div class="title-copy">
-        <p>POWERED BY ZHUDA-LAYA-ENGINE</p>
-        <h1>霓虹疾線</h1>
-        <h2>NEON APEX</h2>
+        <p>FREE TO PLAY · NO DOWNLOAD</p>
+        <h1>NEON<br />APEX<span>↗</span></h1>
+        <h2>霓虹疾線 / SKYLINE TOUR</h2>
+        <div class="title-tagline">Drift. Boost. Own the skyline.</div>
         <button id="title-enter" disabled>正在準備遊戲…</button
         ><a href="https://zhudaandzhuer.github.io/zhuda-arcade/"
-          >探索豬大遊戲館 →</a
+          >More games →</a
         >
       </div>
     </section>
@@ -44,7 +45,7 @@
           <a class="brand" href="./" aria-label="霓虹疾線首頁"
             ><span class="brand-icon">N↗︎</span
             ><span>NEON<span class="brand-apex">APEX</span></span></a
-          ><span class="season"><i></i> 午夜巡迴賽 / SEASON 01</span>
+          ><span class="season"><i></i> SKYLINE TOUR / SEASON 01</span>
           <nav>
             <span class="balance">◈ <b id="wallet">0</b></span
             ><button id="garage-open">車庫 <span>↗︎</span></button
@@ -56,9 +57,9 @@
         <main class="lobby-main">
           <div class="hero">
             <div class="eyebrow">
-              <span class="short-line"></span> THE CITY IS YOUR CIRCUIT
+              <span class="short-line"></span> CHASE THE HORIZON
             </div>
-            <h1>把夜色<br />甩在<span>身後。</span></h1>
+            <h1>把地平線<br />甩在<span>身後。</span></h1>
             <p>不必等綠燈。<br />抓住彎心，用氮氣拉開距離。</p>
             <div class="hero-note">
               <span>4</span> 條賽道 <i>/</i> <span>3</span> 位對手
@@ -87,7 +88,7 @@
               </div>
             </div>
             <p class="race-goal">在時限內跑進前三，解鎖下一條賽道。</p>
-            <button id="start" class="primary">出發比賽 <span>↗︎</span></button
+            <button id="start" class="primary">START RACE <span>↗︎</span></button
             ><button id="help-open" class="text-button">
               第一次上路？看看操作方式 <span>→</span>
             </button>
@@ -169,7 +170,10 @@
       <div id="toast" role="status"></div>
     </div>
     <script src="libs/laya.core.js"></script>
+    <script src="libs/laya.d3.js"></script>
     <script src="libs/laya.webgl_2D.js"></script>
+    <script src="libs/laya.webgl_3D.js"></script>
+    <script src="libs/laya.postProcess.js"></script>
     <script src="game.js"></script>
   </body>
 </html>
