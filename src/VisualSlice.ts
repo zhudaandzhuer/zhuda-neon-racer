@@ -145,6 +145,13 @@ class HarborStudy {
   library = new ZhudaModelLibrary(1);
   view = "hero";
   moving = false;
+  freeExplore = false;
+  private freeX = -1.4;
+  private freeZ = 1.5;
+  private freeYaw = 180;
+  private freePitch = 0.18;
+  private freeKeys = new Set<string>();
+  private freePointer: { id: number; x: number; y: number } | null = null;
   comparison = false;
   time = 0;
   frames = 0;
@@ -155,6 +162,68 @@ class HarborStudy {
   reflection!: ZhudaPlanarReflection;
   puddle!: ZhudaShaderMaterial;
   verifyEnvironmentUpload = verifyEnvironmentUpload;
+  private enterFreeExplore() {
+    const p = this.car.transform.position;
+    this.freeX = p.x;
+    this.freeZ = p.z;
+    this.freeYaw = this.car.transform.rotationEuler.y;
+    this.freePitch = 0.18;
+    this.freeExplore = true;
+    this.moving = false;
+    this.view = "free";
+    document.body.classList.add("exploring");
+    $("explore").setAttribute("aria-pressed", "true");
+    $("motion").setAttribute("aria-pressed", "false");
+    this.pipeline.resetHistory();
+  }
+  private exitFreeExplore() {
+    this.freeExplore = false;
+    this.freeKeys.clear();
+    this.freePointer = null;
+    document.body.classList.remove("exploring");
+    $("explore").setAttribute("aria-pressed", "false");
+    this.view = "hero";
+    this.pipeline.resetHistory();
+  }
+  private freeStep(dt: number) {
+    const forward =
+        (this.freeKeys.has("KeyW") || this.freeKeys.has("ArrowUp") ? 1 : 0) -
+        (this.freeKeys.has("KeyS") || this.freeKeys.has("ArrowDown") ? 1 : 0),
+      steer =
+        (this.freeKeys.has("KeyD") || this.freeKeys.has("ArrowRight") ? 1 : 0) -
+        (this.freeKeys.has("KeyA") || this.freeKeys.has("ArrowLeft") ? 1 : 0),
+      boost = this.freeKeys.has("ShiftLeft") || this.freeKeys.has("ShiftRight"),
+      brake = this.freeKeys.has("Space");
+    if (steer) this.freeYaw += steer * dt * (forward ? 82 : 110);
+    const speed = brake ? 1.5 : boost ? 18 : 9;
+    const angle = radians(this.freeYaw);
+    this.freeX += Math.sin(angle) * forward * speed * dt;
+    this.freeZ += Math.cos(angle) * forward * speed * dt;
+    this.freeX = Math.max(-72, Math.min(72, this.freeX));
+    this.freeZ = Math.max(-62, Math.min(178, this.freeZ));
+    const ground = Math.abs(this.freeX) < 10 ? 0 : -4.994;
+    this.car.transform.position = new Laya.Vector3(this.freeX, ground, this.freeZ);
+    this.car.transform.rotationEuler = new Laya.Vector3(0, this.freeYaw, 0);
+  }
+  private freePose() {
+    const angle = radians(this.freeYaw),
+      ground = Math.abs(this.freeX) < 10 ? 0 : -4.994,
+      lookHeight = 1.05 + this.freePitch * 2.2,
+      eyeHeight = 2.15 + this.freePitch * 1.4;
+    return {
+      eye: [
+        this.freeX - Math.sin(angle) * 7.4,
+        ground + eyeHeight,
+        this.freeZ - Math.cos(angle) * 7.4,
+      ] as V,
+      target: [
+        this.freeX + Math.sin(angle) * 10,
+        ground + lookHeight,
+        this.freeZ + Math.cos(angle) * 10,
+      ] as V,
+      fov: 48,
+    };
+  }
   rebuildPipeline() {
     this.pipeline?.dispose();
     this.pipeline = new ZhudaFilmicPipeline(this.camera, {
@@ -1034,9 +1103,63 @@ class HarborStudy {
     };
     walk(this.car, 0.25);
     walk(this.warehouse);
+    const navigationCodes = new Set([
+      "KeyW",
+      "KeyA",
+      "KeyS",
+      "KeyD",
+      "ArrowUp",
+      "ArrowLeft",
+      "ArrowDown",
+      "ArrowRight",
+      "ShiftLeft",
+      "ShiftRight",
+      "Space",
+    ]);
+    window.addEventListener("keydown", (event) => {
+      if (!navigationCodes.has(event.code)) return;
+      this.freeKeys.add(event.code);
+      if (this.freeExplore) event.preventDefault();
+    });
+    window.addEventListener("keyup", (event) => {
+      if (navigationCodes.has(event.code)) this.freeKeys.delete(event.code);
+    });
+    window.addEventListener("blur", () => this.freeKeys.clear());
+    document.querySelectorAll<HTMLButtonElement>("[data-free-key]").forEach((button) => {
+      const code = button.dataset.freeKey!;
+      const release = () => this.freeKeys.delete(code);
+      button.addEventListener("pointerdown", (event) => {
+        if (!this.freeExplore) return;
+        this.freeKeys.add(code);
+        button.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+      button.addEventListener("pointerup", release);
+      button.addEventListener("pointercancel", release);
+      button.addEventListener("lostpointercapture", release);
+    });
+    window.addEventListener("pointerdown", (event) => {
+      if (!this.freeExplore || (event.target as Element)?.closest("button,a"))
+        return;
+      this.freePointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    });
+    window.addEventListener("pointermove", (event) => {
+      if (!this.freePointer || event.pointerId !== this.freePointer.id) return;
+      const dx = event.clientX - this.freePointer.x,
+        dy = event.clientY - this.freePointer.y;
+      this.freePointer.x = event.clientX;
+      this.freePointer.y = event.clientY;
+      this.freeYaw += dx * 0.24;
+      this.freePitch = Math.max(-0.35, Math.min(0.65, this.freePitch - dy * 0.004));
+      event.preventDefault();
+    });
+    window.addEventListener("pointerup", (event) => {
+      if (this.freePointer?.id === event.pointerId) this.freePointer = null;
+    });
     document.querySelectorAll<HTMLButtonElement>("[data-view]").forEach(
       (b) =>
         (b.onclick = () => {
+          if (this.freeExplore) this.exitFreeExplore();
           this.view = b.dataset.view!;
           if (this.view === "dock") {
             this.moving = false;
@@ -1049,7 +1172,12 @@ class HarborStudy {
           this.draw(0);
         }),
     );
+    $("explore").onclick = () => {
+      if (this.freeExplore) this.exitFreeExplore();
+      else this.enterFreeExplore();
+    };
     $("motion").onclick = () => {
+      if (this.freeExplore) this.exitFreeExplore();
       if (this.view === "dock")
         document
           .querySelector<HTMLButtonElement>('[data-view="hero"]')!
@@ -1092,14 +1220,16 @@ class HarborStudy {
   draw(dt: number) {
     const oldLoop = Math.floor((this.time * 8) / 110);
     if (this.moving) this.time += dt;
+    if (this.freeExplore) this.freeStep(dt);
     if (Math.floor((this.time * 8) / 110) !== oldLoop)
       this.pipeline.resetHistory();
     this.frames++;
     const z = 1.5 + ((this.time * 8) % 110);
-    this.car.transform.position =
-      this.view === "dock"
-        ? new Laya.Vector3(-29, -4.994, 52)
-        : new Laya.Vector3(-1.4, 0, z);
+    if (!this.freeExplore)
+      this.car.transform.position =
+        this.view === "dock"
+          ? new Laya.Vector3(-29, -4.994, 52)
+          : new Laya.Vector3(-1.4, 0, z);
     const poses: Record<string, { eye: V; target: V; fov: number }> = {
       hero: {
         eye: [6.4, 1.5, z - 8.7],
@@ -1119,7 +1249,7 @@ class HarborStudy {
         fov: 44,
       },
     };
-    const p = poses[this.view] || poses.hero;
+    const p = this.freeExplore ? this.freePose() : poses[this.view] || poses.hero;
     this.camera.fieldOfView = p.fov;
     this.camera.transform.position = new Laya.Vector3(...p.eye);
     this.camera.transform.lookAt(
@@ -1138,7 +1268,7 @@ class HarborStudy {
     this.puddle.setUniform("u_ZhudaEye", p.eye);
     if (this.frames % 30 === 0) {
       $("status").textContent =
-        `HDR / GGX IBL / PBR / SHADOWS / ACES\n${this.comparison ? "A/B: shadows, IBL and AO disabled" : "Live 3D scene · first visual study"}`;
+        `HDR / GGX IBL / PBR / SHADOWS / ACES\n${this.freeExplore ? "Free exploration · W/A/S/D or drag to look" : this.comparison ? "A/B: shadows, IBL and AO disabled" : "Live 3D scene · first visual study"}`;
     }
   }
   report() {
@@ -1168,6 +1298,8 @@ class HarborStudy {
       ready: this.ready,
       view: this.view,
       moving: this.moving,
+      freeExplore: this.freeExplore,
+      freePosition: [this.freeX, this.freeZ],
       hdr: this.camera.enableHDR,
       ibl: this.environment.texture.width,
       shadows: this.sun.shadowMode,
