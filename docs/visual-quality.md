@@ -2,7 +2,7 @@
 
 [Open the live study](https://zhudaandzhuer.github.io/zhuda-neon-racer/visual.html).
 
-The goal is a believable, controllable Web 3D scene with an eventual AAA visual feel. This first slice prioritizes visual capability over device budgets. It is separate from the stable race entry and preserves its driving rules and saves. EXPLORE now moves the real S800 GLB through the bounded bridge/quay surfaces with WASD or arrow keys, Shift boost, Space brake and pointer/touch drag look. DRIVE remains the fixed forward study path; neither mode is a completed new race mode.
+The goal is a believable, controllable Web 3D scene with an eventual AAA visual feel. This first slice prioritizes visual capability over device budgets. It is separate from the stable race entry and preserves its driving rules and saves. EXPLORE now uses a third-person vehicle controller: acceleration and coast, forward/reverse gears, a bicycle-style steering radius, braking, speed-dependent chase-camera distance, body pitch/roll and independent drag look. The real S800 GLB moves through bounded bridge/quay surfaces with WASD or arrow keys, Shift boost, Space brake and pointer/touch drag look. DRIVE remains the fixed forward study path; neither mode is a completed new race mode.
 
 ## Delivered baseline
 
@@ -18,7 +18,7 @@ The goal is a believable, controllable Web 3D scene with an eventual AAA visual 
 
 ## Acceptance and evidence
 
-Run `node tests/visual.mjs` after typecheck/build. It uses a clean Chrome profile and repository subpath, captures five views and saves `evidence/visual-verification.json` plus screenshots. Checks include actual GPU cube-face readback, PBR bindings, motion, free exploration moving the real GLB, reflection pose/target contribution, shadow-only differences, lighting A/B outside the UI and 30 drawn pipeline replacements. Estimated resource memory is labeled as an estimate, not measured GPU usage. This quality study has no mobile performance acceptance claim.
+Run `node tests/visual.mjs` after typecheck/build. It uses a clean Chrome profile and repository subpath, captures five views and saves `evidence/visual-verification.json` plus screenshots. Checks include actual GPU cube-face readback, PBR bindings, motion, GTA-style acceleration/steering/body-roll free driving of the real GLB, reflection pose/target contribution, shadow-only differences, lighting A/B outside the UI and 30 drawn pipeline replacements. Estimated resource memory is labeled as an estimate, not measured GPU usage. This quality study has no mobile performance acceptance claim.
 
 Local capture uses a 1600 × 1000 viewport; software-rendered CI uses 1024 × 768 with the same scene assets, shader pipeline, reflection target and shadow settings. The report records the viewport. Each check logs progress, and transport timeouts/renderer crashes fail explicitly.
 

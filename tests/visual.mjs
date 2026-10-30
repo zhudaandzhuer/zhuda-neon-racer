@@ -379,6 +379,7 @@ try {
   await delay(700);
   await key("keyUp", "KeyW", "w");
   const freeAfter = await ev("harborStudy.report().freePosition");
+  assert.ok(await ev("harborStudy.report().freeSpeed") > 0.5);
   assert.ok(
     Math.hypot(freeAfter[0] - freeBefore[0], freeAfter[1] - freeBefore[1]) > 1,
     JSON.stringify({ freeBefore, freeAfter }),
@@ -391,9 +392,10 @@ try {
     Math.abs((await ev("harborStudy.freeYaw")) - freeYawBefore) > 1,
     "free exploration accepts steering input",
   );
+  assert.ok(Math.abs(await ev("harborStudy.freeBodyRoll")) > 0.05);
   await click("explore");
   await settle();
-  pass("free exploration moves the real GLB within bounded harbor surfaces");
+  pass("GTA-style free drive accelerates, steers with a turning radius and rolls the real GLB within bounded harbor surfaces");
   await ev("document.querySelector('[data-view=hero]').click()");
   await settle();
   const reflected = await crop();
