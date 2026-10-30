@@ -1,7 +1,7 @@
 {
   "passed": true,
   "url": "https://zhudaandzhuer.github.io/zhuda-neon-racer/",
-  "checkedAt": "2026-10-30T05:22:23.401Z",
+  "checkedAt": "2026-10-30T09:05:15.430Z",
   "checks": [
     "locked circuits do not start",
     "real keyboard steering and nitro create engine particles and historical trails",
@@ -11,6 +11,7 @@
     "simultaneous steering + nitro touch input, capture release, landscape layout",
     "timeout boundary reaches a retryable loss with no reward",
     "all four authored environments render through the public SDK",
+    "3D worlds release bounded resources across twelve track changes",
     "corrupt stored data recovers to a playable fresh game"
   ],
   "liveRace": {
@@ -28,9 +29,25 @@
   "touch": {
     "steer": true,
     "nitro": true,
-    "particles": 36
+    "particles": 38
   },
-  "webglDrawCalls": 25,
+  "webglDrawCalls": 119,
+  "resourceCycles": [
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146,
+    146
+  ],
+  "renderDimension": 3,
   "errors": [],
-  "failures": []
+  "failures": [],
+  "gameCommit": "fc4a848ed01b1ed249c33438ffdc8e4d8a7974f1"
 }
