@@ -237,7 +237,15 @@ try {
       code,
       key,
       windowsVirtualKeyCode:
-        { ArrowRight: 39, ArrowLeft: 37, ArrowDown: 40, Space: 32, Escape: 27 }[
+        {
+          KeyW: 87,
+          ArrowRight: 39,
+          ArrowLeft: 37,
+          ArrowDown: 40,
+          ArrowUp: 38,
+          Space: 32,
+          Escape: 27,
+        }[
           code
         ] || 0,
     });
@@ -363,6 +371,29 @@ try {
     "Stopping DRIVE must preserve the vehicle position",
   );
   pass("drive control moves the actual GLB and camera");
+  await click("explore");
+  await settle();
+  assert.equal(await ev("harborStudy.report().freeExplore"), true);
+  const freeBefore = await ev("harborStudy.report().freePosition");
+  await key("keyDown", "KeyW", "w");
+  await delay(700);
+  await key("keyUp", "KeyW", "w");
+  const freeAfter = await ev("harborStudy.report().freePosition");
+  assert.ok(
+    Math.hypot(freeAfter[0] - freeBefore[0], freeAfter[1] - freeBefore[1]) > 1,
+    JSON.stringify({ freeBefore, freeAfter }),
+  );
+  const freeYawBefore = await ev("harborStudy.freeYaw");
+  await key("keyDown", "ArrowRight", "ArrowRight");
+  await delay(180);
+  await key("keyUp", "ArrowRight", "ArrowRight");
+  assert.ok(
+    Math.abs((await ev("harborStudy.freeYaw")) - freeYawBefore) > 1,
+    "free exploration accepts steering input",
+  );
+  await click("explore");
+  await settle();
+  pass("free exploration moves the real GLB within bounded harbor surfaces");
   await ev("document.querySelector('[data-view=hero]').click()");
   await settle();
   const reflected = await crop();

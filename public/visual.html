@@ -95,6 +95,59 @@
         max-width: 340px;
         line-height: 1.8;
       }
+      #explore-help {
+        position: fixed;
+        left: 38px;
+        top: 148px;
+        z-index: 3;
+        display: none;
+        padding: 10px 13px;
+        border: 1px solid #ffffff26;
+        border-radius: 3px;
+        background: #101820b8;
+        backdrop-filter: blur(12px);
+        color: #e8e2d8;
+        font: 11px/1.65 monospace;
+        pointer-events: none;
+      }
+      body.exploring #explore-help {
+        display: block;
+      }
+      #touch-controls {
+        position: fixed;
+        left: 38px;
+        bottom: 94px;
+        z-index: 4;
+        display: none;
+        grid-template-columns: repeat(3, 42px);
+        grid-template-rows: repeat(2, 42px);
+        gap: 5px;
+        touch-action: none;
+        user-select: none;
+      }
+      body.exploring #touch-controls {
+        display: grid;
+      }
+      #touch-controls button {
+        padding: 0;
+        font-size: 16px;
+        touch-action: none;
+      }
+      #touch-controls [data-free-key="KeyW"] {
+        grid-column: 2;
+      }
+      #touch-controls [data-free-key="KeyA"] {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      #touch-controls [data-free-key="KeyS"] {
+        grid-column: 2;
+        grid-row: 2;
+      }
+      #touch-controls [data-free-key="KeyD"] {
+        grid-column: 3;
+        grid-row: 2;
+      }
       #loading {
         position: fixed;
         inset: 0;
@@ -134,6 +187,11 @@
         #status {
           display: none;
         }
+        #explore-help {
+          left: 18px;
+          top: 100px;
+          font-size: 10px;
+        }
         button,
         a {
           padding: 9px;
@@ -155,12 +213,23 @@
         ><button data-view="wide">03 / HARBOR</button
         ><button data-view="detail">04 / SURFACE</button
         ><button data-view="dock">05 / DOCK</button
+        ><button id="explore" aria-pressed="false">EXPLORE</button
         ><button id="motion" aria-pressed="false">DRIVE</button
         ><button id="compare" aria-pressed="false">LIGHTING A/B</button
         ><a href="index.html">RACE ↗</a>
       </nav>
       <div id="status">Loading scene…</div>
     </footer>
+    <div id="explore-help">
+      W A S D / ARROWS · DRIVE<br />
+      DRAG · LOOK AROUND &nbsp; SHIFT · BOOST &nbsp; SPACE · BRAKE
+    </div>
+    <div id="touch-controls" aria-label="Explore controls">
+      <button data-free-key="KeyW" aria-label="Drive forward">▲</button>
+      <button data-free-key="KeyA" aria-label="Turn left">◀</button>
+      <button data-free-key="KeyS" aria-label="Drive reverse">▼</button>
+      <button data-free-key="KeyD" aria-label="Turn right">▶</button>
+    </div>
     <div id="loading">
       <div>
         PREPARING HARBOR<small id="progress"
