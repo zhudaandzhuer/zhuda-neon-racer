@@ -1,0 +1,5 @@
+/materials/
+/*.glb
+/*.blend*
+/*.json
+/model_*.png

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>HARBOR / Visual Study — zhuda-laya-engine</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #070b10;
+        color: #f4f1e9;
+        font: 13px system-ui;
+        overflow: hidden;
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+      }
+      body:after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          #06101a70,
+          transparent 19%,
+          transparent 85%,
+          #06101a35
+        );
+        z-index: 2;
+      }
+      header {
+        position: fixed;
+        top: 30px;
+        left: 38px;
+        z-index: 3;
+        pointer-events: none;
+      }
+      small {
+        font-size: 10px;
+        letter-spacing: 0.3em;
+        color: #d5bc8c;
+      }
+      h1 {
+        font-size: 29px;
+        font-weight: 450;
+        letter-spacing: 0.11em;
+        margin: 8px 0 5px;
+      }
+      header p {
+        opacity: 0.65;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+      }
+      footer {
+        position: fixed;
+        bottom: 25px;
+        left: 38px;
+        right: 38px;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 18px;
+      }
+      nav {
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+      }
+      button,
+      a {
+        color: #eee5d2;
+        border: 1px solid #ffffff30;
+        border-radius: 3px;
+        background: #101820b8;
+        backdrop-filter: blur(12px);
+        padding: 10px 14px;
+        font: 11px system-ui;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      button[aria-pressed="true"] {
+        background: #dfc794;
+        color: #131c24;
+      }
+      #status {
+        font: 10px monospace;
+        color: #d6dce1;
+        text-align: right;
+        max-width: 340px;
+        line-height: 1.8;
+      }
+      #loading {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        background: #10151e;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font: 14px system-ui;
+        letter-spacing: 0.1em;
+      }
+      #loading small {
+        display: block;
+        margin-top: 14px;
+        color: #a8b2be;
+        letter-spacing: 0.06em;
+      }
+      #loading[hidden] {
+        display: none;
+      }
+      @media (max-width: 700px) {
+        header {
+          top: 15px;
+          left: 18px;
+        }
+        header p {
+          display: none;
+        }
+        h1 {
+          font-size: 21px;
+        }
+        footer {
+          left: 18px;
+          right: 18px;
+          bottom: 15px;
+        }
+        #status {
+          display: none;
+        }
+        button,
+        a {
+          padding: 9px;
+          font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <small>ZHUDA-LAYA-ENGINE · REALTIME WEBGL</small>
+      <h1>HARBOR / 01</h1>
+      <p>A study in light, surface and scale.</p>
+    </header>
+    <footer>
+      <nav>
+        <button data-view="hero" aria-pressed="true">01 / HERO</button
+        ><button data-view="road">02 / ROAD</button
+        ><button data-view="wide">03 / HARBOR</button
+        ><button data-view="detail">04 / SURFACE</button
+        ><button data-view="dock">05 / DOCK</button
+        ><button id="motion" aria-pressed="false">DRIVE</button
+        ><button id="compare" aria-pressed="false">LIGHTING A/B</button
+        ><a href="index.html">RACE ↗</a>
+      </nav>
+      <div id="status">Loading scene…</div>
+    </footer>
+    <div id="loading">
+      <div>
+        PREPARING HARBOR<small id="progress"
+          >HDR environment · PBR surfaces · real geometry</small
+        >
+      </div>
+    </div>
+    <script src="libs/laya.core.js"></script>
+    <script src="libs/laya.d3.js"></script>
+    <script src="libs/laya.webgl_2D.js"></script>
+    <script src="libs/laya.webgl_3D.js"></script>
+    <script src="libs/laya.gltf.js"></script>
+    <script src="libs/laya.postProcess.js"></script>
+    <script src="visual.js"></script>
+  </body>
+</html>

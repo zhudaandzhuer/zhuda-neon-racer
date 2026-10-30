@@ -10,9 +10,10 @@
     "start": "node scripts/server.mjs",
     "typecheck": "node scripts/typecheck.mjs",
     "test": "node scripts/test.mjs",
-    "verify:browser": "node tests/browser.mjs"
+    "verify:browser": "node tests/browser.mjs",
+    "verify:visual": "node tests/visual.mjs"
   },
   "dependencies": {
-    "zhuda-laya-engine": "github:zhudaandzhuer/zhuda-laya-engine#bdfdf51c46346868138d977aa8432ae8f7c9f828"
+    "zhuda-laya-engine": "github:zhudaandzhuer/zhuda-laya-engine#74b04064208f8afe624896482d7bc438dd15dc29"
   }
 }
